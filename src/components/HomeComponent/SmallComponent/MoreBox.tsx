@@ -1,23 +1,38 @@
 "use client";
 
 import { password } from "@/Data/Types";
+import MyContext from "@/components/context/MyContext";
+import { CheckPasswordCorrect } from "@/components/libary/lib";
 import Button from "@/lib/Button";
 import { OutClickToggle } from "@/lib/page";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
-import { FaEdit, FaMapPin, FaTrash } from "react-icons/fa";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { FaEdit, FaEye, FaMapPin, FaTrash } from "react-icons/fa";
 
 export type moreBtnTypes = {
   closeModel: () => void;
   MoreBoxData: password | null;
-  moreButton: React.RefObject<HTMLButtonElement>;
+  passwordIndex: number;
+  boxIndex: number;
 };
 
-const MoreBox = forwardRef((props: moreBtnTypes) => {
+const MoreBox = (props: moreBtnTypes) => {
   const moreBoxes = useRef<HTMLDivElement>(null);
+  const myappData = useContext(MyContext);
 
+  console.log();
   useEffect(() => {
-    OutClickToggle(moreBoxes, props.moreButton, props.closeModel);
+    OutClickToggle(moreBoxes, props.closeModel);
   }, [props]);
+
+  const SeePassWord = () => {
+    
+  }
 
   return (
     <div
@@ -25,23 +40,41 @@ const MoreBox = forwardRef((props: moreBtnTypes) => {
       className={` flex flex-col justify-center  absolute w-[100px]
        h-auto border py-1 z-10 right-9  rounded-sm top-0 bg-white shadow-lg`}
     >
-      <Button className="flex hover:bg-black group hover:text-white py-1 items-center justify-start pl-2 space-x-1">
-        <FaTrash className="text-gray-500 group-hover:text-red-500 text-[20px]   transition-all duration-300 p-1 rounded-full" />
+      <Button
+        onClick={() => {
+          props.closeModel();
+          myappData?.DeletePassword(props.boxIndex, props.passwordIndex);
+        }}
+        className="flex hover:bg-black name hover:text-white py-1 items-center justify-start pl-2 space-x-1"
+      >
+        <FaTrash className="text-gray-500 name-hover:text-red-500 text-[20px]   transition-all duration-300 p-1 rounded-full" />
         <span className="text-[13px]">Delete</span>
       </Button>
 
-      <Button className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1">
-        <FaEdit className="text-gray-500 text-[20px]  transition-all duration-300 p-1 rounded-full" />
-        <span className="text-[13px]">Edit</span>
+      <Button
+        onClick={() => {
+          props.closeModel();
+          CheckPasswordCorrect("string");
+        }}
+        className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1"
+      >
+        <FaEye className="text-gray-500 text-[20px]  transition-all duration-300 p-1 rounded-full" />
+        <span className="text-[13px]">Watch</span>
       </Button>
 
-      <Button className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1">
+      <Button
+        onClick={() => {
+          props.closeModel();
+          myappData?.DeletePassword(props.boxIndex, props.passwordIndex);
+        }}
+        className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1"
+      >
         <FaMapPin className="text-gray-500 text-[20px]   transition-all duration-300 p-1 rounded-full" />
         <span className="text-[13px]">Pin</span>
       </Button>
     </div>
   );
-});
+};
 
 MoreBox.displayName = "MoreBox";
 

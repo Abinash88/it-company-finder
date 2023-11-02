@@ -14,8 +14,9 @@ export type contextTypes = {
   GetSavePassword: (
     password: string,
     passwordName: string,
-    index: number,
+    index: number
   ) => void;
+  DeletePassword: (boxId: number, passwordId: number) => void;
   OpenCloseMoreBox: (socialIndex: number, passwordIndex: number) => void;
 };
 
@@ -86,11 +87,26 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const DeletePassword = (boxId: number, passwordId: number) => {
+    setSocialData((item) => {
+      const data = [...item];
+      data[boxId].passwords?.splice(passwordId, 1);
+      return data;
+    });
+  };
+
+
   // searching logic for the search input box
 
   return (
     <MyContext.Provider
-      value={{ SocialData, setSocialData, GetSavePassword, OpenCloseMoreBox }}
+      value={{
+        SocialData,
+        setSocialData,
+        GetSavePassword,
+        OpenCloseMoreBox,
+        DeletePassword,
+      }}
     >
       {children}
     </MyContext.Provider>

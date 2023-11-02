@@ -29,26 +29,37 @@ body {
   border-radius: 20px;
 }
 
-
-.myAppGrid{
+.myAppGrid {
   display: grid;
-  grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)) ;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;
   justify-content: start;
   align-items: start;
 }
 
-.transparentBg{
-  background-color:#6a6a8f4d;
+.transparentBg {
+  background-color: #6a6a8f4d;
   backdrop-filter: blur(5px);
 }
 
-.popupPasswrodBox{
+.popupPasswrodBox {
   background: #fffffff2;
   backdrop-filter: blur(20px);
 }
 
-.setPasswordBg{
+.setPasswordBg {
   /* background: #366ebc; */
   backdrop-filter: blur(20px);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+
+.bgColorDark{
+  background-color: #2269a0e1;  
 }

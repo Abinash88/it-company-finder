@@ -10,16 +10,15 @@ import { MyAppDataTypes, password } from "@/Data/Types";
 import Div from "@/lib/Div";
 import { FaEye, FaEyeSlash, FaPlus } from "react-icons/fa";
 import MyContext from "@/components/context/MyContext";
-import { OutClickToggle } from "@/lib/page";
+import PinCodeBox from "./PinCodeBox";
 
 export type popupPassword = {
-  setpasswordBtn: React.MutableRefObject<HTMLButtonElement | null>;
   PopupData: MyAppDataTypes | null;
   index: number;
-  closeModelBox: () => void;
+  closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PopUpPassword = forwardRef((props: popupPassword, ref) => {
+const PopUpPassword = (props: popupPassword) => {
   const RemovePasswordBox = useRef<HTMLDivElement | null>(null);
   const [ShowPassword, setShowPassword] = useState<boolean>(false);
   const MyAppData = useContext(MyContext);
@@ -27,29 +26,25 @@ const PopUpPassword = forwardRef((props: popupPassword, ref) => {
   const [password, setPassword] = useState<string>("");
   const [passwordName, setPasswordName] = useState<string>("");
 
-  useEffect(() => {
-    OutClickToggle(
-      RemovePasswordBox,
-      props.setpasswordBtn,
-      props.closeModelBox
-    );
-  }, [props]);
-  console.log(ref);
   return (
     <div
       id="PasswordOutBox"
-      className={` fixed cursor-normal flex bg-red-500 items-center justify-center  z-20 w-full h-screen transparentBg top-[-12px] left-0`}
+      className={`  fixed cursor-normal flex  items-center justify-center  z-20 w-full h-screen  top-[-12px] left-0`}
     >
+      <div
+        onClick={() => props.closeModelBox(false)}
+        className=" fixed cursor-normal flex  items-center justify-center  z-20 w-full h-screen transparentBg top-[-12px] left-0"
+      ></div>
       <div
         ref={RemovePasswordBox}
         id="RemovingPasswordBox"
-        className="h-[470px] p-4 relative rounded-md w-[450px] popupPasswrodBox "
+        className="h-[470px] z-50 p-4 relative rounded-md w-[450px] popupPasswrodBox "
       >
         <h2 className="text-center border-b pb-1  font-semibold text-purple-700 text-[17px]">
           Set New Password
         </h2>
         <Div
-          onClick={props.closeModelBox}
+          onClick={() => props.closeModelBox(false)}
           className="absolute top-2 right-3 transform rotate-[45deg]    p-2 rounded-full transition duration-300 hover:rotate-[140deg] hover:bg-gray-200"
         >
           <FaPlus className="text-gray-600 text-[19px]" />
@@ -65,7 +60,11 @@ const PopUpPassword = forwardRef((props: popupPassword, ref) => {
             props.PopupData?.passwords?.map((item: password, id) => {
               return (
                 <div className="w-full" key={id}>
-                  <PasswordBox item={item} />
+                  <PasswordBox
+                    boxIndex={props.index}
+                    passwordIndex={id}
+                    item={item}
+                  />
                 </div>
               );
             })}
@@ -105,7 +104,7 @@ const PopUpPassword = forwardRef((props: popupPassword, ref) => {
               id="addPassword"
               value={password}
               type={ShowPassword ? "text" : "password"}
-              className="py-3 px-3 text-[13px] pr-10 rounded-lg bg-transparent shadow-lg
+              className="py-3  px-3 text-[13px] pr-10 rounded-lg bg-transparent shadow-lg
              shadow-gray-300 border focus:outline-none mt-1"
               placeholder="Eg. A3u-ioVa_343"
             />
@@ -134,11 +133,11 @@ const PopUpPassword = forwardRef((props: popupPassword, ref) => {
           <FaPlus className=" " />
           <span> Add Password</span>
         </button>
+
+        <PinCodeBox />
       </div>
     </div>
   );
-});
-
-PopUpPassword.displayName = "PopUpPassword";
+};
 
 export default PopUpPassword;
