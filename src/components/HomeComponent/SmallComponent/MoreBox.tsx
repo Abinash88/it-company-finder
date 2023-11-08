@@ -16,6 +16,7 @@ import { FaEdit, FaEye, FaMapPin, FaTrash } from "react-icons/fa";
 
 export type moreBtnTypes = {
   closeModel: () => void;
+  setShowPinCodeBox:React.Dispatch<React.SetStateAction<boolean>>
   MoreBoxData: password | null;
   passwordIndex: number;
   boxIndex: number;
@@ -53,13 +54,14 @@ const MoreBox = (props: moreBtnTypes) => {
 
       <Button
         onClick={() => {
+          props.setShowPinCodeBox(!false);
           props.closeModel();
           CheckPasswordCorrect("string");
         }}
         className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1"
       >
         <FaEye className="text-gray-500 text-[20px]  transition-all duration-300 p-1 rounded-full" />
-        <span className="text-[13px]">Watch</span>
+        <span className="text-[13px]">Password</span>
       </Button>
 
       <Button
@@ -71,6 +73,17 @@ const MoreBox = (props: moreBtnTypes) => {
       >
         <FaMapPin className="text-gray-500 text-[20px]   transition-all duration-300 p-1 rounded-full" />
         <span className="text-[13px]">Pin</span>
+      </Button>
+      
+      <Button
+        onClick={() => {
+          props.closeModel();
+          myappData?.DeleteAll();
+        }}
+        className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1"
+      >
+        <FaMapPin className="text-gray-500 text-[20px]   transition-all duration-300 p-1 rounded-full" />
+        <span className="text-[13px]">Clear All</span>
       </Button>
     </div>
   );

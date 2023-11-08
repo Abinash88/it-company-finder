@@ -7,7 +7,7 @@ export const OutClickToggle = (
   if (typeof window !== "undefined") {
     const passwordBtn: HTMLElement | null =
       document.getElementById("setpasswordBtn");
-
+console.log(RemovePasswordBox?.current)
     const ClosePasswordBox = (e: MouseEvent) => {
       const passwordBox = RemovePasswordBox?.current;
       const buttonBox = passwordBtn;

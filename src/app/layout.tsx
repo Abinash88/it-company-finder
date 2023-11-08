@@ -16,18 +16,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+
+    
+
     <html lang="en">
       <body>
         <MyContextProvider>
           <div className="mx-auto overflow-hidden max-w-[1300px] w-full min-h-screen  flex flex-col">
-            {false ? (
+            {true ? (
               <div className="w-full flex justify-center items-center h-screen">
-                <SignUpForm/>
+                <SignUpForm/> 
               </div>
             ) : (
               <>
                 <Headers />
-                <div className=" h-[calc(100vh-60px)] pt-5 w-full flex  ">
+                <div className=" h-[calc(100vh-60px)] pt-5 w-full flex">
                   <div className="w-[250px]  h-full">
                     <Sidebars />
                   </div>

@@ -25,6 +25,7 @@ const PopUpPassword = (props: popupPassword) => {
 
   const [password, setPassword] = useState<string>("");
   const [passwordName, setPasswordName] = useState<string>("");
+  const [showPinCodeBox, setShowPinCodeBox] = useState<boolean>(false);
 
   return (
     <div
@@ -61,6 +62,7 @@ const PopUpPassword = (props: popupPassword) => {
               return (
                 <div className="w-full" key={id}>
                   <PasswordBox
+                    setShowPinCodeBox={setShowPinCodeBox}
                     boxIndex={props.index}
                     passwordIndex={id}
                     item={item}
@@ -125,6 +127,8 @@ const PopUpPassword = (props: popupPassword) => {
         <button
           onClick={() => {
             MyAppData?.GetSavePassword(password, passwordName, props.index);
+            setPassword("")
+            setPasswordName("")
           }}
           className="px-6 py-2 flex space-x-2 items-center rounded-md 
          hover:bg-purple-700 text-[13px] font-normal text-purple-700
@@ -133,8 +137,7 @@ const PopUpPassword = (props: popupPassword) => {
           <FaPlus className=" " />
           <span> Add Password</span>
         </button>
-
-        <PinCodeBox />
+        {showPinCodeBox && <PinCodeBox  showPinCodeBox={showPinCodeBox}  setShowPinCodeBox={setShowPinCodeBox} />}
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ export type contextTypes = {
   ) => void;
   DeletePassword: (boxId: number, passwordId: number) => void;
   OpenCloseMoreBox: (socialIndex: number, passwordIndex: number) => void;
+  DeleteAll:() => void;
 };
 
 const MyContext = createContext<contextTypes | undefined>(undefined);
@@ -78,6 +79,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  
   const OpenCloseMoreBox = (socialIndex: number, passwordIndex: number) => {
     setSocialData((item) => {
       const data = [...item];
@@ -87,6 +89,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  // Delete selected password form the home page password data
   const DeletePassword = (boxId: number, passwordId: number) => {
     setSocialData((item) => {
       const data = [...item];
@@ -95,8 +98,16 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  // Delete all the passwords form the home page password data
+  const DeleteAll = () => {
+    setSocialData((item) => {
+      const data = [...item];
+      return data.map((dataItem, index) => {
+        return {...dataItem, passwords:[]}
+      })
+    })
+  }
 
-  // searching logic for the search input box
 
   return (
     <MyContext.Provider
@@ -106,6 +117,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
         GetSavePassword,
         OpenCloseMoreBox,
         DeletePassword,
+        DeleteAll
       }}
     >
       {children}
