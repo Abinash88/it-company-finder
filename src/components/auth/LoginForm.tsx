@@ -1,40 +1,73 @@
 import Div from "@/lib/Div";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import MyContext from "../context/MyContext";
 
 const LoginForm = () => {
+  const contextdata = useContext(MyContext);
+  const [loginDetails, setLoginDetails] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
+
+  const setLoginUpData: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setLoginDetails((item) => ({ ...item, [e.target.name]: e.target.value }));
+  };
+
+  console.log(contextdata?.LoginToken);
+
+
   return (
     <Div className="w-full  h-full px-5 pt-7 ">
-      <form action="" className="w-full  ">
-        <h3 className="text-center text-[25px] font-extrabold text-gray-400">Login</h3>
+      <form
+        action=""
+        onSubmit={(e) => {
+          e.preventDefault();
+          contextdata?.loginPostRequest(loginDetails);
+        }}
+        className="w-full"
+      >
+        <h3 className="text-center text-[25px] font-extrabold text-gray-400">
+          Login
+        </h3>
+
         <Div className="flex flex-col mb-4 space-y-2 ">
           <label
             className="text-[15px] font-normal text-gray-600"
-            htmlFor="email"
+            htmlFor="loginEmail"
           >
             Email
           </label>
           <input
-            id="email"
-            required
+            id="loginEmail"
             type="email"
+            value={loginDetails.email}
+            onChange={(e) => setLoginUpData(e)}
+            name="email"
             placeholder="Email"
+            required
             className="px-4 py-2 focus:outline-none bg-gray-50 "
           />
         </Div>
         <Div className="flex flex-col  space-y-1">
           <label
             className="text-[15px] font-normal text-gray-600"
-            htmlFor="password"
+            htmlFor="loginPassword"
           >
             Password
           </label>
           <input
-            id="password"
+            id="loginPassword"
+            value={loginDetails.password}
+            onChange={(e) => setLoginUpData(e)}
+            name="password"
             type="password"
-            placeholder="Password"
             required
+            placeholder="Password"
             className="px-4 py-2 focus:outline-none bg-gray-50 "
           />
         </Div>

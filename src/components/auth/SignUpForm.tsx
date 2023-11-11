@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import Signup from "./Signup";
 import Div from "@/lib/Div";
+import MyContext from "../context/MyContext";
 
 const SignUpForm = () => {
+  const contextData = useContext(MyContext);
   const [chooseLogin, setChooseLogin] = useState(false);
+
+  useEffect(() => {
+    if (contextData?.isSignUp) {
+      setChooseLogin(true);
+    }
+  }, [contextData?.isSignUp]);
   return (
     <Div className="flex flex-col  justify-center items-center w-full h-screen">
       <Div className="w-[450px] overflow-hidden overflh p-4  h-[500px] bg-gray-100 rounded-md">

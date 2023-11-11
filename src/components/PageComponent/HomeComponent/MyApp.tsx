@@ -3,8 +3,8 @@
 import { MyAppDataTypes } from "@/Data/Types";
 import React, { useContext } from "react";
 import SingleApp from "./SingleApp";
-import MyContext, { contextTypes } from "../context/MyContext";
 import Div from "@/lib/Div";
+import MyContext from "@/components/context/MyContext";
 
 const MyApp = () => {
   const MyAppData = useContext(MyContext);

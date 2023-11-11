@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export type HttpMethod = "GET" | "POST" | "DELETE" | "PUT" | "PATCH";
 
 type fetchApiTypes = {
@@ -7,44 +9,43 @@ type fetchApiTypes = {
   data?: Record<string, any>;
 };
 
-type optionTypes = {
-  method: HttpMethod;
-  headers: { [key: string]: string; Authorization: string };
-  body?: string;
-};
+type returnData = {
+  data:any;
+  success:boolean;
+  message:string;
+}
 
-export const requestOptions = (
-  method: HttpMethod,
-  token: string
-): optionTypes => {
-  return {
-    method,
-    headers: {
-      "content-type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+export const FetchingApi = async (props: fetchApiTypes) => {
+  const headers: Record<string, string> = {};
+
+  if (props.token) {
+    headers["Authorization"] = `Bearer ${props.token}`;
+  }
+
+  const requestOptions: RequestInit = {
+    method: props.method,
+    headers,
   };
-};
 
-export const FetchingApi = async <T>({
-  url,
-  method,
-  token,
-  data,
-}: fetchApiTypes) => {
-  if (token)
-    try {
-      if (data) {
-        requestOptions(method, token).body = JSON.stringify(data);
-      }
-
-      const resp = await fetch(
-        `${process.env.BACKEND_API_ENDPOINT}/${url}`,
-        requestOptions(method, token)
-      );
-
-      const fetchData = await resp.json();
-    } catch (err) {
-      console.log(err);
+  if (props.data) {
+    if (props.method !== "GET") {
+      headers["Content-Type"] = "application/json";
+      requestOptions.body = JSON.stringify(props.data);
     }
+  }
+
+
+  try {
+    const resp = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_ENDPOINT}/${props.url}`,
+      requestOptions
+    );
+
+    const fetchData = await resp.json();
+    if (!fetchData.success) return toast.error(fetchData?.message);
+    toast.success(fetchData.message);
+    return fetchData;
+  } catch (err) {
+    console.log(err);
+  }
 };

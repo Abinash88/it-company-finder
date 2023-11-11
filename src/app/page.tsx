@@ -1,4 +1,4 @@
-import MyApp from "@/components/HomeComponent/MyApp";
+import MyApp from "@/components/PageComponent/HomeComponent/MyApp";
 import React from "react";
 
 const page = () => {

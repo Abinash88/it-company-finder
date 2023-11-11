@@ -1,12 +1,13 @@
 "use client";
 
-import React, { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 import Facebook from "@/assests/homeImage/facebook.jpg";
 import Instagram from "@/assests/homeImage/instagram.jpg";
 import Messnager from "@/assests/homeImage/messanger.jpg";
 import Reddit from "@/assests/homeImage/reddit.jpg";
 import Pinterest from "@/assests/homeImage/pintrest.jpg";
 import { MyAppDataTypes } from "@/Data/Types.jsx";
+import { FetchingApi } from "./contextApi";
 
 export type contextTypes = {
   SocialData: MyAppDataTypes[];
@@ -18,7 +19,12 @@ export type contextTypes = {
   ) => void;
   DeletePassword: (boxId: number, passwordId: number) => void;
   OpenCloseMoreBox: (socialIndex: number, passwordIndex: number) => void;
-  DeleteAll:() => void;
+  DeleteAll: () => void;
+  signUpPostRequest: any;
+  loginPostRequest: any;
+  userData: any;
+  LoginToken: any;
+  isSignUp: boolean;
 };
 
 const MyContext = createContext<contextTypes | undefined>(undefined);
@@ -41,7 +47,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     },
     {
       id: "faksjhdfkajshdflakjsd",
-      name: "Messanger",
+      name: "Messenger",
       link: "https://www.messanger.com",
       image: Messnager,
       passwords: [],
@@ -62,6 +68,9 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     },
   ]);
 
+  const [LoginToken, setLoginToken] = useState();
+  const [userData, setUserData] = useState();
+  const [isSignUp, setIsSignUp] = useState(false);
   const GetSavePassword = (
     password: string,
     passwordName: string,
@@ -79,7 +88,6 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  
   const OpenCloseMoreBox = (socialIndex: number, passwordIndex: number) => {
     setSocialData((item) => {
       const data = [...item];
@@ -102,11 +110,56 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const DeleteAll = () => {
     setSocialData((item) => {
       const data = [...item];
-      return data.map((dataItem, index) => {
-        return {...dataItem, passwords:[]}
-      })
-    })
-  }
+      return data.map((dataItem) => {
+        return { ...dataItem, passwords: [] };
+      });
+    });
+  };
+
+  const signUpPostRequest = async (data: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    const signup = await FetchingApi({
+      url: "signup",
+      method: "POST",
+      data,
+    });
+    if (signup.success) {
+      setIsSignUp(true);
+    }
+  };
+
+  const loginPostRequest = async (data: {
+    email: string;
+    password: string;
+  }) => {
+    const loginData = await FetchingApi({
+      url: "login",
+      method: "POST",
+      data,
+    });
+
+    setLoginToken(loginData);
+  };
+  console.log(LoginToken)
+
+  useEffect(() => {
+    if (LoginToken) {
+      async () => {
+        const user = await FetchingApi({
+          url: "me",
+          method: "GET",
+          token: LoginToken,
+        });
+        console.log(LoginToken);
+
+        setUserData(user);
+        console.log(userData);
+      };
+    }
+  }, [LoginToken, userData]);
 
 
   return (
@@ -117,7 +170,12 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
         GetSavePassword,
         OpenCloseMoreBox,
         DeletePassword,
-        DeleteAll
+        DeleteAll,
+        signUpPostRequest,
+        loginPostRequest,
+        userData,
+        LoginToken,
+        isSignUp,
       }}
     >
       {children}

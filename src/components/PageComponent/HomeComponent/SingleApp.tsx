@@ -14,9 +14,7 @@ const SingleApp = ({
   data: MyAppDataTypes;
   index: number;
 }) => {
-  // const setpasswordBtn = useRef<HTMLButtonElement | null>(null);
 
-  const [PopupData, setPopupData] = useState<MyAppDataTypes | null>(null);
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
 
   return (

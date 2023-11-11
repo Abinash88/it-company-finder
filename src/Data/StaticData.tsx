@@ -1,4 +1,4 @@
-import { FaCog, FaHome, FaLock } from "react-icons/fa";
+import { FaCog, FaDatabase, FaHome, FaLock } from "react-icons/fa";
 import {  SidebarDataTypes } from "./Types";
 
 export const SidebarData:SidebarDataTypes[] = [
@@ -18,9 +18,9 @@ export const SidebarData:SidebarDataTypes[] = [
         link:"/pin",
     },
     {
-        name:"More",
-        icon:<FaHome/>,
-        link:"/more",
+        name:"Data",
+        icon:<FaDatabase/>,
+        link:"/data",
     },
     {
         name:"Setting",

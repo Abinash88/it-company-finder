@@ -24,7 +24,7 @@ const AccountBox = ({
             alt="user"
           ></Image>
         </Div>
-        <Spacing spaceY={"h-[18px]"} />
+        <Spacing space={"h-[18px]"}  />
         <Div className="w-full border-b pb-2 text-center">
           <h5 className="font-semibold  text-gray-600 text-[16px]">
             {"Abinash Subedi"}
@@ -33,7 +33,7 @@ const AccountBox = ({
             {"subediabinash@gmail.com"}
           </h6>
         </Div>
-        <Spacing spaceY={"h-[20px]"} />
+        <Spacing space={"h-[20px]"} />
         <Div className="w-full">
           <LinkBtn
             ButtonClick={closeAccount}

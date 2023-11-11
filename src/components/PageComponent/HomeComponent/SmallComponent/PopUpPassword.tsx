@@ -11,6 +11,7 @@ import Div from "@/lib/Div";
 import { FaEye, FaEyeSlash, FaPlus } from "react-icons/fa";
 import MyContext from "@/components/context/MyContext";
 import PinCodeBox from "./PinCodeBox";
+import toast from "react-hot-toast";
 
 export type popupPassword = {
   PopupData: MyAppDataTypes | null;
@@ -126,9 +127,13 @@ const PopUpPassword = (props: popupPassword) => {
         <Div className=""></Div>
         <button
           onClick={() => {
-            MyAppData?.GetSavePassword(password, passwordName, props.index);
-            setPassword("")
-            setPasswordName("")
+            if (!!password && !!passwordName) {
+              MyAppData?.GetSavePassword(password, passwordName, props.index);
+              setPassword("");
+              setPasswordName("");
+            }else{
+              toast.error("Please fill up your friend.")
+            }
           }}
           className="px-6 py-2 flex space-x-2 items-center rounded-md 
          hover:bg-purple-700 text-[13px] font-normal text-purple-700
@@ -137,7 +142,12 @@ const PopUpPassword = (props: popupPassword) => {
           <FaPlus className=" " />
           <span> Add Password</span>
         </button>
-        {showPinCodeBox && <PinCodeBox  showPinCodeBox={showPinCodeBox}  setShowPinCodeBox={setShowPinCodeBox} />}
+        {showPinCodeBox && (
+          <PinCodeBox
+            showPinCodeBox={showPinCodeBox}
+            setShowPinCodeBox={setShowPinCodeBox}
+          />
+        )}
       </div>
     </div>
   );
