@@ -2,6 +2,7 @@ import Div from "@/lib/Div";
 import React, { useContext, useState } from "react";
 import MyContext from "../context/MyContext";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Image from "next/image";
 
 const Signup = () => {
   const contextdata = useContext(MyContext);
@@ -98,8 +99,14 @@ const Signup = () => {
             )}
           </Div>
         </Div>
-        <button className="px-6 py-2 mt-6 mx-auto block bg-blue-600 text-white rounded-md w-full hover:bg-blue-700">
-          Submit
+        <button
+          className="px-6 py-2 mt-6 mx-auto flex justify-center bg-blue-600 text-white rounded-md w-full hover:bg-blue-700"
+        >
+          {contextdata?.signUpLoading ? (
+            <Image src={"/loading.gif"} alt="" width={25} height={25} />
+          ) : (
+            <span> Submit</span>
+          )}
         </button>
         <h4 className="text-center  mt-5">or</h4>
       </form>

@@ -1,18 +1,33 @@
+"use client";
+
 import React, { useContext, useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import Signup from "./Signup";
 import Div from "@/lib/Div";
 import MyContext from "../context/MyContext";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
   const contextData = useContext(MyContext);
   const [chooseLogin, setChooseLogin] = useState(false);
-
+  const router = useRouter();
+  
   useEffect(() => {
-    if (contextData?.isSignUp) {
+    if (contextData?.isSignUp && contextData?.isSignUp) {
       setChooseLogin(true);
     }
   }, [contextData?.isSignUp]);
+
+  useEffect(() => {
+    contextData?.GetUserData();
+  }, [contextData]);
+  console.log(contextData?.userData)
+  useEffect(() => {
+    if(contextData?.userData && contextData?.userData?.data){
+      router.push("/")
+    }
+  }, [contextData?.userData, router]);
+
   return (
     <Div className="flex flex-col  justify-center items-center w-full h-screen">
       <Div className="w-[450px] overflow-hidden overflh p-4  h-[500px] bg-gray-100 rounded-md">

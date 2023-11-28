@@ -4,7 +4,7 @@ import React from 'react'
 const profile = () => {
   return (
     <Div className=''>
-        profile page here...
+      
     </Div>
   )
 }

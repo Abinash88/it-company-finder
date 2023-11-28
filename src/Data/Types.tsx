@@ -9,7 +9,7 @@ export type SidebarDataTypes = {
 export type password = {
   passwordName: string;
   password: string;
-  OpenMoreBar:boolean
+  OpenMoreBar: boolean;
 };
 
 export type MyAppDataTypes = {
@@ -20,3 +20,36 @@ export type MyAppDataTypes = {
   passwords: password[];
 };
 
+export type settingLinksTypes = {
+  name: string;
+  link: string;
+};
+
+export type userData = {
+  success: boolean;
+  message: string;
+  data: { name: string; email: string; id: string };
+};
+
+export type contextTypes = {
+  SocialData: MyAppDataTypes[];
+  setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
+  GetSavePassword: (
+    password: string,
+    passwordName: string,
+    index: number
+  ) => void;
+  DeletePassword: (boxId: number, passwordId: number) => void;
+  OpenCloseMoreBox: (socialIndex: number, passwordIndex: number) => void;
+  DeleteAll: () => void;
+  signUpPostRequest: any;
+  loginPostRequest: any;
+  userData: any;
+  isSignUp: boolean;
+  GetUserData: () => void;
+  LoginData: userData | undefined;
+  LogoutFunc: () => void;
+  loadingUserData:boolean;
+  loginLoading: boolean;
+  signUpLoading: boolean;
+};

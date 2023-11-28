@@ -5,35 +5,32 @@ export type HttpMethod = "GET" | "POST" | "DELETE" | "PUT" | "PATCH";
 type fetchApiTypes = {
   url: string;
   method: HttpMethod;
-  token?: string;
+  // token?: string;
   data?: Record<string, any>;
 };
 
 type returnData = {
-  data:any;
-  success:boolean;
-  message:string;
-}
+  data: any;
+  success: boolean;
+  message: string;
+};
 
 export const FetchingApi = async (props: fetchApiTypes) => {
   const headers: Record<string, string> = {};
 
-  if (props.token) {
-    headers["Authorization"] = `Bearer ${props.token}`;
-  }
-
   const requestOptions: RequestInit = {
     method: props.method,
     headers,
+    credentials: "include",
   };
 
   if (props.data) {
     if (props.method !== "GET") {
       headers["Content-Type"] = "application/json";
       requestOptions.body = JSON.stringify(props.data);
+    } else {
     }
   }
-
 
   try {
     const resp = await fetch(
@@ -42,9 +39,15 @@ export const FetchingApi = async (props: fetchApiTypes) => {
     );
 
     const fetchData = await resp.json();
-    if (!fetchData.success) return toast.error(fetchData?.message);
-    toast.success(fetchData.message);
-    return fetchData;
+    if (!fetchData.success && props.method !== "GET") {
+      return toast.error(fetchData?.message);
+    }
+    if (fetchData.success && props.method !== "GET") {
+      toast.success(fetchData.message);
+    }
+    if (fetchData?.success) {
+      return fetchData;
+    }
   } catch (err) {
     console.log(err);
   }

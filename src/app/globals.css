@@ -8,6 +8,10 @@ body {
   background-color: rgb(214, 219, 220);
 }
 
+:root{
+  --main_black:#283644;
+}
+
 * {
   font-family: "Poppins", sans-serif;
   margin: 0;
@@ -38,18 +42,22 @@ body {
 }
 
 .transparentBg {
-  background-color: #6a6a8f4d;
-  backdrop-filter: blur(5px);
+  background-color: #252e36ae;
+  backdrop-filter: blur(10px);
 }
 
 .popupPasswrodBox {
-  background: #fffffff2;
+  background: #ffffffe8;
   backdrop-filter: blur(20px);
 }
 
 .setPasswordBg {
   /* background: #366ebc; */
   backdrop-filter: blur(20px);
+}
+
+.inputbox::placeholder{
+  color: #424141e3;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -63,3 +71,23 @@ input[type="number"]::-webkit-outer-spin-button {
 .bgColorDark{
   background-color: #2269a0e1;  
 }
+
+
+.AddPassword{
+  color: rgba(var(--main_black), 0.2);
+  border: 1px solid #49525bd5;
+}
+
+
+.AddPassword:hover{
+  background-color: var(--main_black);
+  color:white;
+}
+
+
+
+.passwordBg{
+  background-color: #5f6064cf;
+}
+
+

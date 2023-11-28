@@ -2,11 +2,11 @@ import Div from "@/lib/Div";
 import React from "react";
 
 export type spacingTypes = {
-  space: string;
+  styleCss: string;
 };
 
-const Spacing = ({ space }: spacingTypes) => {
-  return <Div className={` ${space}`}></Div>;
+const Spacing = ({ styleCss }: spacingTypes) => {
+  return <Div className={` ${styleCss}`}></Div>;
 };
 
 export default Spacing;

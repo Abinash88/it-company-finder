@@ -27,10 +27,10 @@ const PasswordBox = ({ item, passwordIndex, boxIndex, setShowPinCodeBox }: passw
 
 
   return (
-    <Div className="w-full  bg-gray-100 flex items-center justify-between my-1 py-3 px-4 rounded-md">
+    <Div className="w-full  passwordBg flex items-center justify-between my-1 py-3 px-4 rounded-md">
       <Div className="w-[90%] overflowstyle overflow-x-scroll ">
-        <h5>{item?.passwordName}</h5>
-        <p className="text-gray-600 text-[16px] w-1/2 font-light italic">
+        <h5 className="text-gray-200">{item?.passwordName}</h5>
+        <p className="text-gray-300 text-[16px] w-1/2 font-light italic">
           *************
         </p>
       </Div>
@@ -40,7 +40,7 @@ const PasswordBox = ({ item, passwordIndex, boxIndex, setShowPinCodeBox }: passw
             onClick={() => {
               openModel(OpenMoreBox ? null : item, !OpenMoreBox);
             }}
-            className="text-gray-500 text-[29px] p-2 transition-all duration-300 hover:bg-gray-200 rounded-full"
+            className="text-gray-100 text-[29px] p-2 transition-all duration-300 hover:bg-gray-600 rounded-full"
           />
         </button>
         {OpenMoreBox && (

@@ -6,28 +6,10 @@ import Instagram from "@/assests/homeImage/instagram.jpg";
 import Messnager from "@/assests/homeImage/messanger.jpg";
 import Reddit from "@/assests/homeImage/reddit.jpg";
 import Pinterest from "@/assests/homeImage/pintrest.jpg";
-import { MyAppDataTypes } from "@/Data/Types.jsx";
+import { MyAppDataTypes, contextTypes } from "@/Data/Types.jsx";
 import { FetchingApi } from "./contextApi";
-
-export type contextTypes = {
-  SocialData: MyAppDataTypes[];
-  setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
-  GetSavePassword: (
-    password: string,
-    passwordName: string,
-    index: number
-  ) => void;
-  DeletePassword: (boxId: number, passwordId: number) => void;
-  OpenCloseMoreBox: (socialIndex: number, passwordIndex: number) => void;
-  DeleteAll: () => void;
-  signUpPostRequest: any;
-  loginPostRequest: any;
-  userData: any;
-  LoginToken: any;
-  isSignUp: boolean;
-};
-
 const MyContext = createContext<contextTypes | undefined>(undefined);
+import { useRouter } from "next/navigation";
 
 export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
@@ -68,9 +50,14 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     },
   ]);
 
-  const [LoginToken, setLoginToken] = useState();
+  let [loadingUserData, setLoadingUserData] = useState<boolean>(true);
+  const [LoginData, setLoginData] = useState();
   const [userData, setUserData] = useState();
   const [isSignUp, setIsSignUp] = useState(false);
+  const router = useRouter();
+  const [signUpLoading, setSignupLoading] = useState<boolean>(false);
+  const [loginLoading, setLoginLoading] = useState<boolean>(false);
+
   const GetSavePassword = (
     password: string,
     passwordName: string,
@@ -121,6 +108,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     email: string;
     password: string;
   }) => {
+    setSignupLoading(true);
     const signup = await FetchingApi({
       url: "signup",
       method: "POST",
@@ -129,38 +117,47 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     if (signup.success) {
       setIsSignUp(true);
     }
+    setSignupLoading(false);
   };
 
   const loginPostRequest = async (data: {
     email: string;
     password: string;
   }) => {
+    setLoginLoading(true);
     const loginData = await FetchingApi({
       url: "login",
       method: "POST",
       data,
     });
-
-    setLoginToken(loginData);
+    setLoginLoading(false);
+    if (loginData?.success) {
+      setLoginData(loginData);
+      router.push("/");
+    }
   };
-  console.log(LoginToken)
+
+  const GetUserData = async () => {
+    const user = await FetchingApi({
+      url: "me",
+      method: "GET",
+    });
+    if (user?.success) {
+      setUserData(user);
+      setLoadingUserData(false);
+    }
+  };
+
+  const LogoutFunc = async () => {
+    await FetchingApi({
+      url: "logout",
+      method: "GET",
+    });
+  };
 
   useEffect(() => {
-    if (LoginToken) {
-      async () => {
-        const user = await FetchingApi({
-          url: "me",
-          method: "GET",
-          token: LoginToken,
-        });
-        console.log(LoginToken);
-
-        setUserData(user);
-        console.log(userData);
-      };
-    }
-  }, [LoginToken, userData]);
-
+    GetUserData();
+  }, []);
 
   return (
     <MyContext.Provider
@@ -174,8 +171,13 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
         signUpPostRequest,
         loginPostRequest,
         userData,
-        LoginToken,
+        LoginData,
         isSignUp,
+        loadingUserData,
+        GetUserData,
+        LogoutFunc,
+        signUpLoading,
+        loginLoading
       }}
     >
       {children}

@@ -11,6 +11,11 @@ const MyApp = () => {
 
   return (
     <Div className="w-full h-full">
+      <div
+        className={`${
+          MyAppData?.loadingUserData ? "" : "hidden"
+        } z-50 fixed w-full h-screen top-0 left-0 right-0 bg-white`}
+      ></div>
       <Div className="w-full overflow-auto overflowstyle px-4 myAppGrid h-full ">
         {MyAppData?.SocialData?.map((data: MyAppDataTypes, index) => {
           return <SingleApp key={data?.id} index={index} data={data} />;

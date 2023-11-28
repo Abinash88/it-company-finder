@@ -1,14 +1,29 @@
 import Div from "@/lib/Div";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import AccountBox from "./AccountBox";
-import { OutClickToggle } from "@/lib/page";
+import MyContext from "../context/MyContext";
+import { useRouter } from "next/navigation";
 
 const Headers = () => {
   const [openAccountBox, setOpenAccountBox] = useState<boolean>(false);
   const removeBox = useRef<HTMLDivElement>(null);
+  const accountData = useContext(MyContext);
+  const router = useRouter()
+  useEffect(() => {
+    accountData?.GetUserData();
+  }, []);
+
+
+
+  useEffect(() => {
+    if( accountData && !accountData?.userData?.data?.id){
+      router.push('/account')
+    }
+  },[accountData, router]);
+
 
   const openAccount = () => {
     setOpenAccountBox(!openAccountBox);
@@ -62,7 +77,7 @@ const Headers = () => {
             </Div>
 
             <Div>
-              {openAccountBox && <AccountBox closeAccount={closeAccount} />}
+              {openAccountBox && <AccountBox userdata={accountData?.userData} closeAccount={closeAccount} />}
             </Div>
           </Div>
         </Div>

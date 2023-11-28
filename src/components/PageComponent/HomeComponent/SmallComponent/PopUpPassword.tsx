@@ -42,12 +42,12 @@ const PopUpPassword = (props: popupPassword) => {
         id="RemovingPasswordBox"
         className="h-[470px] z-50 p-4 relative rounded-md w-[450px] popupPasswrodBox "
       >
-        <h2 className="text-center border-b pb-1  font-semibold text-purple-700 text-[17px]">
+        <h2 className="text-center border-b pb-1  font-semibold text-gray-600 text-[17px]">
           Set New Password
         </h2>
         <Div
           onClick={() => props.closeModelBox(false)}
-          className="absolute top-2 right-3 transform rotate-[45deg]    p-2 rounded-full transition duration-300 hover:rotate-[140deg] hover:bg-gray-200"
+          className="absolute top-2 right-3 transform rotate-[45deg]  p-2 rounded-full transition duration-300 hover:rotate-[140deg] hover:bg-gray-200"
         >
           <FaPlus className="text-gray-600 text-[19px]" />
         </Div>
@@ -75,7 +75,7 @@ const PopUpPassword = (props: popupPassword) => {
         <Div className="">
           <Div className="mt-5 flex flex-col relative">
             <label
-              className="text-[13px] text-start text-gray-500"
+              className="text-[13px] text-start text-gray-600"
               htmlFor="PassWordName"
             >
               Password Name
@@ -87,14 +87,13 @@ const PopUpPassword = (props: popupPassword) => {
               onChange={(e) => {
                 setPasswordName(e.target.value);
               }}
-              className="py-3 text-[13px] px-3 pr-10 rounded-lg bg-transparent shadow-lg
-             shadow-gray-300 border focus:outline-none mt-1"
+              className="py-3 text-[13px] px-3 pr-10 rounded-lg  bg-gray-200  border-gray-400 text-gray-500 inputbox focus:outline-none mt-1"
               placeholder="Password Name"
             />
           </Div>
           <Div className="mt-3 flex flex-col relative">
             <label
-              className="text-[13px] text-start text-gray-500"
+              className="text-[13px] text-start text-gray-600"
               htmlFor="addPassword"
             >
               Password
@@ -107,9 +106,8 @@ const PopUpPassword = (props: popupPassword) => {
               id="addPassword"
               value={password}
               type={ShowPassword ? "text" : "password"}
-              className="py-3  px-3 text-[13px] pr-10 rounded-lg bg-transparent shadow-lg
-             shadow-gray-300 border focus:outline-none mt-1"
-              placeholder="Eg. A3u-ioVa_343"
+              className="py-3  px-3 text-[13px] pr-10 rounded-lg  bg-gray-200  border-gray-400 text-gray-500 inputbox focus:outline-none mt-1"
+              placeholder="Eg. SAfeu_EA-e53"
             />
             <Div
               onClick={() => setShowPassword(!ShowPassword)}
@@ -131,13 +129,13 @@ const PopUpPassword = (props: popupPassword) => {
               MyAppData?.GetSavePassword(password, passwordName, props.index);
               setPassword("");
               setPasswordName("");
-            }else{
-              toast.error("Please fill up your friend.")
+            } else {
+              toast.error("Please fill up your friend.");
             }
           }}
           className="px-6 py-2 flex space-x-2 items-center rounded-md 
-         hover:bg-purple-700 text-[13px] font-normal text-purple-700
-          hover:text-white mx-auto border border-purple-300 mt-5 transition-all duration-300"
+          text-[13px] font-semibold  AddPassword 
+           mx-auto border mt-5 transition-all duration-300"
         >
           <FaPlus className=" " />
           <span> Add Password</span>
