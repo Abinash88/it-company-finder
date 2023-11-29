@@ -133,7 +133,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     setLoginLoading(false);
     if (loginData?.success) {
       setLoginData(loginData);
-      router.push("/");
+      router.push("/pincode");
     }
   };
 

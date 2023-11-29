@@ -13,9 +13,9 @@ export const SidebarData: SidebarDataTypes[] = [
     link: "/password",
   },
   {
-    name: "Pin",
+    name: "Pin code",
     icon: <FaHome />,
-    link: "/pin",
+    link: "/pincode",
   },
   {
     name: "Data",

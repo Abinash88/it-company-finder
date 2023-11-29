@@ -12,6 +12,7 @@ const Headers = () => {
   const removeBox = useRef<HTMLDivElement>(null);
   const accountData = useContext(MyContext);
   const router = useRouter()
+  
   useEffect(() => {
     accountData?.GetUserData();
   }, []);
@@ -20,6 +21,7 @@ const Headers = () => {
 
   useEffect(() => {
     if( accountData && !accountData?.userData?.data?.id){
+      router.refresh();
       router.push('/account')
     }
   },[accountData, router]);

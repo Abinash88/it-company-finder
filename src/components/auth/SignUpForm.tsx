@@ -21,10 +21,11 @@ const SignUpForm = () => {
   useEffect(() => {
     contextData?.GetUserData();
   }, [contextData]);
-  console.log(contextData?.userData)
+  
+
   useEffect(() => {
     if(contextData?.userData && contextData?.userData?.data){
-      router.push("/")
+      // router.push("/")
     }
   }, [contextData?.userData, router]);
 
