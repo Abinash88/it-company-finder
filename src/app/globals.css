@@ -4,12 +4,67 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: rgb(214, 219, 220);
+:root {
+  --background: #f2f3f6;
+  --foreground: #f6f5f2;
+  --sidebar: #202934;
+  --sidebar-foreground: #2f3a47;
+  --card: rgb(51, 58, 73);
+  --card-foreground: #242933;
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20 14.3% 4.1%);
+
+  --primary: #326db9;
+  --primary-foreground: hsl(60 9.1% 97.8%);
+
+  --secondary: hsl(60, 20%, 92%);
+  --secondary-foreground: hsl(24 79% 50%);
+
+  --muted: hsl(40, 100%, 99%);
+  --muted-foreground: hsl(25 5.3% 44.7%);
+
+  --accent: #353f4b;
+  --accent-foreground: hsl(24 79% 50%);
+
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(60 9.1% 97.8%);
+
+  --border: hsl(20 5.9% 90%);
+  --input: #82a1ceca;
+  --ring: hsl(20 14.3% 4.1%);
+  --radius: 0.5rem;
 }
 
-:root{
-  --main_black:#283644;
+.dark {
+  --background: #071525;
+  --foreground: hsl(60 9.1% 97.8%);
+  --sidebar: #0c1520;
+  --sidebar-foreground: #232c38;
+
+  --card: hsl(20 14.3% 4.1%);
+  --card-foreground: hsl(60 9.1% 97.8%);
+
+  --popover: hsl(20 14.3% 4.1%);
+  --popover-foreground: hsl(60 9.1% 97.8%);
+
+  --primary: hsl(60 9.1% 97.8%);
+  --primary-foreground: hsl(24 9.8% 10%);
+
+  --secondary: hsl(12 6.5% 15.1%);
+  --secondary-foreground: hsl(60 9.1% 97.8%);
+
+  --muted: hsl(12 6.5% 15.1%);
+  --muted-foreground: hsl(24 5.4% 63.9%);
+
+  --accent: hsl(12 6.5% 15.1%);
+  --accent-foreground: hsl(60 9.1% 97.8%);
+
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(60 9.1% 97.8%);
+
+  --border: hsl(12 6.5% 15.1%);
+  --input: hsl(12 6.5% 15.1%);
+  --ring: hsl(24 5.7% 82.9%);
 }
 
 * {
@@ -56,7 +111,7 @@ body {
   backdrop-filter: blur(20px);
 }
 
-.inputbox::placeholder{
+.inputbox::placeholder {
   color: #424141e3;
 }
 
@@ -67,27 +122,24 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-
-.bgColorDark{
-  background-color: #2269a0e1;  
+.bgColorDark {
+  background-color: #2269a0e1;
 }
 
-
-.AddPassword{
+.AddPassword {
   color: rgba(var(--main_black), 0.2);
   border: 1px solid #49525bd5;
 }
 
-
-.AddPassword:hover{
+.AddPassword:hover {
   background-color: var(--main_black);
-  color:white;
+  color: white;
 }
 
-
-
-.passwordBg{
+.passwordBg {
   background-color: #5f6064cf;
 }
 
-
+.verifyInput:focus + .verifyLabel {
+  color: red;
+}

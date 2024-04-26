@@ -20,12 +20,12 @@ const SignUpForm = () => {
 
   useEffect(() => {
     contextData?.GetUserData();
-  }, [contextData]);
+  }, []);
   
 
   useEffect(() => {
     if(contextData?.userData && contextData?.userData?.data){
-      // router.push("/")
+      router.push("/")
     }
   }, [contextData?.userData, router]);
 

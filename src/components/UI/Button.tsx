@@ -53,3 +53,16 @@ export function LinkBtn({
     </Div>
   );
 }
+
+export interface InputField extends React.InputHTMLAttributes<HTMLInputElement> {
+
+}
+
+export const InputField = React.forwardRef<HTMLButtonElement, InputField>(({ ...props }) => {
+
+  return (
+    <input {...props} />
+  )
+})
+
+InputField.displayName = 'InputField'

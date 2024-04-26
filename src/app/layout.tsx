@@ -24,12 +24,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body className="bg-background">
         <Toaster position="top-right" />
         <MyContextProvider>
-          <div className="mx-auto overflow-hidden max-w-[1400px] w-[95%] min-h-screen  flex flex-col">
+          <div className="mx-auto  overflow-hidden  w-full min-h-screen  flex flex-col">
             {path === "/account" ? null : <Headers />}
-            <div className=" h-[calc(100vh-60px)] pt-5 w-full flex">
+            <div className="  h-[calc(100vh-60px)]  w-full flex">
               <div
                 className={`${
                   path === "/account" ? "hidden" : ""

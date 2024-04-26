@@ -3,7 +3,7 @@ import { SidebarDataTypes, settingLinksTypes } from "./Types";
 
 export const SidebarData: SidebarDataTypes[] = [
   {
-    name: "Home",
+    name: "Dashboard",
     icon: <FaHome />,
     link: "/",
   },

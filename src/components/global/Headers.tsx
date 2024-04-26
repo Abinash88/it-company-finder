@@ -12,19 +12,19 @@ const Headers = () => {
   const removeBox = useRef<HTMLDivElement>(null);
   const accountData = useContext(MyContext);
   const router = useRouter()
-  
+
   useEffect(() => {
-    accountData?.GetUserData();
+    // accountData?.GetUserData();
   }, []);
 
 
 
   useEffect(() => {
-    if( accountData && !accountData?.userData?.data?.id){
-      router.refresh();
-      router.push('/account')
+    if (accountData && !accountData?.userData?.data?.id) {
+      // router.refresh();
+      // router.push('/account')ss
     }
-  },[accountData, router]);
+  }, [accountData, router]);
 
 
   const openAccount = () => {
@@ -39,26 +39,25 @@ const Headers = () => {
   return (
     <>
       <div
-       onClick={closeAccount}
+        onClick={closeAccount}
         ref={removeBox}
-        className={`${
-          !openAccountBox && "hidden"
-        } absolute w-full h-screen  z-10 left-0 top-0`}
+        className={`${!openAccountBox && "hidden"
+          } absolute w-full h-screen   z-10 left-0 top-0`}
       ></div>
-      <Div className="w-full h-[60px] border-b border-gray-300 ">
+      <Div className="w-full h-[60px] bg-primary ">
         <Div className="w-full h-full px-4 flex justify-between items-center">
           <Link href={"/"}>
-            <h3 className="border-b-2 inline border-blue-600 text-blue-600 font-semibold">
-              Password Manager
+            <h3 className=" text-[20px] inline text-gray-50  font-semibold">
+              Personal Manager
             </h3>
           </Link>
 
           <Div className="w-[60%]">
             <Div className="w-full relative ">
-              <BsSearch className="absolute top-3 left-2 text-[20px] text-gray-600 cursor-pointer" />
+              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-gray-100 cursor-pointer" />
               <input
                 type="text"
-                className="w-full pr-4 pl-10 text-gray-700 text-[15px] py-2 rounded-md bg-gray-50 focus:outline-none"
+                className="w-full pr-4 pl-10 text-gray-100 placeholder:text-gray-200 placeholder:text-[12px] text-[12px] py-2 rounded-md bg-input focus:outline-none"
                 placeholder="Search here..."
               />
             </Div>

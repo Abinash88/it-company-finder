@@ -9,22 +9,21 @@ const Sidebars = () => {
   const location = usePathname();
 
   return (
-    <Div className="w-full h-full ">
+    <Div className="w-full h-full bg-sidebar">
       <Div className="h-full">
-        <ul className="  h-full ">
+        <ul className="  h-full  flex flex-col gap-1 pt-2">
           {SidebarData?.map((item: SidebarDataTypes, index) => {
             return (
               <li
                 key={index}
-                className={`flex  rounded-md duration-300 transition-all my-3 ${
-                  location === (item?.link) && "bg-gray-100"
-                } hover:bg-gray-100 group cursor-pointer w-full items-center `}
+                className={`flex  rounded-md duration-300 transition-all  ${location === (item?.link) && "bg-sidebarForeground text-"
+                  } hover:bg-sidebarForeground group cursor-pointer w-full items-center `}
               >
                 <Link
-                  className="text-gray-600 px-4 py-2  w-full h-full flex items-center space-x-3 font-semibold duration-300 transition-all text-[15px] group-hover:text-gray-600"
+                  className="text-white px-4 py-2  w-full h-full flex items-center space-x-3 font-normal duration-300 transition-all text-[13px] "
                   href={item?.link}
                 >
-                  <span className="text-gray-600 text-[22px] duration-300 transition-all group-hover:text-gray-600">
+                  <span className="text-white text-[18px] duration-300 transition-all ">
                     {item?.icon}
                   </span>
                   <span>{item?.name}</span>

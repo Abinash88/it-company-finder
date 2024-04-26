@@ -133,7 +133,7 @@ const PopUpPassword = (props: popupPassword) => {
               toast.error("Please fill up your friend.");
             }
           }}
-          className="px-6 py-2 flex space-x-2 items-center rounded-md 
+          className="pr-6 pl-5 py-2 flex space-x-3 items-center rounded-md 
           text-[13px] font-semibold  AddPassword 
            mx-auto border mt-5 transition-all duration-300"
         >
