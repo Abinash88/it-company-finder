@@ -16,8 +16,8 @@ const Sidebars = () => {
             return (
               <li
                 key={index}
-                className={`flex  rounded-md duration-300 transition-all  ${location === (item?.link) && "bg-sidebarForeground text-"
-                  } hover:bg-sidebarForeground group cursor-pointer w-full items-center `}
+                className={`flex  rounded-md duration-300 transition-all  ${location === (item?.link) && "bg-sidebar-foreground text-"
+                  } hover:bg-sidebar-foreground group cursor-pointer w-full items-center `}
               >
                 <Link
                   className="text-white px-4 py-2  w-full h-full flex items-center space-x-3 font-normal duration-300 transition-all text-[13px] "

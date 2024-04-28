@@ -47,27 +47,31 @@ const AccountBox = ({
           </h6>
         </Div>
         <Spacing styleCss={"h-[20px]"} />
-        <Div className="w-full">
+        <Div className="w-full flex flex-col gap-2">
           <LinkBtn
             ButtonClick={closeAccount}
             icon={<FaUser />}
             href="/account"
-            btnCss="w-full hover:bg-gray-100 pl-3 py-3 h-full items-center space-x-3"
+            variant={'ghost'}
+            className="w-full hover:bg-gray-100 pl-3 py-3 justify-start items-center space-x-3"
             btnName="Account"
           />
           <LinkBtn
             ButtonClick={closeAccount}
             href="/setting"
+            variant={'ghost'}
             icon={<FaCog />}
-            btnCss="w-full hover:bg-gray-100 pl-3 py-3 h-full items-center space-x-3"
+            className="w-full hover:bg-gray-100 pl-3 py-3 justify-start items-center space-x-3"
             btnName="Setting"
           />
           <Button
             icon={<FiLogOut />}
+            size='sm'
+            variant={'default'}
             ButtonClick={() => {
               LogOutFunc();
             }}
-            btnCss="w-full hover:bg-gray-100 pl-3 py-3 h-full items-center space-x-3"
+            className="w-full hover:bg-gray-100 pl-3 py-3 justify-start items-center space-x-3"
             btnName="LogOut"
           />
         </Div>
