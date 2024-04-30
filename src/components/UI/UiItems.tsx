@@ -2,7 +2,7 @@ import Div from "@/lib/Div";
 import { IconType } from "react-icons";
 import React, { ReactNode } from "react";
 import Link from "next/link";
-import { VariantProps, cva } from "class-variance-authority"
+import { type VariantProps, cva } from "class-variance-authority"
 import { cn } from "@/lib/utils";
 
 
@@ -24,6 +24,7 @@ const buttonVariants = cva(
       size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3 text-[12px]',
+        md: 'h-8 rounded-md px-[10px] text-[13px]',
         lg: 'h-12 rounded-md px-8',
         icon: 'size-10',
       },
@@ -39,10 +40,9 @@ export interface buttonTypes extends React.ButtonHTMLAttributes<HTMLButtonElemen
   btnName: string;
   ButtonClick: () => void;
   icon?: ReactNode;
-  href: string;
 };
 
-const Button = React.forwardRef<HTMLButtonElement, Omit<buttonTypes, 'href'>>(({
+const Button = React.forwardRef<HTMLButtonElement, buttonTypes>(({
   btnName,
   ButtonClick,
   icon,
@@ -53,8 +53,8 @@ const Button = React.forwardRef<HTMLButtonElement, Omit<buttonTypes, 'href'>>(({
 }, ref) => {
   return (
     <button ref={ref} {...rest} onClick={ButtonClick} className={cn(buttonVariants({ variant, size, className }))}>
-      {icon && <span className="text-[18px] text-gray-600">{icon}</span>}
-      <span className="text-[14px] font-normal text-gray-500">
+      {icon && <span className="">{icon}</span>}
+      <span className="">
         {btnName}
       </span>
     </button>
@@ -97,15 +97,31 @@ export const LinkBtn = React.forwardRef<HTMLLinkElement, LinksTypes>(({
 
 
 LinkBtn.displayName = 'LinkBtn';
-export interface InputField extends React.InputHTMLAttributes<HTMLInputElement> {
+
+
+
+export interface InputFieldTypes extends React.InputHTMLAttributes<HTMLInputElement> {
 
 }
 
-export const InputField = React.forwardRef<HTMLButtonElement, InputField>(({ ...props }) => {
+
+export const InputField = React.forwardRef<HTMLInputElement, InputFieldTypes>(({ className, ...props }) => {
 
   return (
-    <input {...props} />
+    <input {...props} className={cn(`rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
   )
 })
 
 InputField.displayName = 'InputField'
+
+export interface labelContent extends React.LabelHTMLAttributes<HTMLLabelElement> {
+
+}
+
+export const LabelContent = React.forwardRef<HTMLLabelElement, labelContent>(({ className, ...props }, ref) => {
+  return (
+    <label ref={ref} {...props} className={cn(`text-[13px] font-normal text-card ${className}`)}></label>
+  )
+})
+
+LabelContent.displayName = 'LabelContent' 

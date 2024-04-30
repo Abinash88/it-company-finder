@@ -17,10 +17,10 @@
   --primary: #326db9;
   --primary-foreground: #f0f2f4;
 
-  --secondary: hsl(60, 20%, 92%);
-  --secondary-foreground: hsl(24 79% 50%);
+  --secondary: hsl(225, 20%, 92%);
+  --secondary-foreground: rgb(27, 91, 228);
 
-  --muted: hsl(40, 100%, 99%);
+  --muted: hsl(204, 100%, 99%);
   --muted-foreground: hsl(25 5.3% 44.7%);
 
   --accent: #fdfdfd;
@@ -29,8 +29,8 @@
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(60 9.1% 97.8%);
 
-  --border: hsl(220, 6%, 90%);
-  --input: #82a1ceca;
+  --border: #cfd1d7;
+  --input: #e9ecf4ca;
   --ring: hsl(220, 14%, 4%);
   --radius: 0.5rem;
 }
@@ -63,7 +63,7 @@
   --destructive-foreground: hsl(60 9.1% 97.8%);
 
   --border: hsl(12 6.5% 15.1%);
-  --input: hsl(12 6.5% 15.1%);
+  --input: hsl(10, 11%, 11%);
   --ring: hsl(24 5.7% 82.9%);
 }
 
@@ -97,8 +97,8 @@
 }
 
 .transparentBg {
-  background-color: #252e36ae;
-  backdrop-filter: blur(10px);
+  background-color: #252e361b;
+  backdrop-filter: blur(5px);
 }
 
 .popupPasswrodBox {

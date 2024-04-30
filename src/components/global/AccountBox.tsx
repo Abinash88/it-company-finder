@@ -1,7 +1,7 @@
 import Div from "@/lib/Div";
 import Image from "next/image";
 import React, { useContext, useEffect } from "react";
-import Button, { LinkBtn } from "../UI/Button";
+import Button, { LinkBtn } from "../UI/UiItems";
 import Spacing from "../UI/Spacing";
 import { FaCog, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
@@ -67,7 +67,7 @@ const AccountBox = ({
           <Button
             icon={<FiLogOut />}
             size='sm'
-            variant={'default'}
+            variant={'ghost'}
             ButtonClick={() => {
               LogOutFunc();
             }}

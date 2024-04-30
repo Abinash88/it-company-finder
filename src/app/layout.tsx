@@ -6,7 +6,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Sidebars from "@/components/global/Sidebars";
 import MyContext, { MyContextProvider } from "@/components/context/MyContext";
-import { Toaster } from "react-hot-toast";
+import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
 import { usePathname } from "next/navigation";
 
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-background">
-        <Toaster position="top-right" />
+        <ToastContainer position="top-right" />
         <MyContextProvider>
           <div className="mx-auto  overflow-hidden  w-full min-h-screen  flex flex-col">
             {path === "/account" ? null : <Headers />}

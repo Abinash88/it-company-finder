@@ -6,6 +6,10 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Div from "@/lib/Div";
 import PopUpPassword from "./SmallComponent/PopUpPassword";
+import { InputField } from "@/components/UI/UiItems";
+import { FaEdit } from "react-icons/fa";
+import { BsThreeDots } from "react-icons/bs";
+import PopupMenu from "./SmallComponent/PopupMenu";
 
 const SingleApp = ({
   data,
@@ -15,44 +19,47 @@ const SingleApp = ({
   index: number;
 }) => {
 
-  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
     <Div
-      className="h-[150px] flex flex-col space-y-3 relative cursor-pointer
-     group justify-center items-center  rounded-md bg-gray-50"
+      className="h-[150px] w-full flex flex-row relative cursor-pointer
+     group justify-start px-2 items-center gap-4  rounded-md bg-gray-50  "
     >
-      <Div className="w-[50%] h-[50%] mx-auto  rounded-full">
-        <Link target="_blank" href={data?.link}>
-          <Image
-            src={data?.image}
-            className="rounded-full"
-            alt={data?.name + "image"}
-          />
-        </Link>
-      </Div>
-      <Div className=" w-full  backdrop-blur-5   top-[-12px] rounded-md  left-0">
-        <Div className="">
-          <button
-            id="setpasswordBtn"
-            onClick={() => {
-              setIsOpenPopup(!isOpenPopup);
-            }}
-            className="block mx-auto py-1 mt-2 px-4 text-[13px]
-            rounded-md setPasswordBg hover:bg-gray-200 bg-gray-100
-              transition-all duration-300 text-gray-600 font-semibold"
-          >
-            Set Password
-          </button>
+      <Div className="flex items-center">
+        <Div className="w-[50px] h-full">
+          <InputField type="checkbox" className=" " />
+        </Div>
+        <Div className="w-[50px] h-[50px]  rounded-full">
+          <Link target="_blank" href={data?.link}>
+            <Image
+              src={data?.image}
+              className="rounded-md size-full"
+              width={500}
+              height={500}
+              alt={data?.name + "image"}
+            />
+          </Link>
         </Div>
       </Div>
-      {isOpenPopup ? (
-        <PopUpPassword
-          closeModelBox={setIsOpenPopup}
-          index={index}
-          PopupData={data}
-        />
-      ) : null}
+
+      <Div className=" h-full  backdrop-blur-5   top-[-12px] rounded-md  left-0">
+        <Div className="h-full mt-5 flex flex-col gap-1 ">
+          <h2 className="text-[13px] text-gray-600 font-light">Facebook</h2>
+          <h3 className="text-[11px] text-gray-600 font-normal">Password Catagory : <b className="text-gray-400 "> Website Url</b> </h3>
+        </Div>
+      </Div>
+      <Div className=" h-full flex-1 flex relative justify-end backdrop-blur-5 rounded-md  ">
+        <Div className="h-full pr-5 flex flex-row   gap-2 items-center ">
+          <BsThreeDots onClick={() => { setToggleMenu(!toggleMenu) }} className="text-gray-500  p-[7px] text-[30px] rounded-full hover:bg-gray-100 " />
+        </Div>
+        {toggleMenu &&
+          <Div className="absolute w-[100px] rounded-sm h-[120px] bg-white shadow-lg right-[50px] top-4 z-40">
+            <Div onClick={() => {setToggleMenu(false)}} className="fixed top-0 left-0 right-0 w-full h-screen z-20"></Div>
+            <PopupMenu />
+          </Div>
+        }
+      </Div>
     </Div>
   );
 };
