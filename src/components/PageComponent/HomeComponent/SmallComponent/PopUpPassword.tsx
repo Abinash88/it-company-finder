@@ -165,7 +165,7 @@ const PopUpPassword = (props: popupPassword) => {
           icon={<FaPlus className=" " />}
           size='md'
           variant='secondary'
-          className="flex gap-2 mx-auto"
+          className="flex gap-2 mx-auto  hover:bg-[#4343ae] hover:text-white"
           btnName="Add Password"
           ButtonClick={() => {
             if (!!password && !!passwordName) {

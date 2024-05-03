@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  email           String            @unique
+  name            String
+  password        String            @unique
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  socialPassword  SocialPasswords[]
+  PasswordPinCode PasswordPinCode[]
+}
+
+model SocialPasswords {
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  socialName String
+  passwords  PasswordType[]
+  userId     String         @db.ObjectId
+  user       User           @relation(fields: [userId], references: [id])
+}
+
+model PasswordType {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  passwordName      String
+  password          String
+  SocialId          String           @db.ObjectId
+  SocialPasswords   SocialPasswords? @relation(fields: [socialPasswordsId], references: [id])
+  socialPasswordsId String?          @db.ObjectId
+}
+
+model PasswordPinCode {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  pinCode String
+  userId  String @db.ObjectId
+  user    User   @relation(fields: [userId], references: [id])
+}
