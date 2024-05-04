@@ -7,7 +7,7 @@ import { sendEmailOfPincode } from "@/BackendLib/lib/helper";
 import { NextRequest, NextResponse } from "next/server";
 import { createRouter, expressWrapper } from "next-connect";
 import { NextApiRequest, NextApiResponse } from "next";
-import { signUpValidation } from "@/BackendLib/Middleware/Validation";
+import { signUpValidation, validateFunc } from "@/BackendLib/Middleware/Validation";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
@@ -15,7 +15,7 @@ const prisma = new PrismaClient();
 type resType = Omit<signupBodyTypes, "password">;
 
 //// signup auth controller
-export const POST = AuthMiddleware(async (req: NextRequest, res: NextResponse) => {
+const POST = AuthMiddleware(async (req: NextRequest, res: NextResponse) => {
   
   if (req.method !== "POST")
     return ErrorMessage("POST method not supported", 405);
@@ -51,3 +51,7 @@ export const POST = AuthMiddleware(async (req: NextRequest, res: NextResponse) =
   const resData: resType = getData;
   return SuccessMessage<resType>("User created successfully!", 201, resData);
 });
+
+
+
+export default validateFunc(signUpValidation, POST)

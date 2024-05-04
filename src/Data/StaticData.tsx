@@ -13,14 +13,14 @@ export const SidebarData: SidebarDataTypes[] = [
     link: "/password",
   },
   {
+    name: "Lists",
+    icon: <FaDatabase />,
+    link: "/lists",
+  },
+  {
     name: "Pin code",
     icon: <FaHome />,
     link: "/pincode",
-  },
-  {
-    name: "Data",
-    icon: <FaDatabase />,
-    link: "/data",
   },
   {
     name: "Setting",
@@ -29,7 +29,7 @@ export const SidebarData: SidebarDataTypes[] = [
   },
 ];
 
-export const SettingLinksData:settingLinksTypes[] = [
+export const SettingLinksData: settingLinksTypes[] = [
   {
     name: "profile",
     link: "/setting",

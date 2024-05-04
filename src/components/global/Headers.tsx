@@ -53,11 +53,12 @@ const Headers = () => {
           </Link>
 
           <Div className="w-[60%]">
-            <Div className="w-full relative ">
-              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-gray-100 cursor-pointer" />
+            <Div className="w-full relative">
+              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-gray-500 cursor-pointer" />
               <input
                 type="text"
-                className="w-full pr-4 pl-10 text-gray-100 placeholder:text-gray-200 placeholder:text-[12px] text-[12px] py-2 rounded-md bg-input focus:outline-none"
+                className="w-full pr-4 pl-10 text-gray-600 placeholder:text-gray-500 placeholder:text-[12px] 
+                text-[12px] py-2 rounded-md bg-input focus:outline-none"
                 placeholder="Search here..."
               />
             </Div>

@@ -55,9 +55,9 @@ const PopUpPassword = (props: popupPassword) => {
       <div
         ref={RemovePasswordBox}
         id="RemovingPasswordBox"
-        className="h-[470px] z-50 p-4 bg-white absolute bottom-0 rounded-sm w-full px-8 mx-auto popupPasswrodBox "
+        className="h-[470px] z-50 p-4 bg-white absolute bottom-0 rounded-sm w-full px-8 mx-auto  "
       >
-        <h2 className="text-center border-b pb-1  font-normal text-gray-600 text-[18px]">
+        <h2 className="text-center border-b border-gray-200 mb-3 pb-2 font-normal text-gray-600 text-[20px]">
           Set New Password
         </h2>
         <Div
@@ -66,7 +66,7 @@ const PopUpPassword = (props: popupPassword) => {
         >
           <FaPlus className="text-gray-600 text-[19px]" />
         </Div>
-       
+
         <Div className="">
           <Div className=" flex-1 flex flex-col relative gap-2">
             <LabelContent htmlFor="passwordCatagory" > Password Catagory</LabelContent>
