@@ -20,16 +20,44 @@ model User {
   isVerified      Boolean           @default(false)
   socialPassword  SocialPasswords[]
   PasswordPinCode PasswordPinCode[]
+  passwords       AddPassword[]
+  lists           AddLists[]
 }
 
 model AddPassword {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  catagory  String
-  name      String
-  password  String
-  url       String 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  catagory    String
+  name        String
+  password    String
+  url         String?
+  notes       String?
+  image       String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?  @db.ObjectId
+}
+
+model AddLists {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  title       String?
+  description String?
+  priority    String?
+  date        String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  User        User?       @relation(fields: [userId], references: [id])
+  userId      String?     @db.ObjectId
+  listTypes   ListTypes[]
+}
+
+model ListTypes {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  detail     String
+  AddLists   AddLists? @relation(fields: [addListsId], references: [id])
+  addListsId String?   @db.ObjectId
 }
 
 model SocialPasswords {
