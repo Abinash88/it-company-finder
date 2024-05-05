@@ -1,4 +1,4 @@
-import { ValidationChain, body } from "express-validator";
+import {  ValidationChain, body,  } from "express-validator";
 import { NextHandler } from "next-connect";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -20,7 +20,7 @@ export const signUpValidation = [
     .isEmail({ allow_display_name: true })
     .withMessage("Please enter a valid email address."),
 ];
-    
+
 export const loginValidation = [
   body("password").notEmpty().withMessage("Password is required!"),
   body("email")
@@ -70,12 +70,13 @@ export const deletePasswordValidation = [
     .withMessage("Text field can only contain letters, numbers, and spaces"),
 ];
 
-
-
-export const validateFunc = async (schema:ValidationChain[], handler:NextHandler) => {
-  return async (req:NextRequest, res:NextResponse) => {
-    if(['POST', 'PUT'].includes(req.method)){
-        await schema
+export const validateFunc = async (
+  schema: ValidationChain[],
+  handler: NextHandler
+) => {
+  return async (req: NextRequest, res: NextResponse) => {
+    if (["POST", "PUT"].includes(req.method)) {
+      await schema;
     }
-  }
-}
+  };
+};
