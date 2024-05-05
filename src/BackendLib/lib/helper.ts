@@ -17,8 +17,8 @@ export const sendEmailOfPincode = (email: string) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     auth: {
-      user: "subediabinas@gmail.com",
-      pass: "smnk jjes hrvb rmwg",
+      user: process.env.MAILING_EMAIL,
+      pass: process.env.APP_PASSWORD,
     },
   });
 
@@ -47,15 +47,14 @@ export const sendEmailOfPincode = (email: string) => {
 
 //VERIFICATION CODE VERIFY HERE
 export const VerifyPincode = (code: string) => {
-  console.log(verificationCode, "verifypincode");
-  if (verificationCode.length === 4) {
+  if (verificationCode) {
     if (code === verificationCode) {
-      return SuccessMessage("verification Completed successfully.", 200);
+      return "SUCCESS";
     } else {
-      return ErrorMessage("Pincode didn't match!", 400);
+      return "FAILED";
     }
   } else {
-    return ErrorMessage("Verification code Expires!", 400);
+    return "EXPIRE";
   }
 };
 //VERIFICATION CODE VERIFY HERE

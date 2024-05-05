@@ -28,6 +28,7 @@ export const POST = AuthMiddleware(
     });
 
     if (!data) return ErrorMessage("User not found!", 404);
+    console.log(data.isVerified);
     if (!data.isVerified) return ErrorMessage("Email is not verified!", 400);
     const compare = await bcrypt.compare(userData?.password, data?.password);
 
