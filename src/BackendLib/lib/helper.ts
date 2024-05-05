@@ -48,14 +48,14 @@ export const sendEmailOfPincode = (email: string) => {
 //VERIFICATION CODE VERIFY HERE
 export const VerifyPincode = (code: string) => {
   console.log(verificationCode, "verifypincode");
-  if (verificationCode.length >= 1) {
+  if (verificationCode.length === 4) {
     if (code === verificationCode) {
-      SuccessMessage("verification Completed successfully.", 200);
+      return SuccessMessage("verification Completed successfully.", 200);
     } else {
-      ErrorMessage("Pincode didn't match!", 400);
+      return ErrorMessage("Pincode didn't match!", 400);
     }
   } else {
-    ErrorMessage("Verification code expire!", 400);
+    return ErrorMessage("Verification code Expires!", 400);
   }
 };
 //VERIFICATION CODE VERIFY HERE

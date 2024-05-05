@@ -1,6 +1,7 @@
-import {  ValidationChain, body,  } from "express-validator";
+import { ValidationChain, body } from "express-validator";
 import { NextHandler } from "next-connect";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
 export const signUpValidation = [
   body("name")
@@ -21,62 +22,33 @@ export const signUpValidation = [
     .withMessage("Please enter a valid email address."),
 ];
 
-export const loginValidation = [
-  body("password").notEmpty().withMessage("Password is required!"),
-  body("email")
-    .notEmpty()
-    .withMessage("Email is required.")
-    .isEmail({ allow_display_name: true })
-    .withMessage("Please enter a valid email address."),
-];
-
-export const changePinCodeEmailValidation = [
-  body("email")
-    .notEmpty()
-    .withMessage("Email is required!")
-    .isEmail({ allow_display_name: true })
-    .withMessage("Please enter a valid email address!"),
-];
-
-export const pincodeVerification = [
-  body("passwordpin")
-    .notEmpty()
-    .withMessage("Present feild should not be empty!")
-    .isString()
-    .equals("4")
-    .withMessage("Number field must be exactly 4 characters."),
-];
-
-export const addingPasswordValidation = [
-  body("password")
-    .notEmpty()
-    .withMessage("Please fill up your empty field.")
-    .matches(/^[a-zA-Z0-9\s]+$/, "g")
-    .withMessage("Text field can only contain letters, numbers, and spaces"),
-
-  body("socialName").notEmpty().withMessage("Please fill up your empty field."),
-];
-
-export const deletePasswordValidation = [
-  body("userId")
-    .notEmpty()
-    .withMessage("Please fill up your empty field.")
-    .matches(/^[a-zA-Z0-9\s]+$/, "g")
-    .withMessage("Text field can only contain letters, numbers, and spaces"),
-  body("socialName")
-    .notEmpty()
-    .withMessage("Please fill up your empty field")
-    .matches(/^[a-zA-Z0-9\s]+$/, "g")
-    .withMessage("Text field can only contain letters, numbers, and spaces"),
-];
-
-export const validateFunc = async (
-  schema: ValidationChain[],
-  handler: NextHandler
-) => {
-  return async (req: NextRequest, res: NextResponse) => {
-    if (["POST", "PUT"].includes(req.method)) {
-      await schema;
-    }
-  };
+//ZOD VALIDATION
+export const getSignupSchema = () => {
+  return z.object({
+    name: z.string().nonempty({ message: "Name is required!" }),
+    email: z
+      .string()
+      .nonempty({ message: "Email is required!" })
+      .email({ message: "Invalid email" }),
+    password: z
+      .string()
+      .nonempty({ message: "Password is required!" })
+      .max(15, { message: "Message must be upto 15 characters" })
+      .min(3, { message: "message is too short" }),
+  });
 };
+
+export const getLoginSchema = () => {
+  return z.object({
+    email: z
+      .string()
+      .nonempty({ message: "Email is required!" })
+      .email({ message: "Invalid email" }),
+    password: z
+      .string()
+      .nonempty({ message: "Password is required!" })
+      .max(15, { message: "Message must be upto 15 characters" })
+      .min(3, { message: "message is too short" }),
+  });
+};
+

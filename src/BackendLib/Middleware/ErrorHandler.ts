@@ -4,8 +4,6 @@ import {
   validationResult,
 } from "express-validator";
 import { NextRequest, NextResponse } from "next/server";
-import { NextHandler, createRouter } from "next-connect";
-import RenderResult from "next/dist/server/render-result";
 
 export const ErrorMessage = (message: string, statusCode: number = 500) => {
   return NextResponse.json({ success: false, message }, { status: statusCode });
@@ -41,17 +39,19 @@ export const initValidation = (
           await validation.run(req);
         }
         const errors = validationResult(req);
-        if (errors.isEmpty()) return NextResponse.next();
-        return NextResponse.json({
-          message: errors.array()?.[0].msg,
-          success: false,
-        });
+        console.log(errors);
+        if (!errors.isEmpty()) {
+          return NextResponse.json({
+            message: errors.array()?.[0].msg,
+            success: false,
+          });
+        }
       } catch (err) {
         const error = err as Error;
         //eslint-disable-next-line
         console.log(error.message || "Error occured while validating");
       }
     }
-    await handler(req, res);
+    return await handler(req, res);
   };
 };
