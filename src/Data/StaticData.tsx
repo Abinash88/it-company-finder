@@ -13,14 +13,14 @@ export const SidebarData: SidebarDataTypes[] = [
     link: "/password",
   },
   {
-    name: "Lists",
+    name: "Notes",
     icon: <FaDatabase />,
-    link: "/lists",
+    link: "/notes",
   },
   {
-    name: "Pin code",
+    name: "Timer",
     icon: <FaHome />,
-    link: "/pincode",
+    link: "/time",
   },
   {
     name: "Setting",

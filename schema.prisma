@@ -13,33 +13,33 @@ datasource db {
 model User {
   id              String            @id @default(auto()) @map("_id") @db.ObjectId
   email           String            @unique
-  name            String
+  name            String?
   password        String            @unique
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   isVerified      Boolean           @default(false)
-  socialPassword  SocialPasswords[]
   PasswordPinCode PasswordPinCode[]
   passwords       AddPassword[]
-  lists           AddLists[]
+  lists           Notes[]
 }
 
 model AddPassword {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   catagory    String
-  name        String
+  name        String?
   password    String
   url         String?
   notes       String?
   image       String?
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  User        User?    @relation(fields: [userId], references: [id])
-  userId      String?  @db.ObjectId
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?    @db.ObjectId
+  workTime    WorkTime[]
 }
 
-model AddLists {
+model Notes {
   id          String      @id @default(auto()) @map("_id") @db.ObjectId
   title       String?
   description String?
@@ -49,32 +49,32 @@ model AddLists {
   updatedAt   DateTime    @updatedAt
   User        User?       @relation(fields: [userId], references: [id])
   userId      String?     @db.ObjectId
-  listTypes   ListTypes[]
+  listTypes   NoteTypes[]
 }
 
-model ListTypes {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  detail     String
-  AddLists   AddLists? @relation(fields: [addListsId], references: [id])
-  addListsId String?   @db.ObjectId
+model NoteTypes {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  name       String?
+  detail     String?
+  AddLists   Notes?  @relation(fields: [addListsId], references: [id])
+  addListsId String? @db.ObjectId
 }
 
-model SocialPasswords {
-  id         String         @id @default(auto()) @map("_id") @db.ObjectId
-  socialName String
-  passwords  PasswordType[]
-  userId     String         @db.ObjectId
-  user       User           @relation(fields: [userId], references: [id])
+enum timeTypes {
+  hrs
+  min
+  sec
 }
 
-model PasswordType {
-  id                String           @id @default(auto()) @map("_id") @db.ObjectId
-  passwordName      String
-  password          String
-  SocialId          String           @db.ObjectId
-  SocialPasswords   SocialPasswords? @relation(fields: [socialPasswordsId], references: [id])
-  socialPasswordsId String?          @db.ObjectId
+model WorkTime {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  time          String?
+  description   String?
+  alarm         String?
+  timeType      timeTypes
+  AddPassword   AddPassword? @relation(fields: [addPasswordId], references: [id])
+  addPasswordId String?      @db.ObjectId
 }
 
 model PasswordPinCode {

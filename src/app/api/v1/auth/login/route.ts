@@ -28,13 +28,13 @@ export const POST = AuthMiddleware(
     });
 
     if (!data) return ErrorMessage("User not found!", 404);
-    console.log(data.isVerified);
     if (!data.isVerified) return ErrorMessage("Email is not verified!", 400);
+
     const compare = await bcrypt.compare(userData?.password, data?.password);
 
     if (!compare) return ErrorMessage("Password incorrect!", 401);
-    const access_token = CreateToken(data?.id, "2m");
-    const refresh_token = CreateToken(data?.id, "10m");
+    const access_token = CreateToken(data?.id, "10m");
+    const refresh_token = CreateToken(data?.id, "20m");
     const setAccess = CookieSetter(res, access_token, true, accessToken);
     const setRefresh = CookieSetter(res, refresh_token, true, refreshToken);
     console.log(setAccess, setRefresh);

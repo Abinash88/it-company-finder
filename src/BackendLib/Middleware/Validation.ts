@@ -52,3 +52,16 @@ export const getLoginSchema = () => {
   });
 };
 
+export const getAddPasswordSchema = () => {
+  return z.object({
+    catagory: z
+      .string({ message: "Catagory must be string" })
+      .nonempty({ message: "Catagory  is required" }),
+    name: z.string().nonempty({ message: "Password is required!" }),
+    password: z.string().nonempty({ message: "Password is required!" }),
+    url: z.string({ message: "Catagory must be string" }).optional(),
+    image: z.string({ message: "Image must be string" }).optional(),
+    notes: z.string({ message: "notes must be string" }).optional(),
+    description: z.string({ message: "description must be string" }).optional(),
+  });
+};
