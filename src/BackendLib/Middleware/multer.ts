@@ -1,5 +1,5 @@
 import multer from "multer";
-import { BASE_URL } from "../config";
+// import { BASE_URL } from "../config";
 import { RequestWithExtends } from "../lib/types";
 import { NextRequest } from "next/server";
 
@@ -12,8 +12,9 @@ const storage = multer.diskStorage({
     cb(null, `./${UPLOAD_PATH}`);
   },
   filename: (req: any, file, cb) => {
+    console.log(file);
     const fileName = `${Date.now()}-${file.originalname}`;
-    req[file.fieldname] = `${BASE_URL}/${UPLOAD_PATH}/${fileName}`;
+    req[file.fieldname] = `${process.env.BASE_URL}/${UPLOAD_PATH}/${fileName}`;
     cb(null, fileName);
   },
 });

@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 import { PrismaClient } from "@prisma/client";
 import { generateVerificationCode } from "./utils";
 import { ErrorMessage, SuccessMessage } from "../Middleware/ErrorHandler";
+import { NextRequest, NextResponse } from "next/server";
+import multer from "multer";
 
 const prisma = new PrismaClient();
 
@@ -58,3 +60,29 @@ export const VerifyPincode = (code: string) => {
   }
 };
 //VERIFICATION CODE VERIFY HERE
+
+//GET FORM DATA IN OBJECT
+export const GetFormData = <T>(data: FormData, key: string[]): T => {
+  const passwordData: Record<string, any> = {};
+  for (let i = 0; i < key.length; i += 1) {
+    const formdata = data.get(key[i]);
+    if (formdata) passwordData[key[i]] = formdata;
+  }
+
+  return passwordData as T;
+};
+//GET FORM DATA IN OBJECT
+
+export const HandleMulterMiddleware = (
+  req: NextRequest,
+  res: NextResponse,
+  upload: any
+) => {
+  return new Promise((resolve, reject) => {
+    upload(req, res, (result: any) => {
+      if (result instanceof Error) return reject(result.message);
+      console.log(result);
+      return resolve(result);
+    });
+  });
+};

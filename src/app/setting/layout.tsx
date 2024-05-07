@@ -11,8 +11,8 @@ const Settinglayout = ({ children }: { children: React.ReactNode }) => {
         dynamicStyle="bg-gray-200 px-3 py-1 rounded-sm"
         title="Settings"
       />
-      <Spacing styleCss="h-[20px]"/>
-      <Div className="flex items-start h-auto  "> 
+      <Spacing styleCss="h-[20px]" />
+      <Div className="flex items-start h-auto  ">
         <Div className="w-[200px] h-full pr-4  border-r ">
           <SettingLinks />
         </Div>

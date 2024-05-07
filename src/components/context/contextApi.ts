@@ -34,7 +34,7 @@ export const FetchingApi = async (props: fetchApiTypes) => {
 
   try {
     const resp = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_ENDPOINT}/${props.url}`,
+      `${process.env.BASE_URL}/${props.url}`,
       requestOptions
     );
 

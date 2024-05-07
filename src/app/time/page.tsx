@@ -6,7 +6,7 @@ const page = () => {
 
 
   return (
-    <Div className='"w-full overflow-hidden flex-1 p-4 h-full '>
+    <Div className='w-full overflow-hidden flex-1 p-4 h-full '>
        <PincodeForm/>
     </Div>
   )

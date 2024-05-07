@@ -108,7 +108,7 @@ export interface InputFieldTypes extends React.InputHTMLAttributes<HTMLInputElem
 export const InputField = React.forwardRef<HTMLInputElement, InputFieldTypes>(({ className, ...props }) => {
 
   return (
-    <input {...props} className={cn(`rounded-sm rounded-md border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
+    <input {...props} className={cn(` rounded-md border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
   )
 })
 

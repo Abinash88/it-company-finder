@@ -15,7 +15,11 @@ import {
 } from "@/BackendLib/Middleware/Validation";
 
 const prisma = new PrismaClient();
-type resType = Omit<signupBodyTypes, "password">;
+type resType = {
+  name: string | null;
+  id: string;
+  email: string;
+};
 
 //// signup auth controller
 export const POST = AuthMiddleware(

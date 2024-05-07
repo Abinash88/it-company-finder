@@ -50,7 +50,7 @@ const PincodeForm = () => {
             action=""
             className="flex  flex-col justify-start space-y-10 items-center space-x-2"
           >
-            <div className="flex  items-center space-x-2">
+            <div className="flex items-center space-x-2">
               {Pincode?.map((item, index) => {
                 return (
                   <div key={index} className="w-[70px] h-[50px] bg-red-500">
@@ -70,7 +70,7 @@ const PincodeForm = () => {
             </div>
             <div className="mt-5">
               <button className="px-10 py-3  bg-blue-700 rounded-sm shadow-xl transform hover:scale-105 transition-all duration-300  text-white ">
-                Set Pin{" "}
+                Set Pin
               </button>
             </div>
           </form>

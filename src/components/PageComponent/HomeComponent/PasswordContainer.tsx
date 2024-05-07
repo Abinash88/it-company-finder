@@ -20,16 +20,16 @@ const MyApp = () => {
         <Div className={cn(`w-full fixed z-20 h-full left-0  transition-all ${isOpenPopup ? 'top-[0px]' : 'top-[150%]'} right-0 `)}>
 
           <Div className="w-full h-full ">
-            <PopUpPassword
+            {/* <PopUpPassword
               closeModelBox={setIsOpenPopup}
-            />
+            /> */}
           </Div>
         </Div>
       </Div>
       <Div className="w-full  gap-2 flex flex-col  h-[87%] ">
-        {MyAppData?.SocialData?.map((data: MyAppDataTypes, index) => {
+        {/* {MyAppData?.SocialData?.map((data: MyAppDataTypes, index) => {
           return <SingleApp key={data?.id} index={index} data={data} />;
-        })}
+        })} */}
       </Div>
     </Div>
   );

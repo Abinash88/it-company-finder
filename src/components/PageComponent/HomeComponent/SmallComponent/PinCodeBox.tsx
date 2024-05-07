@@ -3,10 +3,10 @@ import { FaPlus } from "react-icons/fa";
 
 export type pincodeBoxTypes = {
   setShowPinCodeBox: React.Dispatch<React.SetStateAction<boolean>>;
-  showPinCodeBox:boolean;
+  showPinCodeBox: boolean;
 };
 
-const PinCodeBox = ({ setShowPinCodeBox,showPinCodeBox }: pincodeBoxTypes) => {
+const PinCodeBox = ({ setShowPinCodeBox, showPinCodeBox }: pincodeBoxTypes) => {
   const [pinCode, setPinCode] = useState(["", "", "", ""]);
   const pinInputs: React.MutableRefObject<HTMLInputElement | null>[] = [
     useRef<HTMLInputElement | null>(null),
@@ -14,11 +14,11 @@ const PinCodeBox = ({ setShowPinCodeBox,showPinCodeBox }: pincodeBoxTypes) => {
     useRef<HTMLInputElement | null>(null),
     useRef<HTMLInputElement | null>(null),
   ];
-  
+
 
   useEffect(() => {
     pinInputs[0].current?.focus();
-  },[showPinCodeBox])
+  }, [showPinCodeBox])
 
   const GetThePinCode = (value: string, index: number) => {
     if (/^\d*$/.test(value) && value.length <= 1) {
