@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { ReactElement } from "react";
 
 export type SidebarDataTypes = {
   name: string;
@@ -46,7 +47,14 @@ export type contextTypes = {
   GetUserData: () => void;
   LoginData: userData | undefined;
   LogoutFunc: () => void;
-  loadingUserData:boolean;
+  loadingUserData: boolean;
   loginLoading: boolean;
   signUpLoading: boolean;
 };
+
+
+export interface PasswordMoreToolTypes {
+  name: string;
+  icon: ReactElement;
+  clickFunc: () => void;
+}

@@ -42,7 +42,6 @@ const useFileHandler = (): {
         setBlobImage('');
         setFileLists(null);
     }
-    console.log(blobImage)
     return { fileLists, handleFile, blobImage, clearFile, valueData };
 }
 

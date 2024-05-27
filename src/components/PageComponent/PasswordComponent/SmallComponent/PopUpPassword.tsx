@@ -9,7 +9,6 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 import MyContext from "@/components/context/MyContext";
 import PinCodeBox from "./PinCodeBox";
-import toast from "react-hot-toast";
 import Button, { InputField, LabelContent } from "@/components/UI/UiItems";
 import Image from "next/image";
 import { selectCatagory } from "@/lib/utils";
@@ -41,8 +40,6 @@ const PopUpPassword = (props: popupPassword) => {
   const onSubmitForm: SubmitHandler<Add_password_data_types> = (data) => {
     console.log(data);
   }
-  console.log(blobImage);
-
   const handleImageClick = () => {
     if (siteFileInputRef && siteFileInputRef.current)
       siteFileInputRef?.current?.click();

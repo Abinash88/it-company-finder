@@ -15,7 +15,7 @@ const buttonVariants = cva(
         outline:
           'border border-border bg-accent hover:bg-accent-foreground/80 hover:text-accent-foreground',
         secondary:
-          'hover:bg-card bg-secondary text-secondary-foreground',
+          'hover:bg-secondary/80 hover:text-secondary hover:border-secondary border bg-secondary text-secondary-foreground',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
       },
@@ -97,7 +97,7 @@ LinkBtn.displayName = 'LinkBtn';
 
 
 export interface InputFieldTypes extends React.InputHTMLAttributes<HTMLInputElement> {
-  className: string;
+  className?: string;
 }
 
 
@@ -116,8 +116,24 @@ export interface labelContent extends React.LabelHTMLAttributes<HTMLLabelElement
 
 export const LabelContent = React.forwardRef<HTMLLabelElement, labelContent>(({ className, ...props }, ref) => {
   return (
-    <label ref={ref} {...props} className={cn(`text-[13px] font-normal text-card ${className}`)}></label>
+    <label ref={ref} {...props} className={cn(`text-[13px] font-normal text-gray-600 ${className}`)}></label>
   )
 })
 
-LabelContent.displayName = 'LabelContent' 
+LabelContent.displayName = 'LabelContent'
+
+
+
+export interface InputCheckBoxTypes extends React.InputHTMLAttributes<HTMLInputElement> {
+  className?: string;
+}
+
+
+export const InputCheckBox = React.forwardRef<HTMLInputElement, InputCheckBoxTypes>(({ className, ...props }) => {
+
+  return (
+    <input {...props} className={cn(` rounded-sm border w-5  before:contents-check h-5 bg-input focus:outline-none text-[13px] px-3  ${className}`)} />
+  )
+})
+
+InputCheckBox.displayName = 'InputCheckBox'

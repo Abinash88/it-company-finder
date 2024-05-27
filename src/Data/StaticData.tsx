@@ -1,5 +1,6 @@
-import { FaCog, FaDatabase, FaHome, FaLock } from "react-icons/fa";
-import { SidebarDataTypes, settingLinksTypes } from "./Types";
+import { FaCog, FaDatabase, FaHome, FaLock, FaRegCopy, FaRegEdit } from "react-icons/fa";
+import {  SidebarDataTypes, settingLinksTypes } from "./Types";
+
 
 export const SidebarData: SidebarDataTypes[] = [
   {
@@ -47,3 +48,5 @@ export const SettingLinksData: settingLinksTypes[] = [
     link: "/setting/profile",
   },
 ];
+
+

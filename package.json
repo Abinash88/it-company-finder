@@ -8,8 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "@heroicons/react": "^2.0.18",
+    "@headlessui/react": "^2.0.4",
     "@hookform/resolvers": "^3.4.2",
     "@prisma/client": "^5.13.0",
     "@reduxjs/toolkit": "^1.9.5",
