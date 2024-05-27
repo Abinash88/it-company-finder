@@ -2,10 +2,10 @@
 
 import Div from '@/lib/Div'
 import React, { useState } from 'react'
-import GlobalTopSearch from '../HomeComponent/SmallComponent/GlobalTopSearch';
 import { cn } from '@/lib/utils';
 
 import dynamic from 'next/dynamic';
+import GlobalTopSearch from '../PasswordComponent/SmallComponent/GlobalTopSearch';
 const PopUpForm = dynamic(() => import('./PopupForm'))
 const MainTodo = () => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);

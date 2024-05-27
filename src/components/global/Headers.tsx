@@ -44,21 +44,15 @@ const Headers = () => {
         className={`${!openAccountBox && "hidden"
           } absolute w-full h-screen   z-10 left-0 top-0`}
       ></div>
-      <Div className="w-full h-[60px] bg-primary ">
-        <Div className="w-full h-full px-4 flex justify-between items-center">
-          <Link href={"/"}>
-            <h3 className=" text-[20px] inline text-gray-50  font-semibold">
-              Personal Manager
-            </h3>
-          </Link>
-
+      <Div className="w-full py-1 bg-gradient-to-r  from-[#856FB4] via-primary to-[#AC72C0] ">
+        <Div className="w-full h-full px-6 flex justify-between items-center">
           <Div className="w-[60%]">
             <Div className="w-full relative">
-              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-gray-500 cursor-pointer" />
+              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-gray-100 cursor-pointer" />
               <input
-                type="text"
-                className="w-full pr-4 pl-10 text-gray-600 placeholder:text-gray-500 placeholder:text-[12px] 
-                text-[12px] py-2 rounded-md bg-input focus:outline-none"
+                type="search"
+                className="w-full pr-4 pl-10 text-gray-100 placeholder:text-gray-200 placeholder:text-[12px] 
+                text-[12px] py-2 rounded-md bg-[#85a4cc96] focus:outline-none"
                 placeholder="Search here..."
               />
             </Div>

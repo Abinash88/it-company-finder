@@ -39,9 +39,6 @@ export type contextTypes = {
     passwordName: string,
     index: number
   ) => void;
-  DeletePassword: (boxId: number, passwordId: number) => void;
-  OpenCloseMoreBox: (socialIndex: number, passwordIndex: number) => void;
-  DeleteAll: () => void;
   signUpPostRequest: any;
   loginPostRequest: any;
   userData: any;

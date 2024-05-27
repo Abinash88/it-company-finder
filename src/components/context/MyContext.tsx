@@ -75,33 +75,6 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const OpenCloseMoreBox = (socialIndex: number, passwordIndex: number) => {
-    setSocialData((item) => {
-      const data = [...item];
-      data[socialIndex].passwords[passwordIndex].OpenMoreBar =
-        !data[socialIndex].passwords[passwordIndex].OpenMoreBar;
-      return data;
-    });
-  };
-
-  // Delete selected password form the home page password data
-  const DeletePassword = (boxId: number, passwordId: number) => {
-    setSocialData((item) => {
-      const data = [...item];
-      data[boxId].passwords?.splice(passwordId, 1);
-      return data;
-    });
-  };
-
-  // Delete all the passwords form the home page password data
-  const DeleteAll = () => {
-    setSocialData((item) => {
-      const data = [...item];
-      return data.map((dataItem) => {
-        return { ...dataItem, passwords: [] };
-      });
-    });
-  };
 
   const signUpPostRequest = async (data: {
     name: string;
@@ -165,9 +138,6 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
         SocialData,
         setSocialData,
         GetSavePassword,
-        OpenCloseMoreBox,
-        DeletePassword,
-        DeleteAll,
         signUpPostRequest,
         loginPostRequest,
         userData,

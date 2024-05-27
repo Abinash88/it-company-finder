@@ -1,5 +1,3 @@
-import Div from "@/lib/Div";
-import { IconType } from "react-icons";
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import { type VariantProps, cva } from "class-variance-authority"
@@ -11,21 +9,21 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'hover:bg-primary/70 bg-primary text-primary-foreground',
+        default: 'hover:bg-blue-600/80 bg-primary text-primary-foreground',
         destructive:
           'hover:bg-destructive/90 bg-destructive text-destructive-foreground',
         outline:
-          'border border-input bg-accent hover:bg-accent hover:text-accent-foreground',
+          'border border-border bg-accent hover:bg-accent-foreground/80 hover:text-accent-foreground',
         secondary:
-          'hover:bg-secondary/80 bg-secondary text-secondary-foreground',
+          'hover:bg-card bg-secondary text-secondary-foreground',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3 text-[12px]',
-        md: 'h-8 rounded-md px-[10px] text-[13px]',
-        lg: 'h-12 rounded-md px-8',
+        sm: 'h-7 rounded-sm px-3 text-[12px]',
+        md: 'h-8 rounded-sm px-4 text-[13px]',
+        lg: 'h-12 rounded-sm px-8 text-[15px]',
         icon: 'size-10',
       },
     },
@@ -38,13 +36,11 @@ const buttonVariants = cva(
 
 export interface buttonTypes extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   btnName: string;
-  ButtonClick: () => void;
   icon?: ReactNode;
 };
 
 const Button = React.forwardRef<HTMLButtonElement, buttonTypes>(({
   btnName,
-  ButtonClick,
   icon,
   variant,
   className,
@@ -52,11 +48,11 @@ const Button = React.forwardRef<HTMLButtonElement, buttonTypes>(({
   ...rest
 }, ref) => {
   return (
-    <button ref={ref} {...rest} onClick={ButtonClick} className={cn(buttonVariants({ variant, size, className }))}>
-      {icon && <span className="">{icon}</span>}
+    <button ref={ref} {...rest} className={cn(buttonVariants({ variant, size, className }))}>
       <span className="">
         {btnName}
       </span>
+      {icon && <span className="">{icon}</span>}
     </button>
   );
 })
@@ -101,14 +97,14 @@ LinkBtn.displayName = 'LinkBtn';
 
 
 export interface InputFieldTypes extends React.InputHTMLAttributes<HTMLInputElement> {
-
+  className: string;
 }
 
 
 export const InputField = React.forwardRef<HTMLInputElement, InputFieldTypes>(({ className, ...props }) => {
 
   return (
-    <input {...props} className={cn(` rounded-md border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
+    <input {...props} className={cn(` rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
   )
 })
 

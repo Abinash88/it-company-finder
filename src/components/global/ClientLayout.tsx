@@ -18,16 +18,25 @@ const ClientLayout = ({
     return (
         <div>
             <MyContextProvider>
-                <div className="mx-auto  overflow-hidden  w-full min-h-screen  flex flex-col">
-                    {path === "/account" ? null : <Headers />}
-                    <div className="  h-[calc(100vh-60px)]  w-full flex">
+                <div className="mx-auto  overflow-hidden w-full h-screen   flex flex-col">
+                    <div className=" w-full h-full flex">
                         <div
                             className={`${path === "/account" ? "hidden" : ""
                                 } w-[250px]  h-full`}
                         >
                             <Sidebars />
                         </div>
-                        {children}
+                        <div className="flex flex-1 flex-col">
+                            {path === "/account" ? null : <Headers />}
+                            <div className="  flex flex-1">
+                                <div className="w-full">
+                                    {children}
+                                </div>
+                                <div className="w-[50px] px-1 ">
+                                    nav
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </MyContextProvider>

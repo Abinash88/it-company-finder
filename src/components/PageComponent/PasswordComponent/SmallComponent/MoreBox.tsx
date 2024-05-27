@@ -3,7 +3,7 @@
 import { password } from "@/Data/Types";
 import MyContext from "@/components/context/MyContext";
 import { CheckPasswordCorrect } from "@/components/libary/lib";
-import Button from "@/lib/Button";
+import Button from "@/components/UI/Button";
 import { OutClickToggle } from "@/lib/page";
 import React, {
   forwardRef,
@@ -26,14 +26,10 @@ const MoreBox = (props: moreBtnTypes) => {
   const moreBoxes = useRef<HTMLDivElement>(null);
   const myappData = useContext(MyContext);
 
-  console.log();
   useEffect(() => {
     OutClickToggle(moreBoxes, props.closeModel);
   }, [props]);
 
-  const SeePassWord = () => {
-    
-  }
 
   return (
     <div

@@ -10,17 +10,23 @@ const Sidebars = () => {
 
   return (
     <Div className="w-full h-full bg-sidebar">
-      <Div className="h-full">
-        <ul className="  h-full  flex flex-col gap-1 pt-2">
+      <Div className="h-full pt-3 ">
+        <Link href={"/dashboard"} className="">
+          <h3 className=" text-[20px] px-4  inline text-gray-50  font-semibold">
+            Personal Manager
+          </h3>
+        </Link>
+
+        <ul className=" flex flex-col gap-1 pt-4">
           {SidebarData?.map((item: SidebarDataTypes, index) => {
             return (
               <li
                 key={index}
-                className={`flex  rounded-md duration-300 transition-all  ${location === (item?.link) && "bg-sidebar-foreground text-"
-                  } hover:bg-sidebar-foreground group cursor-pointer w-full items-center `}
+                className={`flex  rounded-md duration-300 transition-all ${location === (item?.link) && "bg-sidebar-foreground text-"
+                  } hover:bg-sidebar-foreground group cursor-pointer w-full items-center`}
               >
                 <Link
-                  className="text-white px-4 py-2  w-full h-full flex items-center space-x-3 font-normal duration-300 transition-all text-[13px] "
+                  className="text-white px-4 py-2 w-full h-full flex items-center space-x-3 font-normal duration-300 transition-all text-[13px] "
                   href={item?.link}
                 >
                   <span className="text-white text-[18px] duration-300 transition-all ">

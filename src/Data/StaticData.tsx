@@ -5,27 +5,27 @@ export const SidebarData: SidebarDataTypes[] = [
   {
     name: "Dashboard",
     icon: <FaHome />,
-    link: "/",
+    link: "/dashboard",
   },
   {
     name: "Password",
     icon: <FaLock />,
-    link: "/password",
+    link: "/dashboard/password",
   },
   {
     name: "Notes",
     icon: <FaDatabase />,
-    link: "/notes",
+    link: "/dashboard/notes",
   },
   {
     name: "Timer",
     icon: <FaHome />,
-    link: "/time",
+    link: "/dashboard/time",
   },
   {
     name: "Setting",
     icon: <FaCog />,
-    link: "/setting",
+    link: "/dashboard/setting",
   },
 ];
 

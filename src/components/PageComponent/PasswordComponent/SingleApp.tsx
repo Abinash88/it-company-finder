@@ -5,9 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import Div from "@/lib/Div";
-import PopUpPassword from "./SmallComponent/PopUpPassword";
 import { InputField } from "@/components/UI/UiItems";
-import { FaEdit } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import PopupMenu from "./SmallComponent/PopupMenu";
 
