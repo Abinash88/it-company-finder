@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Outfit:wght@100&family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Outfit:wght@100&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,9 +7,9 @@
 :root {
   --background: 220, 14%, 96%;
   --foreground: #f6f5f2;
-  --sidebar: #202934;
-  --sidebar-foreground: #2f3a47;
-  --card: #FAFBFD;
+  --sidebar: 213, 24%, 16%;
+  --sidebar-foreground: 213, 20%, 23%;
+  --card: #fafbfd;
   --card-foreground: #242933;
   --popover: hsl(0, 0%, 100%);
   --popover-foreground: hsl(20 14.3% 4.1%);
@@ -68,7 +68,7 @@
 } */
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -116,11 +116,11 @@
 }
 
 .add_password_input {
-  @apply  rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full 
+  @apply rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[9px] w-full;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;

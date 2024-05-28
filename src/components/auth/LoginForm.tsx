@@ -2,7 +2,7 @@ import Div from "@/lib/Div";
 import React, { useContext, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import MyContext from "../context/MyContext";
+import MyContext from "../../context/MyContext";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
 

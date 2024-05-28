@@ -1,19 +1,27 @@
 
 import { twMerge } from "tailwind-merge"
 import { ClassValue, clsx } from "clsx"
+import { toast } from "react-toastify";
 
 export const cn = (...classes: ClassValue[]) => {
     return twMerge(clsx(classes))
 }
 
-export const selectCatagory = [
-    { id: 0, catagory: '-select catagory-' },
-    { id: 1, catagory: 'PaymentCard' },
-    { id: 2, catagory: 'Web Account' },
-    { id: 3, catagory: 'File Store' },
-    { id: 4, catagory: 'Secure Note' },
-    { id: 5, catagory: 'Unix' },
-    { id: 6, catagory: 'Windows' },
-    { id: 7, catagory: 'Bank Account' },
-    { id: 8, catagory: 'Socal Security Number' },
-];
+
+export const handleError = ({ error, popup = true }: { error: any, popup?: boolean }) => {
+    const err = error as Error;
+    const newError = err.message || "An unexpected error occurred.";
+    if (popup) toast.error(newError);
+    console.log(newError);
+}
+
+export const copyToClipboard = async (text: string) => {
+    try {
+        await navigator.clipboard.writeText(text);
+        toast.success('Copied!')
+    } catch (err) {
+        toast.success('Filled to copy!')
+        handleError({ error: err });
+    }
+}
+

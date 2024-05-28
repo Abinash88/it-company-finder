@@ -5,7 +5,7 @@ import Button, { LinkBtn } from "../UI/UiItems";
 import Spacing from "../UI/Spacing";
 import { FaCog, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
-import MyContext from "../context/MyContext";
+import MyContext from "../../context/MyContext";
 import { userData } from "@/Data/Types";
 import { useRouter } from "next/navigation";
 

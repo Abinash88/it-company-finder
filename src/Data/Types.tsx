@@ -17,8 +17,9 @@ export type MyAppDataTypes = {
   id: string;
   name: string;
   link: string;
-  image: StaticImageData;
-  passwords: password[];
+  image: StaticImageData | null;
+  password: string;
+  catagory: string;
 };
 
 export type settingLinksTypes = {
@@ -35,11 +36,6 @@ export type userData = {
 export type contextTypes = {
   SocialData: MyAppDataTypes[];
   setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
-  GetSavePassword: (
-    password: string,
-    passwordName: string,
-    index: number
-  ) => void;
   signUpPostRequest: any;
   loginPostRequest: any;
   userData: any;

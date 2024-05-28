@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useContext } from 'react'
-import MyContext, { MyContextProvider } from '../context/MyContext'
+import MyContext, { MyContextProvider } from '../../context/MyContext'
 import Sidebars from './Sidebars'
 import { usePathname } from 'next/navigation';
 import Headers from './Headers';

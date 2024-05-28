@@ -1,22 +1,20 @@
 "use client";
 
 import { password } from "@/Data/Types";
-import MyContext from "@/components/context/MyContext";
+import MyContext from "@/context/MyContext";
 import { CheckPasswordCorrect } from "@/components/libary/lib";
 import Button from "@/components/UI/Button";
 import { OutClickToggle } from "@/lib/page";
 import React, {
-  forwardRef,
   useContext,
   useEffect,
   useRef,
-  useState,
 } from "react";
-import { FaEdit, FaEye, FaMapPin, FaTrash } from "react-icons/fa";
+import { FaEye, FaMapPin, FaTrash } from "react-icons/fa";
 
 export type moreBtnTypes = {
   closeModel: () => void;
-  setShowPinCodeBox:React.Dispatch<React.SetStateAction<boolean>>
+  setShowPinCodeBox: React.Dispatch<React.SetStateAction<boolean>>
   MoreBoxData: password | null;
   passwordIndex: number;
   boxIndex: number;
@@ -40,7 +38,7 @@ const MoreBox = (props: moreBtnTypes) => {
       <Button
         onClick={() => {
           props.closeModel();
-          myappData?.DeletePassword(props.boxIndex, props.passwordIndex);
+          // myappData?.DeletePassword(props.boxIndex, props.passwordIndex);
         }}
         className="flex hover:bg-black name hover:text-white py-1 items-center justify-start pl-2 space-x-1"
       >
@@ -63,18 +61,18 @@ const MoreBox = (props: moreBtnTypes) => {
       <Button
         onClick={() => {
           props.closeModel();
-          myappData?.DeletePassword(props.boxIndex, props.passwordIndex);
+          // myappData?.DeletePassword(props.boxIndex, props.passwordIndex);
         }}
         className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1"
       >
         <FaMapPin className="text-gray-500 text-[20px]   transition-all duration-300 p-1 rounded-full" />
         <span className="text-[13px]">Pin</span>
       </Button>
-      
+
       <Button
         onClick={() => {
           props.closeModel();
-          myappData?.DeleteAll();
+          // myappData?.DeleteAll();
         }}
         className="flex hover:bg-black hover:text-white py-1  items-center justify-start pl-2 space-x-1"
       >

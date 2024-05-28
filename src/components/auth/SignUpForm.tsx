@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import Signup from "./Signup";
 import Div from "@/lib/Div";
-import MyContext from "../context/MyContext";
+import MyContext from "../../context/MyContext";
 import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {

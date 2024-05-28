@@ -7,19 +7,20 @@ import Div from "@/lib/Div";
 import { FaDownload, FaEye, FaEyeSlash } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import MyContext from "@/components/context/MyContext";
+import MyContext from "@/context/MyContext";
 import PinCodeBox from "./PinCodeBox";
 import Button, { InputField, LabelContent } from "@/components/UI/UiItems";
 import Image from "next/image";
-import { selectCatagory } from "@/lib/utils";
 import PageTitle from "@/components/UI/page-title";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Add_password_data_types } from "@/BackendLib/lib/types";
 import FormError from "@/components/UI/form_error";
 import { Validation } from "@/BackendLib/Middleware/Validation";
-import useFileHandler from "@/components/Hooks/UseHandleFile";
+import useFileHandler from "@/Hooks/UseHandleFile";
 import ImageFunction from "@/components/global/image_function";
+import { selectCatagory } from "@/Data/StaticData";
+import RemoveBox from "@/components/UI/remove";
 
 export type popupPassword = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,10 +46,10 @@ const PopUpPassword = (props: popupPassword) => {
       siteFileInputRef?.current?.click();
   }
 
-  return (
+  return (  
     <div
       id="PasswordOutBox"
-      className={`  relative cursor-normal flex  items-end justify-center  w-full h-full`}
+      className={`  relative cursor-normal flex  items-end justify-end  w-full h-full`}
     >
       <div
         onClick={() => props.closeModelBox(false)}
@@ -57,25 +58,20 @@ const PopUpPassword = (props: popupPassword) => {
       <div
         ref={RemovePasswordBox}
         id="RemovingPasswordBox"
-        className=" z-50 p-4 bg-white absolute bottom-0 rounded-sm w-full px-8 mx-auto  "
+        className=" z-50 p-4 bg-gray-600 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
       >
         <form className="" action="" onSubmit={handleSubmit(onSubmitForm)}>
           <Div className="text-center border-b border-gray-200 mb-3 pb-2 font-normal text-gray-600 text-[20px]">
-            <PageTitle title="Set New Password" />
+            <PageTitle className="text-gray-50" title="Set New Password" />
           </Div>
-          <Div
-            onClick={() => props.closeModelBox(false)}
-            className="absolute top-2 right-3 transform rotate-[45deg]  p-2 rounded-full transition duration-300 hover:rotate-[140deg] hover:bg-gray-50 cursor-pointer"
-          >
-            <AiOutlinePlus className="text-gray-600 text-[19px]" />
-          </Div>
+          <RemoveBox remove={() => props.closeModelBox(false)} />
 
           <Div className="flex flex-col md:gap-4">
             <Div className="flex gap-4 flex-1">
               <Div className="flex-1">
                 <Div className=" flex-1 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
-                  <Div className="w-[130px] md:w-[180px] flex items-center">
-                    <LabelContent htmlFor="passwordCatagory" > Password Catagory</LabelContent>
+                  <Div className="w-full md:w-[130px] flex items-center">
+                    <LabelContent className="text-gray-100" htmlFor="passwordCatagory" > Password Catagory</LabelContent>
                   </Div>
                   <Div className="flex-1">
                     <select {...register('catagory')} id="passwordCatagory" className="rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[9px] w-full ">
@@ -91,14 +87,14 @@ const PopUpPassword = (props: popupPassword) => {
 
                 <Div className="flex items-center gap-2 mt-5">
                   <Div className=" flex-1 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
-                    <Div className="w-[130px] md:w-[180px] flex items-center">
-                      <LabelContent htmlFor="password_name" > Password Name</LabelContent>
+                    <Div className="w-full md:w-[130px] flex items-center">
+                      <LabelContent className="text-gray-100" htmlFor="password_name" > Password Name</LabelContent>
                     </Div>
                     <Div className="flex-1 ">
                       <input
                         id="password_name"
                         type="text"
-                        className="py-[9px] add_password_input"
+                        className="py-[10px] add_password_input"
                         placeholder="Password Name"
                         {...register('password_name')}
                       />
@@ -107,7 +103,7 @@ const PopUpPassword = (props: popupPassword) => {
                   </Div>
                 </Div>
               </Div>
-              <Div className="w-[100px] md:w-[80px] flex  relative gap-[4px] md:gap-2">
+              <Div className="w-[100px] md:w-[80px] md:h-[80px] h-[100px] flex  relative gap-[4px] md:gap-2">
                 <Div className=" h-full w-full relative rounded-md border bg-gray-100 flex items-center justify-center">
                   {
                     !blobImage ?
@@ -130,18 +126,18 @@ const PopUpPassword = (props: popupPassword) => {
                   }}
                   ref={siteFileInputRef}
                   type="file"
-                  className="py-[9px] hidden"
+                  className="py-[10px] hidden"
                   placeholder="Password Name" />
               </Div>
             </Div>
 
             <Div className="mt-3 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
-              <Div className="w-[130px] md:w-[180px] flex items-center">
-                <LabelContent htmlFor="addPassword" >Password</LabelContent>
+              <Div className="w-full md:w-[130px] flex items-center">
+                <LabelContent className="text-gray-100" htmlFor="addPassword" >Password</LabelContent>
               </Div>
               <Div className="flex-1 relative">
                 <input
-                  className="py-[9px] add_password_input"
+                  className="py-[10px] add_password_input"
                   id="addPassword"
                   type={ShowPassword ? "text" : "password"}
                   placeholder="Eg. SAfeu_EA-e53"
@@ -163,14 +159,14 @@ const PopUpPassword = (props: popupPassword) => {
             </Div>
 
             <Div className=" mt-2 flex-1 flex flex-col md:flex-row relativegap-[4px] md:gap-2">
-              <Div className="w-[130px] md:w-[180px] flex items-center">
-                <LabelContent htmlFor="passwordUrl" > Url</LabelContent>
+              <Div className="w-full md:w-[130px] flex items-center">
+                <LabelContent className="text-gray-100" htmlFor="passwordUrl" > Url</LabelContent>
               </Div>
               <Div className="flex-1">
                 <input
                   id="passwordUrl"
                   type="text"
-                  className="py-[9px] add_password_input"
+                  className="py-[10px] add_password_input"
                   placeholder="Site Url"
                   {...register('url')}
                 />
@@ -185,11 +181,11 @@ const PopUpPassword = (props: popupPassword) => {
               icon={<AiOutlinePlus className="text-[17px]" />}
               size='md'
               type="submit"
-              variant='secondary'
+              variant='default'
               className="flex gap-2"
               btnName="Add Password"
             />
-            <Button type="button" onClick={() => { props.closeModelBox(false) }} size='md' btnName="Cancel" />
+            <Button type="button" variant='destructive' onClick={() => { props.closeModelBox(false) }} size='md' btnName="Cancel" />
             {showPinCodeBox && (
               <PinCodeBox
                 showPinCodeBox={showPinCodeBox}

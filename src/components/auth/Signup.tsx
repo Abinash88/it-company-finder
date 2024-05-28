@@ -1,6 +1,6 @@
 import Div from "@/lib/Div";
 import React, { useContext, useState } from "react";
-import MyContext from "../context/MyContext";
+import MyContext from "../../context/MyContext";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
 

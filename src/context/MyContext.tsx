@@ -14,39 +14,44 @@ import { useRouter } from "next/navigation";
 export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
     {
-      id: "alksfhkajshdflkajshd",
+      id: "asldewio23409roasidjf",
       name: "Facebook",
       link: "https://www.facebook.com",
       image: Facebook,
-      passwords: [],
+      password: 'facebook',
+      catagory:'password'
     },
     {
-      id: "asfkjahsdkfjahs",
+      id: "aoisudfjoaisdfjaosidj",
       name: "Instagram",
       link: "https://www.instagram.com",
       image: Instagram,
-      passwords: [],
+      password: 'instagram',
+      catagory:'password'
     },
     {
-      id: "faksjhdfkajshdflakjsd",
+      id: "24o824093rijaoisjdfaf",
       name: "Messenger",
       link: "https://www.messanger.com",
       image: Messnager,
-      passwords: [],
+      password: 'messager',
+      catagory:'password'
     },
     {
-      id: "fkajshdkfajshdlk",
+      id: "aosidjf4o4429058reoia",
       name: "Reddit",
       link: "https://www.reddit.com",
       image: Reddit,
-      passwords: [],
+      password: 'reddit',
+      catagory:'password'
     },
     {
-      id: "aksjdhfsdflaksjd",
+      id: "420983rhauoisdjfaoisl",
       name: "Pinterest",
       link: "https://www.pinterest.com",
       image: Pinterest,
-      passwords: [],
+      password: 'pinterest',
+      catagory:'password'
     },
   ]);
 
@@ -58,22 +63,6 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [signUpLoading, setSignupLoading] = useState<boolean>(false);
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
-  const GetSavePassword = (
-    password: string,
-    passwordName: string,
-    index: number
-  ) => {
-    setSocialData((item) => {
-      const data = [...item];
-
-      data[index].passwords.push({
-        password,
-        passwordName,
-        OpenMoreBar: false,
-      });
-      return data;
-    });
-  };
 
 
   const signUpPostRequest = async (data: {
@@ -137,7 +126,6 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         SocialData,
         setSocialData,
-        GetSavePassword,
         signUpPostRequest,
         loginPostRequest,
         userData,

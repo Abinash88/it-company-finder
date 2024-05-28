@@ -1,7 +1,11 @@
 import React, { HTMLProps } from "react";
 
-const Div:React.FC<HTMLProps<HTMLDivElement>> = (props ) => {
-  return <div {...props}>{props.children}</div>;
-};
+interface DivTypes extends React.AllHTMLAttributes<HTMLDivElement> { }
+
+
+
+const Div = React.forwardRef<HTMLDivElement, DivTypes>(({ ...props }, ref) => {
+  return <div ref={ref} {...props} />
+});
 
 export default Div;

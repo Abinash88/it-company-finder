@@ -11,11 +11,11 @@ const buttonVariants = cva(
       variant: {
         default: 'hover:bg-blue-600/80 bg-primary text-primary-foreground',
         destructive:
-          'hover:bg-destructive/90 bg-destructive text-destructive-foreground',
+          'hover:bg-destructive/80 bg-destructive text-destructive-foreground',
         outline:
-          'border border-border bg-accent hover:bg-accent-foreground/80 hover:text-accent-foreground',
+          'border border-border bg-accent hover:bg-accent/80 hover:text-accent-foreground',
         secondary:
-          'hover:bg-secondary/80 hover:text-secondary hover:border-secondary border bg-secondary text-secondary-foreground',
+          'hover:bg-secondary/80 border bg-secondary text-secondary-foreground',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
       },
@@ -61,14 +61,14 @@ export default Button;
 Button.displayName = 'Button';
 
 
-export interface LinksTypes extends React.LinkHTMLAttributes<HTMLLinkElement>, VariantProps<typeof buttonVariants> {
+export interface LinksTypes extends React.AnchorHTMLAttributes<HTMLAnchorElement>, VariantProps<typeof buttonVariants> {
   btnName: string;
   ButtonClick: () => void;
   icon?: ReactNode;
   href: string;
 };
 
-export const LinkBtn = React.forwardRef<HTMLLinkElement, LinksTypes>(({
+export const LinkBtn = React.forwardRef<HTMLAnchorElement, LinksTypes>(({
   btnName,
   ButtonClick,
   icon,
@@ -76,10 +76,11 @@ export const LinkBtn = React.forwardRef<HTMLLinkElement, LinksTypes>(({
   variant,
   className,
   href,
-}: LinksTypes) => {
+}, ref) => {
   return (
     <Link
       href={href}
+      ref={ref}
       onClick={ButtonClick}
       className={cn(buttonVariants({ size, variant, className }))}
     >
@@ -101,10 +102,10 @@ export interface InputFieldTypes extends React.InputHTMLAttributes<HTMLInputElem
 }
 
 
-export const InputField = React.forwardRef<HTMLInputElement, InputFieldTypes>(({ className, ...props }) => {
+export const InputField = React.forwardRef<HTMLInputElement, InputFieldTypes>(({ className, ...props }, ref) => {
 
   return (
-    <input {...props} className={cn(` rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
+    <input ref={ref} {...props} className={cn(` rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[5px] w-full ${className}`)} />
   )
 })
 
@@ -129,10 +130,10 @@ export interface InputCheckBoxTypes extends React.InputHTMLAttributes<HTMLInputE
 }
 
 
-export const InputCheckBox = React.forwardRef<HTMLInputElement, InputCheckBoxTypes>(({ className, ...props }) => {
+export const InputCheckBox = React.forwardRef<HTMLInputElement, InputCheckBoxTypes>(({ className, ...props }, ref) => {
 
   return (
-    <input {...props} className={cn(` rounded-sm border w-5  before:contents-check h-5 bg-input focus:outline-none text-[13px] px-3  ${className}`)} />
+    <input {...props} ref={ref} className={cn(` rounded-sm border w-5  before:contents-check h-5 bg-input focus:outline-none text-[13px] px-3  ${className}`)} />
   )
 })
 

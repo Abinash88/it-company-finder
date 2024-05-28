@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import AccountBox from "./AccountBox";
-import MyContext from "../context/MyContext";
+import MyContext from "../../context/MyContext";
 import { useRouter } from "next/navigation";
 
 const Headers = () => {
