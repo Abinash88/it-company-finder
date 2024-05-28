@@ -7,18 +7,19 @@ import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import GlobalTopSearch from '../PasswordComponent/SmallComponent/GlobalTopSearch';
 import PageTitle from '@/components/UI/page-title';
-import MyContext from '@/context/MyContext';
-import SingleApp from '../PasswordComponent/single-password';
 import { MyAppDataTypes } from '@/Data/Types';
 import { notesData } from '@/Data/StaticData';
 import { StaticNotesDataTypes } from '@/BackendLib/lib/types';
 import SingleNotes from './single-notes';
 import SingleNotePopup from './single-note-popup';
-const PopUpForm = dynamic(() => import('./PopupForm'))
-const MainTodo = () => {
+import UseHandleSearch from '@/Hooks/use-handle-search';
+const NoteForm = dynamic(() => import('./notes-form'))
+const MainNotes = () => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [text, setText] = useState('')
   const [notePopup, setNotePopup] = useState<StaticNotesDataTypes>()
+
+  const { searched } = UseHandleSearch({ data: notesData, searchItem: 'title', searchText: text });
 
   return (
     <Div className="w-full h-full ">
@@ -30,25 +31,25 @@ const MainTodo = () => {
           <GlobalTopSearch setText={setText} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
           <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
             <Div className="w-full h-full ">
-              <PopUpForm
+              <NoteForm
                 closeModelBox={setIsOpenPopup}
               />
             </Div>
           </Div>
         </Div>
         <Div className="w-full px-6 h-[calc(100vh-160px)]  overflowstyle overflow-y-auto">
-          {notesData?.map((data: StaticNotesDataTypes) =>
+          {searched?.map((data: StaticNotesDataTypes) =>
           (
             <SingleNotes setNotePopup={setNotePopup} data={data} />
           )
           )}
         </Div>
         {notePopup &&
-          <SingleNotePopup setNotePopup={setNotePopup}  notePopup={notePopup} />
+          <SingleNotePopup setNotePopup={setNotePopup} notePopup={notePopup} />
         }
       </Div>
     </Div>
   )
 }
 
-export default MainTodo
+export default MainNotes

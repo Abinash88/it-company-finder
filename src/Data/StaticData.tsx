@@ -1,6 +1,6 @@
 import { FaCog, FaDatabase, FaHome, FaLock, FaRegCopy, FaRegEdit } from "react-icons/fa";
 import { SidebarDataTypes, settingLinksTypes } from "./Types";
-import { StaticNotesDataTypes } from "@/BackendLib/lib/types";
+import { StaticNotesDataTypes, TodoDataTypes } from "@/BackendLib/lib/types";
 
 
 export const SidebarData: SidebarDataTypes[] = [
@@ -20,9 +20,9 @@ export const SidebarData: SidebarDataTypes[] = [
     link: "/dashboard/notes",
   },
   {
-    name: "Timer",
+    name: "todo",
     icon: <FaHome />,
-    link: "/dashboard/time",
+    link: "/dashboard/todo",
   },
   {
     name: "Setting",
@@ -114,4 +114,27 @@ export const notesData: StaticNotesDataTypes[] = [
      aperiam labore, beatae quidem. Repellat, illum?`,
     priority: 'important'
   },
+]
+
+
+export const todoData: TodoDataTypes[] = [
+  {
+    id: "asldewio23409roasidjf",
+    name: "Task Name",
+    description: `Task Description`,
+    priority: 'important'
+  },
+  {
+    id: "asldewio23409roasidjf",
+    name: "Task Name",
+    description: `Task Description`,
+    priority: 'important'
+  },
+  {
+    id: "asldewio23409roasidjf",
+    name: "Task Name",
+    description: `Task Description`,
+    priority: 'important'
+  },
+
 ]

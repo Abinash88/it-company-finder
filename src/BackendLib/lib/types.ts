@@ -27,8 +27,15 @@ export interface add_notes_data_types {
 }
 
 export interface StaticNotesDataTypes {
-  id: string;
+  id: string
   title: string
+  description: string
+  priority: 'not important' | 'important' | 'normal' | 'very important'
+}
+
+export interface TodoDataTypes {
+  id: string
+  name: string
   description: string
   priority: 'not important' | 'important' | 'normal' | 'very important'
 }

@@ -24,7 +24,7 @@ export type popupPassword = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PopupForm = (props: popupPassword) => {
+const NotesForm = (props: popupPassword) => {
   const RemovePasswordBox = useRef<HTMLDivElement | null>(null);
   const [ShowPassword, setShowPassword] = useState<boolean>(false);
   const MyAppData = useContext(MyContext);
@@ -65,11 +65,11 @@ const PopupForm = (props: popupPassword) => {
           <RemoveBox remove={() => props.closeModelBox(false)} />
 
 
-          <Div className="flex flex-col md:gap-2">
+          <Div className="flex flex-col md:gap-">
             <Div className="flex gap-4 flex-1">
               <Div className="flex-1">
                 <Div className="flex items-center gap-2 mt-5">
-                  <Div className=" flex-1 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
+                  <Div className=" flex-1 flex flex-col relative gap-[4px] md:gap-1">
                     <Div className="w-full md:w-[130px] flex items-start">
                       <LabelContent className="text-gray-100" htmlFor="title" > Title</LabelContent>
                     </Div>
@@ -88,7 +88,7 @@ const PopupForm = (props: popupPassword) => {
               </Div>
             </Div>
 
-            <Div className="mt-3 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
+            <Div className="mt-3 flex flex-col relative gap-[4px] md:gap-1">
               <Div className="w-full md:w-[130px] flex items-start">
                 <LabelContent className="text-gray-100" htmlFor="Description" >Description</LabelContent>
               </Div>
@@ -96,7 +96,7 @@ const PopupForm = (props: popupPassword) => {
                 <textarea
                   className=" add_password_input"
                   id="Description"
-                  placeholder="Eg. SAfeu_EA-e53"
+                  placeholder="description here..."
                   {...register('description')}
                   rows={5}
                   cols={6}
@@ -106,7 +106,7 @@ const PopupForm = (props: popupPassword) => {
               </Div>
             </Div>
 
-            <Div className=" flex-1 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
+            <Div className=" flex-1 flex flex-col relative gap-[4px] md:gap-1">
               <Div className="w-full md:w-[130px] flex items-start">
                 <LabelContent className="text-gray-100" htmlFor="Priority" > Priority</LabelContent>
               </Div>
@@ -149,4 +149,4 @@ const PopupForm = (props: popupPassword) => {
   );
 };
 
-export default PopupForm;
+export default NotesForm;
