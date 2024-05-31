@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <Div className='w-full  overflow-hidden flex-1 h-full '>
+    <Div className='w-full flex-1 h-full '>
       <MainNotes />
     </Div>
   )

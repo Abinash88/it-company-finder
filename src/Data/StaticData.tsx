@@ -6,27 +6,27 @@ import { StaticNotesDataTypes, TodoDataTypes } from "@/BackendLib/lib/types";
 export const SidebarData: SidebarDataTypes[] = [
   {
     name: "Dashboard",
-    icon: <FaHome />,
+    icon: <FaHome className="text-[18px] text-blue-700" />,
     link: "/dashboard",
   },
   {
     name: "Password",
-    icon: <FaLock />,
+    icon: <FaLock className="text-[18px] text-yellow-800/70" />,
     link: "/dashboard/password",
   },
   {
     name: "Notes",
-    icon: <FaDatabase />,
+    icon: <FaDatabase className="text-[18px] text-" />,
     link: "/dashboard/notes",
   },
   {
     name: "todo",
-    icon: <FaHome />,
+    icon: <FaHome className="text-[18px] text-" />,
     link: "/dashboard/todo",
   },
   {
     name: "Setting",
-    icon: <FaCog />,
+    icon: <FaCog className="text-[18px] text-" />,
     link: "/dashboard/setting",
   },
 ];
@@ -66,9 +66,8 @@ export const selectCatagory = [
 ];
 
 export const selectNotePriority = [
-  { id: 0, catagory: '-select type-' },
-  { id: 1, catagory: 'not important' },
   { id: 2, catagory: 'normal' },
+  { id: 1, catagory: 'not important' },
   { id: 3, catagory: 'important' },
   { id: 4, catagory: 'very important' },
 ];

@@ -22,17 +22,17 @@ const ClientLayout = ({
                     <div className=" w-full h-full flex">
                         <div
                             className={`${path === "/account" ? "hidden" : ""
-                                } w-[250px]  h-full`}
+                                }   h-full`}
                         >
                             <Sidebars />
                         </div>
                         <div className="flex flex-1 flex-col">
                             {path === "/account" ? null : <Headers />}
-                            <div className="  flex flex-1">
+                            <div className=" overflow-y-auto h-[calc(100vh-50px)] flex flex-1">
                                 <div className="w-full">
                                     {children}
                                 </div>
-                                <div className="w-[50px] px-1 ">
+                                <div className="w-[50px] bg-white px-1 ">
                                     nav
                                 </div>
                             </div>

@@ -23,10 +23,10 @@ const MainNotes = () => {
 
   return (
     <Div className="w-full h-full ">
-      <Div className="w-full px-6 flex items-center  h-[50px]">
+      <Div className="w-[90%] mx-auto px-6 py-2 flex items-center  justify-center my-6 ">
         <PageTitle title="Notes" />
       </Div>
-      <Div className="h-[calc(100vh-100px)] bg-background rounded-tr-lg">
+      <Div className=" bg-background rounded-tr-lg">
         <Div className="w-full px-6 py-4   ">
           <GlobalTopSearch setText={setText} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
           <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
@@ -37,7 +37,7 @@ const MainNotes = () => {
             </Div>
           </Div>
         </Div>
-        <Div className="w-full px-6 h-[calc(100vh-160px)]  overflowstyle overflow-y-auto">
+        <Div className="w-full px-6">
           {searched?.map((data: StaticNotesDataTypes) =>
           (
             <SingleNotes setNotePopup={setNotePopup} data={data} />

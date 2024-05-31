@@ -5,13 +5,12 @@ import React, { ReactNode, useContext, useEffect, useState } from "react";
 import SingleApp from "./single-password";
 import Div from "@/lib/Div";
 import MyContext from "@/context/MyContext";
-import PopUpPassword from "./SmallComponent/PopUpPassword";
+import PasswordForm from "./SmallComponent/password-form";
 import { cn } from "@/lib/utils";
 import GlobalTopSearch from "./SmallComponent/GlobalTopSearch";
 import PageTitle from "@/components/UI/page-title";
 import UseHandleSearch from "@/Hooks/use-handle-search";
-import { DndContext, DragEndEvent, useDraggable, useDroppable, DragOverlay, DragStartEvent } from "@dnd-kit/core";
-import { CSS } from '@dnd-kit/utilities';
+import { DragEndEvent } from "@dnd-kit/core";
 
 
 const PasswordContainer = () => {
@@ -45,23 +44,23 @@ const PasswordContainer = () => {
 
 
   return (
-    <Div className="w-full h-full ">
-      <Div className="w-full px-6 flex items-center  h-[50px]">
+    <Div className="w-full h-full">
+      <Div className="w-[90%] mx-auto px-6 py-2 flex items-center  justify-center my-6 ">
         <PageTitle title="Password" />
       </Div>
-      <Div className="h-[calc(100vh-100px)] bg-background rounded-tr-lg">
-        <Div className="w-full px-6 py-4   ">
+      <Div className=" bg-background rounded-tr-lg">
+        <Div className="w-full px-6 py-4">
           <GlobalTopSearch setText={setText} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
           <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
 
             <Div className="w-full h-full ">
-              <PopUpPassword
+              <PasswordForm
                 closeModelBox={setIsOpenPopup}
               />
             </Div>
           </Div>
         </Div>
-        <Div className="w-full px-6 h-[calc(100vh-160px)]  overflowstyle overflow-y-auto">
+        <Div className="w-full px-6">
           {searchData?.map((data: MyAppDataTypes) =>
           (
             <SingleApp data={data} />

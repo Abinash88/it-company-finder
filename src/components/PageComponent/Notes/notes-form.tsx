@@ -34,7 +34,7 @@ const NotesForm = (props: popupPassword) => {
   const [showPinCodeBox, setShowPinCodeBox] = useState<boolean>(false);
 
   const { register, handleSubmit, formState: { errors }, reset } =
-    useForm<add_notes_data_types>({ resolver: zodResolver(Validation?.add_password_validatioon) });
+    useForm<add_notes_data_types>({ resolver: zodResolver(Validation?.add_notes_validation) });
   const { fileLists, handleFile, blobImage, clearFile, valueData } = useFileHandler()
   const onSubmitForm: SubmitHandler<add_notes_data_types> = (data) => {
     console.log(data);
@@ -56,13 +56,13 @@ const NotesForm = (props: popupPassword) => {
       <div
         ref={RemovePasswordBox}
         id="RemovingPasswordBox"
-        className=" z-50 p-4 bg-gray-600 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
+        className=" z-50 p-4 bg-gray-50 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
       >
         <form className="" action="" onSubmit={handleSubmit(onSubmitForm)}>
           <Div className="text-center border-b border-gray-200 mb-3 pb-2 font-normal text-gray-600 text-[20px]">
-            <PageTitle className="text-gray-50" title="Add Notes" />
+            <PageTitle className="text-gray-700" title="Add Notes" />
           </Div>
-          <RemoveBox remove={() => props.closeModelBox(false)} />
+          <RemoveBox  remove={() => props.closeModelBox(false)} />
 
 
           <Div className="flex flex-col md:gap-">
@@ -71,7 +71,7 @@ const NotesForm = (props: popupPassword) => {
                 <Div className="flex items-center gap-2 mt-5">
                   <Div className=" flex-1 flex flex-col relative gap-[4px] md:gap-1">
                     <Div className="w-full md:w-[130px] flex items-start">
-                      <LabelContent className="text-gray-100" htmlFor="title" > Title</LabelContent>
+                      <LabelContent className="text-gray-600" htmlFor="title" > Title</LabelContent>
                     </Div>
                     <Div className="flex-1 ">
                       <input
@@ -90,7 +90,7 @@ const NotesForm = (props: popupPassword) => {
 
             <Div className="mt-3 flex flex-col relative gap-[4px] md:gap-1">
               <Div className="w-full md:w-[130px] flex items-start">
-                <LabelContent className="text-gray-100" htmlFor="Description" >Description</LabelContent>
+                <LabelContent className="text-gray-600" htmlFor="Description" >Description</LabelContent>
               </Div>
               <Div className="flex-1 relative">
                 <textarea
@@ -108,7 +108,7 @@ const NotesForm = (props: popupPassword) => {
 
             <Div className=" flex-1 flex flex-col relative gap-[4px] md:gap-1">
               <Div className="w-full md:w-[130px] flex items-start">
-                <LabelContent className="text-gray-100" htmlFor="Priority" > Priority</LabelContent>
+                <LabelContent className="text-gray-600" htmlFor="Priority" > Priority</LabelContent>
               </Div>
               <Div className="flex-1">
                 <select {...register('priority')} id="Priority" className="rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[9px] w-full ">

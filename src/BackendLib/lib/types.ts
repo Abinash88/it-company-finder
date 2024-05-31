@@ -39,3 +39,11 @@ export interface TodoDataTypes {
   description: string
   priority: 'not important' | 'important' | 'normal' | 'very important'
 }
+
+export interface add_todo_data_types {
+  id: string
+  task_name: string
+  description: string
+  priority: 'not important' | 'important' | 'normal' | 'very important'
+  
+}

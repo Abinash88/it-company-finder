@@ -52,8 +52,8 @@ const SingleTodo = ({
      group justify-start px-2 items-center gap-4  rounded-md bg-card"
     >
       <Div className="flex items-center">
-        <Div className="w-[50px] flex flex-col gap-4 items-start justify-center h-full">
-          <InputField type="checkbox" className="w-4 h-4" />
+        <Div className="w-[50px] flex flex-col gap-4  items-center justify-center h-full">
+          <InputField type="checkbox" title="Check Completed"  className="w-4 h-6 rounded-full checked:bg-gray-500/80 appearance-none " />
           <Div>
             <FaRegStar className="text-[18px] text-gray-500 " />
             {/* <FaStar className="text-[18px] text-blue-600"/> */}

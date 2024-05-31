@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         border: 'hsla(var(--border))',
         input: 'hsla(var(--input))',
+        text: 'hsla(var(--text))',
         background: {
           DEFAULT: 'hsla(var(--background))',
           foreground: 'var(--foreground)',

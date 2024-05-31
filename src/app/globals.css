@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  --background: 220, 14%, 96%;
+  --background: 240, 45%, 98%;
   --foreground: #f6f5f2;
   --sidebar: 213, 24%, 16%;
   --sidebar-foreground: 213, 20%, 23%;
@@ -28,7 +28,7 @@
 
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(60 9.1% 97.8%);
-
+  --text: 203, 3%, 46%;
   --border: 224, 15%, 85%;
   --input: 225, 33%, 98%;
   --ring: hsl(220, 14%, 4%);
@@ -76,14 +76,14 @@
   -moz-box-sizing: border-box;
 }
 
-.overflowstyle::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 5px;
   height: 100%;
   background: rgb(174, 174, 174);
   border-radius: 10px;
 }
 
-.overflowstyle::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: #717578;
   border-radius: 20px;
 }
@@ -116,7 +116,7 @@
 }
 
 .add_password_input {
-  @apply rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[9px] w-full;
+  @apply rounded-sm border border-border focus:outline-none text-[13px] px-3 py-[9px] w-full;
 }
 
 input[type='number']::-webkit-inner-spin-button,

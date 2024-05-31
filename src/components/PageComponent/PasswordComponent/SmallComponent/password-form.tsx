@@ -46,10 +46,10 @@ const PopUpPassword = (props: popupPassword) => {
       siteFileInputRef?.current?.click();
   }
 
-  return (  
+  return (
     <div
       id="PasswordOutBox"
-      className={`  relative cursor-normal flex  items-end justify-end  w-full h-full`}
+      className={`z-50   relative cursor-normal flex  items-end justify-end  w-full h-full`}
     >
       <div
         onClick={() => props.closeModelBox(false)}
@@ -58,11 +58,11 @@ const PopUpPassword = (props: popupPassword) => {
       <div
         ref={RemovePasswordBox}
         id="RemovingPasswordBox"
-        className=" z-50 p-4 bg-gray-600 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
+        className=" z-50 p-4 bg-white absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
       >
         <form className="" action="" onSubmit={handleSubmit(onSubmitForm)}>
-          <Div className="text-center border-b border-gray-200 mb-3 pb-2 font-normal text-gray-600 text-[20px]">
-            <PageTitle className="text-gray-50" title="Set New Password" />
+          <Div className="text-center border-b border-gray-200 mb-7 pb-2 font-normal text-gray-600 text-[20px]">
+            <PageTitle className="text-gray-700" title="Set New Password" />
           </Div>
           <RemoveBox remove={() => props.closeModelBox(false)} />
 
@@ -71,10 +71,10 @@ const PopUpPassword = (props: popupPassword) => {
               <Div className="flex-1">
                 <Div className=" flex-1 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
                   <Div className="w-full md:w-[130px] flex items-center">
-                    <LabelContent className="text-gray-100" htmlFor="passwordCatagory" > Password Catagory</LabelContent>
+                    <LabelContent className="text-gray-600" htmlFor="passwordCatagory" > Password Catagory</LabelContent>
                   </Div>
                   <Div className="flex-1">
-                    <select {...register('catagory')} id="passwordCatagory" className="rounded-sm border border-border bg-input focus:outline-none text-[13px] px-3 py-[9px] w-full ">
+                    <select {...register('catagory')} id="passwordCatagory" className="add_password_input">
                       {
                         selectCatagory?.map((item) => {
                           return (<option key={item?.id} value={item?.catagory}>{item?.catagory}</option>)
@@ -88,7 +88,7 @@ const PopUpPassword = (props: popupPassword) => {
                 <Div className="flex items-center gap-2 mt-5">
                   <Div className=" flex-1 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
                     <Div className="w-full md:w-[130px] flex items-center">
-                      <LabelContent className="text-gray-100" htmlFor="password_name" > Password Name</LabelContent>
+                      <LabelContent className="text-gray-600" htmlFor="password_name" > Password Name</LabelContent>
                     </Div>
                     <Div className="flex-1 ">
                       <input
@@ -133,7 +133,7 @@ const PopUpPassword = (props: popupPassword) => {
 
             <Div className="mt-3 flex flex-col md:flex-row relative gap-[4px] md:gap-2">
               <Div className="w-full md:w-[130px] flex items-center">
-                <LabelContent className="text-gray-100" htmlFor="addPassword" >Password</LabelContent>
+                <LabelContent className="text-gray-600" htmlFor="addPassword" >Password</LabelContent>
               </Div>
               <Div className="flex-1 relative">
                 <input
@@ -160,7 +160,7 @@ const PopUpPassword = (props: popupPassword) => {
 
             <Div className=" mt-2 flex-1 flex flex-col md:flex-row relativegap-[4px] md:gap-2">
               <Div className="w-full md:w-[130px] flex items-center">
-                <LabelContent className="text-gray-100" htmlFor="passwordUrl" > Url</LabelContent>
+                <LabelContent className="text-gray-600" htmlFor="passwordUrl" > Url</LabelContent>
               </Div>
               <Div className="flex-1">
                 <input

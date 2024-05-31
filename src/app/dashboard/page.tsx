@@ -2,8 +2,8 @@ import MainDashboard from '@/components/PageComponent/DashboardComponent/main-da
 import React from 'react'
 
 const page = () => {
-  return (
-    <div className="w-full h-[calc(100vh-50px)]">
+  return ( 
+    <div className="w-full  h-[calc(100vh-50px)]">
       <MainDashboard/>
     </div>
   )
