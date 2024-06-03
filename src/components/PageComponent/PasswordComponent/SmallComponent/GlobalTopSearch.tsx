@@ -20,7 +20,7 @@ const GlobalTopSearch = ({ setIsOpenPopup, isOpenPopup, setText, offCheckList = 
                 <Button icon={<AiOutlinePlus className="text-[15px]" />}
                     onClick={() => { setIsOpenPopup(!isOpenPopup) }} size="md" variant={'secondary'}
                     className="text-[11px] flex gap-2 " btnName="Add" />
-                <Button icon={<FaChevronDown className="text-[12px] text-gray-600" />}
+                <Button icon={<FaChevronDown className="text-[12px] text-gray-60" />}
                     onClick={() => { }} size="md" variant={'outline'}
                     className="text-[11px] flex gap-2 " btnName="More" />
                 <Div className="flex items-center gap-2">

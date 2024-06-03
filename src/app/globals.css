@@ -34,38 +34,19 @@
   --ring: hsl(220, 14%, 4%);
   --radius: 0.5rem;
 }
-/* 
-.dark {
-  --background: #071525;
-  --foreground: hsl(60 9.1% 97.8%);
-  --sidebar: #0c1520;
-  --sidebar-foreground: #232c38;
 
-  --card: hsl(20 14.3% 4.1%);
-  --card-foreground: hsl(60 9.1% 97.8%);
 
-  --popover: hsl(20 14.3% 4.1%);
-  --popover-foreground: hsl(60 9.1% 97.8%);
+p {
+  @apply text-text text-[13px] text-center;
+}
 
-  --primary: hsl(60 9.1% 97.8%);
-  --primary-foreground: hsl(24 9.8% 10%);
+.account_style {
+  @apply px-4 py-[5px] text-[13px] placeholder:text-[13px] placeholder:text-gray-500 rounded-md border focus:outline-none;
+}
 
-  --secondary: hsl(12 6.5% 15.1%);
-  --secondary-foreground: hsl(60 9.1% 97.8%);
-
-  --muted: hsl(12 6.5% 15.1%);
-  --muted-foreground: hsl(24 5.4% 63.9%);
-
-  --accent: hsl(12 6.5% 15.1%);
-  --accent-foreground: hsl(60 9.1% 97.8%);
-
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(60 9.1% 97.8%);
-
-  --border: hsl(12 6.5% 15.1%);
-  --input: hsl(10, 11%, 11%);
-  --ring: hsl(24 5.7% 82.9%);
-} */
+.account_label {
+  @apply text-[14px] font-normal text-gray-700;
+}
 
 * {
   font-family: 'Poppins', sans-serif;

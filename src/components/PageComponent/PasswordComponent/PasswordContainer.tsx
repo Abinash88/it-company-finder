@@ -48,7 +48,7 @@ const PasswordContainer = () => {
       <Div className="w-[90%] mx-auto px-6 py-2 flex items-center  justify-center my-6 ">
         <PageTitle title="Password" />
       </Div>
-      <Div className=" bg-background rounded-tr-lg">
+      <Div className=" bg-white h-full  rounded-tr-lg">
         <Div className="w-full px-6 py-4">
           <GlobalTopSearch setText={setText} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
           <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>

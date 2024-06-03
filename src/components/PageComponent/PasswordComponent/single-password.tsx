@@ -49,8 +49,9 @@ const SinglePassword = ({
 
   return (
     <Div
-      className="h-[100px] w-full flex my-3 flex-row relative cursor-pointer
-     group justify-start px-2 items-center gap-4  rounded-md bg-white border border-gray-300"
+      style={{ boxShadow: '1px 3px 10px #DADAE1' }}
+      className="h-[110px] w-full flex my-4 flex-row relative cursor-pointer
+     group justify-start px-2 items-center gap-4  rounded-md bg-white "
     >
       <Div className="flex items-center">
         <Div className="w-[50px] flex flex-col gap-4 items-start justify-center h-full">

@@ -32,9 +32,9 @@ const ClientLayout = ({
                                 <div className="w-full">
                                     {children}
                                 </div>
-                                <div className="w-[50px] bg-white px-1 ">
-                                    nav
-                                </div>
+                                    {/* <div className="w-[50px] bg-white px-1 ">
+                                        nav
+                                    </div> */}
                             </div>
                         </div>
                     </div>

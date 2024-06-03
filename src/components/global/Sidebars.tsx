@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Div from "@/lib/Div";
 import { cn } from "@/lib/utils";
 import { FaBars } from "react-icons/fa";
+import Image from "next/image";
 
 const Sidebars = () => {
   const location = usePathname();
@@ -15,12 +16,9 @@ const Sidebars = () => {
   return (
     <Div className={cn(` ${toggle ? 'w-[80px]' : 'w-[250px]'}  transition-all duration-500 h-full relative bg-sidebar`)}>
       <Div className="h-full pt-3 ">
-        <Div className="flex h-[50px]  items-center ">
-          <Link href={"/dashboard"} className="flex flex-col items-center justify-center  w-full">
-            <h3 className={cn(`text-[20px]  text-gray-100 text-center`)}>P M</h3>
-            <h3 className={cn(` text-[16px] px-4 inline text-gray-50  font-semibold ${toggle ? 'hidden' : ''}`)}>
-              Personal Manager
-            </h3>
+        <Div className="flex h-[50px] justify-center  items-center ">
+          <Link href={"/dashboard"} className="flex flex-col items-center justify-center  w-[120px]">
+            <Image src={'/white-logo.png'} alt="logo" width={500} height={500} className="size-full object-contain" />
           </Link>
           <FaBars onClick={() => { setToggle(!toggle) }} className="text-gray-600 absolute top-4 text-[18px] z-20 right-[-50px] cursor-pointer" />
         </Div>
@@ -37,7 +35,7 @@ const Sidebars = () => {
                   className={cn(` px-4 py-2 w-full h-full flex items-center  space-x-3 font-normal duration-300 transition-all text-[13px] ${toggle ? 'justify-center' : ''} transition-all duration-500 `)}
                   href={item?.link}
                 >
-                  <span className={cn(` text-background  duration-300 transition-all ${toggle ? 'text-[20px]' : 'text-[18px]'}`)}>
+                  <span className={cn(` text-gray-400  duration-300 transition-all ${toggle ? 'text-[20px]' : 'text-[18px]'}`)}>
                     {item?.icon}
                   </span>
                   <span className={cn(`text-gray-200 ${toggle ? 'hidden' : ''}`)}>{item?.name}</span>

@@ -46,11 +46,11 @@ const Headers = () => {
         <Div className="w-full h-full px-6 flex justify-between items-center">
           <Div className="w-[60%]">
             <Div className="w-full ml-16 relative">
-              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-gray-600 cursor-pointer" />
+              <BsSearch className="absolute top-[8px] left-2 text-[18px] text-[#415b7ffe] cursor-pointer" />
               <input
                 type="search"
                 className="w-full pr-4 pl-10 text-gray-600 placeholder:text-gray-500 placeholder:text-[12px] 
-                text-[12px] py-2 rounded-md bg-gray-100 focus:outline-none"
+                text-[12px] py-2 rounded-md border border-blue-200 focus:outline-none"
                 placeholder="Search here..."
               />
             </Div>
