@@ -2,9 +2,9 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/BackendLib/Middleware/ErrorHandler";
-import { prisma } from "@/BackendLib/lib/helper";
-import { getCookies, verifyToken } from "@/BackendLib/lib/utils";
+} from "@/Backend/Middleware/ErrorHandler";
+import { prisma } from "@/Backend/lib/helper";
+import { getCookies, verifyToken } from "@/Backend/lib/utils";
 import { NextRequest } from "next/server";
 
 export const POST = AuthMiddleware(async (req: NextRequest) => {

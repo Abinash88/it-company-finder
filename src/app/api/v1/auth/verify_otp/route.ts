@@ -2,8 +2,8 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/BackendLib/Middleware/ErrorHandler";
-import { VerifyPincode, prisma } from "@/BackendLib/lib/helper";
+} from "@/Backend/Middleware/ErrorHandler";
+import { VerifyPincode, prisma } from "@/Backend/lib/helper";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = AuthMiddleware(

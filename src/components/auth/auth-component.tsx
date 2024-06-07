@@ -40,25 +40,21 @@ export const EyeToggle = ({ setIsPasswordSeen, isPasswordSeen }: {
     )
 }
 
-export const SubmitButton = () => {
-    const contextdata = useContext(MyContext);
-    return (
-        <button className="px-6 py-2 text-[13px] mx-auto flex justify-center bg-gray-700
-         text-white rounded-md w-full hover:bg-gray-600 transition-all">
-            {contextdata?.signUpLoading ? (
-                <Image src={"/loading.gif"} alt="" width={25} height={25} />
-            ) : (
-                <span> Submit</span>
-            )}
-        </button>
-    )
-}
+interface ButtonTypes extends React.ButtonHTMLAttributes<HTMLButtonElement> { }
 
+export const SubmitButton = React.forwardRef<HTMLButtonElement, ButtonTypes>(({ ...rest }, ref) => {
+    return (
+        <button ref={ref} {...rest} className={(`px-6 py-2 text-[13px] mx-auto flex justify-center bg-gray-700
+         text-white rounded-md w-full hover:bg-gray-600 transition-all`)} />
+    )
+})
+
+SubmitButton.displayName = 'SubmitButton'
 
 export const BottomText = ({ text, type }: { text: string, type: string }) => {
     const router = useRouter();
     return (
-        <p className="text-[12px] pb-4">{text} <button className="text-gray-800 capitalize hover:underline"
+        <p className="text-[12px] pb-4">{text} <button type='button' className="text-gray-800 capitalize hover:underline"
             onClick={() => router.replace(`/account?type=${type}`)}>{type}</button></p>
     )
 }

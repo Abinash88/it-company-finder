@@ -9,7 +9,7 @@ import GlobalTopSearch from '../PasswordComponent/SmallComponent/GlobalTopSearch
 import PageTitle from '@/components/UI/page-title';
 import { MyAppDataTypes } from '@/Data/Types';
 import { notesData } from '@/Data/StaticData';
-import { StaticNotesDataTypes } from '@/BackendLib/lib/types';
+import { StaticNotesDataTypes } from '@/Backend'/lib/types';
 import SingleNotes from './single-notes';
 import SingleNotePopup from './single-note-popup';
 import UseHandleSearch from '@/Hooks/use-handle-search';

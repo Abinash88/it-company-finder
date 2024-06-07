@@ -36,13 +36,9 @@ export type userData = {
 export type contextTypes = {
   SocialData: MyAppDataTypes[];
   setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
-  signUpPostRequest: any;
-  loginPostRequest: any;
   userData: any;
   isSignUp: boolean;
-  GetUserData: () => void;
   LoginData: userData | undefined;
-  LogoutFunc: () => void;
   loadingUserData: boolean;
   loginLoading: boolean;
   signUpLoading: boolean;

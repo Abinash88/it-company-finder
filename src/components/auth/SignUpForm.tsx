@@ -23,10 +23,6 @@ const SignUpForm = () => {
   }, [contextData?.isSignUp]);
 
   useEffect(() => {
-    contextData?.GetUserData();
-    //eslint-disable-next-line
-  }, []);
-  useEffect(() => {
     if (path.includes('/account') && !type) router.replace('/account?type=login')
   }, [])
 

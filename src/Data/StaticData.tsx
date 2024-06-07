@@ -1,6 +1,6 @@
 import { FaCog, FaDatabase, FaHome, FaLock, FaRegCopy, FaRegEdit } from "react-icons/fa";
 import { SidebarDataTypes, settingLinksTypes } from "./Types";
-import { StaticNotesDataTypes, TodoDataTypes } from "@/BackendLib/lib/types";
+import { StaticNotesDataTypes, TodoDataTypes } from "@/Backend/lib/types";
 
 
 export const SidebarData: SidebarDataTypes[] = [

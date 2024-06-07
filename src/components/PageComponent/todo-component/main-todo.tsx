@@ -9,7 +9,7 @@ import GlobalTopSearch from '../PasswordComponent/SmallComponent/GlobalTopSearch
 import PageTitle from '@/components/UI/page-title';
 import { MyAppDataTypes } from '@/Data/Types';
 import { notesData, todoData } from '@/Data/StaticData';
-import { StaticNotesDataTypes, TodoDataTypes } from '@/BackendLib/lib/types';
+import { StaticNotesDataTypes, TodoDataTypes } from '@/Backend'/lib/types';
 import UseHandleSearch from '@/Hooks/use-handle-search';
 import SingleTodo from './single-todo';
 import TodoForm from './todo-form';

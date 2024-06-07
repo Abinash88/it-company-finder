@@ -10,7 +10,7 @@ import { FaRegCopy, FaRegEdit, FaRegStar } from "react-icons/fa";
 import { MdDragIndicator } from "react-icons/md";
 import { copyToClipboard } from "@/lib/utils";
 import PopupMenu from "../PasswordComponent/SmallComponent/PopupMenu";
-import { TodoDataTypes } from "@/BackendLib/lib/types";
+import { TodoDataTypes } from "@/Backend/lib/types";
 
 const SingleTodo = ({
   data,

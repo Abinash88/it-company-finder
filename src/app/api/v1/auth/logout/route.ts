@@ -2,8 +2,8 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/BackendLib/Middleware/ErrorHandler";
-import { CookieSetter } from "@/BackendLib/lib/utils";
+} from "@/Backend/Middleware/ErrorHandler";
+import { CookieSetter } from "@/Backend/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = AuthMiddleware(async (req: NextRequest, res: NextResponse) => {

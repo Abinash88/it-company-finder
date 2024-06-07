@@ -2,9 +2,9 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/BackendLib/Middleware/ErrorHandler";
-import { accessToken, prisma } from "@/BackendLib/lib/helper";
-import { verifyToken } from "@/BackendLib/lib/utils";
+} from "@/Backend/Middleware/ErrorHandler";
+import { accessToken, prisma } from "@/Backend/lib/helper";
+import { verifyToken } from "@/Backend/lib/utils";
 import { cookies } from "next/headers";
 
 export const GET = AuthMiddleware(async (req: Request, res: Response) => {

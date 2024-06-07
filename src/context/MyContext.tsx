@@ -7,9 +7,9 @@ import Messnager from "@/assests/homeImage/messanger.jpg";
 import Reddit from "@/assests/homeImage/reddit.jpg";
 import Pinterest from "@/assests/homeImage/pintrest.jpg";
 import { MyAppDataTypes, contextTypes } from "@/Data/Types.jsx";
-import { FetchingApi } from "./contextApi";
 const MyContext = createContext<contextTypes | undefined>(undefined);
 import { useRouter } from "next/navigation";
+import { fetchRequest } from "@/lib/fetch";
 
 export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
@@ -19,7 +19,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
       link: "https://www.facebook.com",
       image: Facebook,
       password: 'facebook',
-      catagory:'password'
+      catagory: 'password'
     },
     {
       id: "aoisudfjoaisdfjaosidj",
@@ -27,7 +27,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
       link: "https://www.instagram.com",
       image: Instagram,
       password: 'instagram',
-      catagory:'password'
+      catagory: 'password'
     },
     {
       id: "24o824093rijaoisjdfaf",
@@ -35,7 +35,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
       link: "https://www.messanger.com",
       image: Messnager,
       password: 'messager',
-      catagory:'password'
+      catagory: 'password'
     },
     {
       id: "aosidjf4o4429058reoia",
@@ -43,7 +43,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
       link: "https://www.reddit.com",
       image: Reddit,
       password: 'reddit',
-      catagory:'password'
+      catagory: 'password'
     },
     {
       id: "420983rhauoisdjfaoisl",
@@ -51,7 +51,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
       link: "https://www.pinterest.com",
       image: Pinterest,
       password: 'pinterest',
-      catagory:'password'
+      catagory: 'password'
     },
   ]);
 
@@ -64,76 +64,15 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
 
 
-
-  const signUpPostRequest = async (data: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
-    setSignupLoading(true);
-    const signup = await FetchingApi({
-      url: "signup",
-      method: "POST",
-      data,
-    });
-    if (signup.success) {
-      setIsSignUp(true);
-    }
-    setSignupLoading(false);
-  };
-
-  const loginPostRequest = async (data: {
-    email: string;
-    password: string;
-  }) => {
-    setLoginLoading(true);
-    const loginData = await FetchingApi({
-      url: "login",
-      method: "POST",
-      data,
-    });
-    setLoginLoading(false);
-    if (loginData?.success) {
-      setLoginData(loginData);
-      router.push("/pincode");
-    }
-  };
-
-  const GetUserData = async () => {
-    const user = await FetchingApi({
-      url: "me",
-      method: "GET",
-    });
-    if (user?.success) {
-      setUserData(user);
-      setLoadingUserData(false);
-    }
-  };
-
-  const LogoutFunc = async () => {
-    await FetchingApi({
-      url: "logout",
-      method: "GET",
-    });
-  };
-
-  useEffect(() => {
-    GetUserData();
-  }, []);
-
   return (
     <MyContext.Provider
       value={{
         SocialData,
         setSocialData,
-        signUpPostRequest,
-        loginPostRequest,
         userData,
         LoginData,
         isSignUp,
         loadingUserData,
-        GetUserData,
-        LogoutFunc,
         signUpLoading,
         loginLoading
       }}

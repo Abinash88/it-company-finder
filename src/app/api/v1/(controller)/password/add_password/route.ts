@@ -2,17 +2,17 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/BackendLib/Middleware/ErrorHandler";
-import { getAddPasswordSchema } from "@/BackendLib/Middleware/Validation";
-import { upload } from "@/BackendLib/Middleware/multer";
+} from "@/Backend/Middleware/ErrorHandler";
+import { getAddPasswordSchema } from "@/Backend/Middleware/Validation";
+import { upload } from "@/Backend/Middleware/multer";
 import {
   GetFormData,
   HandleMulterMiddleware,
   accessToken,
   prisma,
-} from "@/BackendLib/lib/helper";
-import { AddPasswordDataTypes } from "@/BackendLib/lib/types";
-import { getCookies, verifyToken } from "@/BackendLib/lib/utils";
+} from "@/Backend/lib/helper";
+import { AddPasswordDataTypes } from "@/Backend/lib/types";
+import { getCookies, verifyToken } from "@/Backend/lib/utils";
 import { PageConfig } from "next";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";

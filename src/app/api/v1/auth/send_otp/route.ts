@@ -1,8 +1,8 @@
 import {
   ErrorMessage,
   SuccessMessage,
-} from "@/BackendLib/Middleware/ErrorHandler";
-import { sendEmailOfPincode } from "@/BackendLib/lib/helper";
+} from "@/Backend/Middleware/ErrorHandler";
+import { sendEmailOfPincode } from "@/Backend/lib/helper";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {

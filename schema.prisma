@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  id              String            @id @default(uuid())
   email           String            @unique
   name            String?
   password        String            @unique
@@ -24,7 +24,7 @@ model User {
 }
 
 model AddPassword {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(uuid())
   catagory    String
   name        String?
   password    String
@@ -34,30 +34,30 @@ model AddPassword {
   description String?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  User        User?      @relation(fields: [userId], references: [id])
-  userId      String?    @db.ObjectId
+  User        User       @relation(fields: [userId], references: [id])
+  userId      String
   workTime    WorkTime[]
 }
 
 model Notes {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  id          String      @id @default(uuid())
   title       String?
   description String?
   priority    String?
   date        String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  User        User?       @relation(fields: [userId], references: [id])
-  userId      String?     @db.ObjectId
   listTypes   NoteTypes[]
+  User        User?       @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 model NoteTypes {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  name       String?
-  detail     String?
-  AddLists   Notes?  @relation(fields: [addListsId], references: [id])
-  addListsId String? @db.ObjectId
+  id      String  @id @default(uuid())
+  name    String?
+  detail  String?
+  Notes   Notes?  @relation(fields: [notesId], references: [id])
+  notesId String?
 }
 
 enum timeTypes {
@@ -67,19 +67,19 @@ enum timeTypes {
 }
 
 model WorkTime {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  id            String       @id @default(uuid())
   name          String
   time          String?
   description   String?
   alarm         String?
   timeType      timeTypes
   AddPassword   AddPassword? @relation(fields: [addPasswordId], references: [id])
-  addPasswordId String?      @db.ObjectId
+  addPasswordId String?
 }
 
 model PasswordPinCode {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  id      String  @id @default(uuid())
   pinCode String
-  userId  String @db.ObjectId
-  user    User   @relation(fields: [userId], references: [id])
+  User    User?   @relation(fields: [userId], references: [id])
+  userId  String?
 }

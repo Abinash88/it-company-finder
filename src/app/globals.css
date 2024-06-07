@@ -35,7 +35,6 @@
   --radius: 0.5rem;
 }
 
-
 p {
   @apply text-text text-[13px] text-center;
 }
@@ -127,4 +126,8 @@ input[type='number']::-webkit-outer-spin-button {
 
 .verifyInput:focus + .verifyLabel {
   color: red;
+}
+
+.form_input_style {
+  @apply px-4 py-[5px] text-[13px] placeholder:text-[13px] placeholder:text-gray-500 rounded-md border focus:outline-none;
 }

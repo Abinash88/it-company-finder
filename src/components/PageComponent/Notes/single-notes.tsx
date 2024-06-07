@@ -10,7 +10,7 @@ import { FaRegCopy, FaRegEdit, FaRegStar } from "react-icons/fa";
 import { MdDragIndicator } from "react-icons/md";
 import { copyToClipboard } from "@/lib/utils";
 import PopupMenu from "../PasswordComponent/SmallComponent/PopupMenu";
-import { StaticNotesDataTypes } from "@/BackendLib/lib/types";
+import { StaticNotesDataTypes } from "@/Backend/lib/types";
 
 const SingleNotes = ({
     data,

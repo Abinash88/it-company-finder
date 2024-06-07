@@ -14,9 +14,9 @@ import Image from "next/image";
 import PageTitle from "@/components/UI/page-title";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Add_password_data_types } from "@/BackendLib/lib/types";
+import { Add_password_data_types } from "@/Backend/lib/types";
 import FormError from "@/components/UI/form_error";
-import { Validation } from "@/BackendLib/Middleware/Validation";
+import { Validation } from "@/Backend/Middleware/Validation";
 import useFileHandler from "@/Hooks/UseHandleFile";
 import ImageFunction from "@/components/global/image_function";
 import { selectCatagory } from "@/Data/StaticData";

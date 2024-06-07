@@ -1,4 +1,4 @@
-import { StaticNotesDataTypes } from '@/BackendLib/lib/types'
+import { StaticNotesDataTypes } from '@/Backend'/lib/types'
 import RemoveBox from '@/components/UI/remove'
 import Div from '@/lib/Div'
 import React from 'react'

@@ -1,6 +1,6 @@
-import { AuthMiddleware, ErrorMessage, SuccessMessage } from "@/BackendLib/Middleware/ErrorHandler";
-import { prisma } from "@/BackendLib/lib/helper";
-import { verifyToken } from "@/BackendLib/lib/utils";
+import { AuthMiddleware, ErrorMessage, SuccessMessage } from "@/Backend/Middleware/ErrorHandler";
+import { prisma } from "@/Backend/lib/helper";
+import { verifyToken } from "@/Backend/lib/utils";
 import { cookies } from "next/headers"
 
 export const GET = AuthMiddleware(
