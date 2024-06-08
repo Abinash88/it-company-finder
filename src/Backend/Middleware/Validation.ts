@@ -33,8 +33,8 @@ export const getSignupSchema = () => {
     password: z
       .string()
       .nonempty({ message: 'Password is required!' })
-      .max(15, { message: 'Message must be upto 15 characters' })
-      .min(3, { message: 'message is too short' }),
+      .max(30, { message: 'password must be upto 30 characters' })
+      .min(3, { message: 'password is too short' }),
   })
 }
 
@@ -47,8 +47,8 @@ export const getLoginSchema = () => {
     password: z
       .string()
       .nonempty({ message: 'Password is required!' })
-      .max(15, { message: 'Message must be upto 15 characters' })
-      .min(3, { message: 'message is too short' }),
+      .max(15, { message: 'password must be upto 15 characters' })
+      .min(3, { message: 'password is too short' }),
   })
 }
 
@@ -57,7 +57,7 @@ export const getAddPasswordSchema = () => {
     catagory: z
       .string({ message: 'Catagory must be string' })
       .nonempty({ message: 'Catagory  is required' }),
-    name: z.string().nonempty({ message: 'Password is required!' }),
+    name: z.string().nonempty({ message: 'name is required!' }),
     password: z.string().nonempty({ message: 'Password is required!' }),
     url: z.string({ message: 'Catagory must be string' }).optional(),
     image: z.string({ message: 'Image must be string' }).optional(),

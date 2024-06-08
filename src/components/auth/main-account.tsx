@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
-import Signup from "./Signup";
+import Signup from "./signup-form";
 import Div from "@/lib/Div";
 import MyContext from "../../context/MyContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
