@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
-        <ToastContainer position="top-right" />
+        <ToastContainer position="top-right" style={{ fontSize: '12px', width: 'auto' }} bodyStyle={{ height: '45px', paddingRight:'20px' }} />
         {children}
       </body>
     </html>

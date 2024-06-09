@@ -9,10 +9,10 @@ import { handleError } from "@/lib/utils";
 import { fetchRequest } from "@/lib/fetch";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignupDataTypes } from "./auth-types";
-import { SCHEMA_VALIDATION } from "@/validation/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "../UI/form_error";
 import ButtonLoading from "@/Hooks/use-loading";
+import { SCHEMA_VALIDATION } from "@/Backend/Middleware/Validation";
 
 const LoginForm = () => {
   const contextdata = useContext(MyContext);
@@ -67,7 +67,7 @@ const LoginForm = () => {
           <SubmitButton >
             {
               loading ?
-                <ButtonLoading />
+                <ButtonLoading className="animate-spin" />
                 :
                 <span>Submit</span>
             }

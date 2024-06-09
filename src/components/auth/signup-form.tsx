@@ -1,18 +1,18 @@
 import Div from "@/lib/Div";
-import React, { useContext, useState } from "react";
-import MyContext from "../../context/MyContext";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Topheader, { AuthInputBox, BottomText, EyeToggle, OrComponent, SubmitButton } from "./auth-component";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SCHEMA_VALIDATION } from "@/validation/schema";
 import { SignupDataTypes } from "./auth-types";
 import FormError from "../UI/form_error";
 import { fetchRequest } from "@/lib/fetch";
 import { handleError } from "@/lib/utils";
 import ButtonLoading from "@/Hooks/use-loading";
+import { SCHEMA_VALIDATION } from "@/Backend/Middleware/Validation";
+import { toast } from "react-toastify";
 
-const Signup = () => {
+const Signup = ({ setCheckEmail }: { setCheckEmail: React.Dispatch<React.SetStateAction<string>> }) => {
 
   const [isPasswordSeen, setIsPasswordSeen] = useState<boolean>(false);
   const { register, handleSubmit, formState: { errors }, watch } = useForm<SignupDataTypes>({ resolver: zodResolver(SCHEMA_VALIDATION?.signup_schema) })
@@ -24,7 +24,9 @@ const Signup = () => {
       const res = await fetchRequest<SignupDataTypes, { data: any, message: string, success: boolean }>({ url: `/api/v1/auth/signup`, method: 'POST', body, popup: true });
       if (res?.success) {
         setLoading(false);
-        router.push('/account?type=login');
+        toast.success(res.message);
+        setCheckEmail(body.email);
+        router.push('/account?type=mailbox');
       }
       setLoading(false);
       console.log(res);
@@ -69,7 +71,7 @@ const Signup = () => {
           <SubmitButton >
             {
               loading ?
-                <ButtonLoading />
+                <ButtonLoading className="animate-spin" />
                 :
                 <span>Submit</span>
             }

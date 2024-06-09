@@ -12,7 +12,7 @@ const MainEmailVerify = () => {
             <div className="max-w-[800px] w-[90%] relative mx-auto h-[80%] flex flex-col justify-center items-center bg-white rounded-md">
                 {/* <Image src={`/black-logo.png`} alt='verify-picture' className='w-[100px] left-5 top-4 absolute object-cover' width={600} height={600} /> */}
                 {
-                    <ButtonLoading className='' />
+                    <ButtonLoading className='' />  
                 }
                 <Image src={VerifyEmail} alt='verify-picture' className='w-[400px] object-cover' width={600} height={600} />
                 <h3 className='text-lg text-gray-600'>Your Email is verified!</h3>
