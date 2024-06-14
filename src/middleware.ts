@@ -1,5 +1,17 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from 'next/server'
 
-export default function middleware(req: NextRequest) {
-  const routes = req.nextUrl.pathname;
+
+export default async function middleware(req: NextRequest) {
+  const token = req.cookies.get('accessToken')?.value
+  console.log(token)
+  if (token && req.nextUrl.pathname !== '/dashboard') {
+    return NextResponse.redirect(new URL('/dashboard', req.url))
+  }
+  if (!token && req.nextUrl.pathname !== '/account') {
+    return NextResponse.redirect(new URL('/account', req.url))
+  }
+}
+
+export const config = {
+  matcher: ['/dashboard:path*', '/accoung:path*'],
 }

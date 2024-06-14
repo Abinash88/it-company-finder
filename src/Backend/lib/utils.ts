@@ -63,9 +63,8 @@ export const transporter = nodemailer.createTransport({
   port: 465,
   host: 'smtp.gmail.com',
   auth: {
-    user: NODEMAILER_PASSWORD,
-    pass: NODEMAILER_EMAIL,
+    user: NODEMAILER_EMAIL,
+    pass: NODEMAILER_PASSWORD,
   },
 })
 
-export const createOtpLink = () => {}

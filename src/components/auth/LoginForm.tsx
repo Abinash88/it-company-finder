@@ -2,7 +2,7 @@
 'use client'
 
 import Div from "@/lib/Div";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MyContext from "../../context/MyContext";
 import Topheader, { AuthInputBox, BottomText, EyeToggle, MoreLogin, OrComponent, SubmitButton } from "./auth-component";
 import { handleError } from "@/lib/utils";
@@ -13,19 +13,30 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "../UI/form_error";
 import ButtonLoading from "@/Hooks/use-loading";
 import { SCHEMA_VALIDATION } from "@/Backend/Middleware/Validation";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const contextdata = useContext(MyContext);
   const [isPasswordSeen, setIsPasswordSeen] = useState<boolean>(false);
   const { register, handleSubmit, formState: { errors }, watch } = useForm<Omit<SignupDataTypes, 'name'>>({ resolver: zodResolver(SCHEMA_VALIDATION?.login_schema) })
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
+
+  useEffect(() => {
+    router.prefetch('/dashboard');
+  }, []);
 
   const dataSubmit: SubmitHandler<Omit<SignupDataTypes, 'name'>> = async (body) => {
     setLoading(true)
     try {
-      const res = await fetchRequest<Omit<SignupDataTypes, 'name'>, { data: any, message: string }>({ url: `/api/v1/auth/login`, method: 'POST', body, popup: true });
-      if (res?.data) {
+      const res = await fetchRequest<Omit<SignupDataTypes, 'name'>,
+        { success: any, message: string, accessToken: string; refreshToken: string }
+      >({ url: `/api/v1/auth/login`, method: 'POST', body, popup: true });
+      if (res?.success) {
         setLoading(false);
+        toast.success(res.message);
+        router.replace('/dashboard')
       }
       console.log(res);
       setLoading(false);
