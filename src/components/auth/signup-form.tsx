@@ -36,7 +36,7 @@ const Signup = ({ setCheckEmail }: { setCheckEmail: React.Dispatch<React.SetStat
     }
   }
   return (
-    <Div className="w-full  h-full px-10 pt-3 ">
+    <Div className="w-[90%] mx-auto  h-full md:px-10 pt-3 ">
       <form
         action=""
         onSubmit={handleSubmit(dataSubmit)}
@@ -53,13 +53,13 @@ const Signup = ({ setCheckEmail }: { setCheckEmail: React.Dispatch<React.SetStat
             }
           </div>
           <div className="relative">
-            <AuthInputBox {...register('email')} name="email" label="Email" placeholder="Email" type="email" />
+            <AuthInputBox {...register('email')} name="email" label="Email" placeholder="Enter your Email" type="email" />
             {
               errors && <FormError error={errors?.email?.message} />
             }
           </div>
-          <Div className="relative">
-            <AuthInputBox {...register('password')} name="password" placeholder="password" label="Password" type={isPasswordSeen ? "text" : "password"} />
+          <Div className="relative flex items-center">
+            <AuthInputBox {...register('password')} name="password" placeholder="Enter your password" label="Password" type={isPasswordSeen ? "text" : "password"} />
             {
               errors && <FormError error={errors?.password?.message} />
             }

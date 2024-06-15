@@ -46,13 +46,13 @@ const LoginForm = () => {
     }
   }
   return (
-    <Div className="w-full h-full px-10 pt-3">
+    <Div className="w-[90%] mx-auto h-full md:px-10 pt-3">
       <form
         action=""
         onSubmit={handleSubmit(dataSubmit)}
         className="w-full"
       >
-        <Topheader title="Login Here" subtitle="Welcome back please login here..." />
+        <Topheader title="Welcome to PersonalManager"  subtitle="Welcome back please login here..." />
         <MoreLogin />
         <br />
         <OrComponent />
@@ -60,13 +60,13 @@ const LoginForm = () => {
         <Div className="flex flex-col gap-3">
           <div className="relative">
 
-            <AuthInputBox  {...register('email')} name="email" label="Email" placeholder="Email" type="email" />
+            <AuthInputBox  {...register('email')} name="email" label="Email" placeholder="Enter your Email" type="email" />
             {
               errors && <FormError error={errors?.email?.message} />
             }
           </div>
-          <Div className="relative">
-            <AuthInputBox  {...register('password')} name="password" placeholder="password" label="Password" type={isPasswordSeen ? 'text' : `password`} />
+          <Div className="relative flex  items-center  ">
+            <AuthInputBox  className="flex-1"  {...register('password')} name="password" placeholder=" Enter your password" label="Password" type={isPasswordSeen ? 'text' : `password`} />
             <EyeToggle isPasswordSeen={isPasswordSeen} setIsPasswordSeen={setIsPasswordSeen} />
             {
               errors && <FormError error={errors?.password?.message} />

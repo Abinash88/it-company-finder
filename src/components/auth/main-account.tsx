@@ -34,21 +34,19 @@ const SignUpForm = () => {
   }, [contextData?.userData, router]);
 
   return (
-    <Div className="flex flex-col  justify-center items-center bg-gray-100 w-full h-screen">
-      <Div className="  ">
-        {/* <Div className="w-full h-[90%] "> */}
-        <Div className="w-full h-full relative flex items-center justify-center">
+    <Div className="flex flex-col  justify-center items-start bg-gray-100 w-full h-screen">
+        <Div className="w-full h-full relative flex  items-start justify-start">
           <Div
-            className={`w-[420px] bg-white rounded-xl  ${type === 'login' ? "" : "hidden"
+            className={`max-w-[700px] w-full md:w-[90%]  bg-white  ${type === 'login' ? "" : "hidden"
               }  h-full  transition duration-300`}
           >
             <LoginForm />
           </Div>
           <Div
-            className={`w-[420px] bg-white rounded-xl  ${type === 'signup' ? "" : "hidden"
+            className={`max-w-[700px] w-full md:w-[90%] bg-white  ${type === 'signup' ? "" : "hidden"
               }   h-full transition duration-300`}
           >
-            <Signup  setCheckEmail={setCheckEmail}/>
+            <Signup setCheckEmail={setCheckEmail} />
           </Div>
 
           <Div
@@ -58,8 +56,6 @@ const SignUpForm = () => {
             <GotoMailBox checkEmail={checkEmail} />
           </Div>
         </Div>
-        {/* </Div> */}
-      </Div>
     </Div>
   );
 };
