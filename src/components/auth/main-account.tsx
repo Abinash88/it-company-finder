@@ -8,6 +8,9 @@ import MyContext from "../../context/MyContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import GotoMailBox from "./goto-mailbox";
+import Image from "next/image";
+import AccountImage from '../../assests/auth/account.jpg'
+
 
 const SignUpForm = () => {
   const contextData = useContext(MyContext);
@@ -35,27 +38,30 @@ const SignUpForm = () => {
 
   return (
     <Div className="flex flex-col  justify-center items-start bg-gray-100 w-full h-screen">
-        <Div className="w-full h-full relative flex  items-start justify-start">
-          <Div
-            className={`max-w-[700px] w-full md:w-[90%]  bg-white  ${type === 'login' ? "" : "hidden"
-              }  h-full  transition duration-300`}
-          >
-            <LoginForm />
-          </Div>
-          <Div
-            className={`max-w-[700px] w-full md:w-[90%] bg-white  ${type === 'signup' ? "" : "hidden"
-              }   h-full transition duration-300`}
-          >
-            <Signup setCheckEmail={setCheckEmail} />
-          </Div>
-
-          <Div
-            className={` p-4 bg-white rounded-xl ${type === 'mailbox' ? "" : "hidden"
-              }  transition duration-300`}
-          >
-            <GotoMailBox checkEmail={checkEmail} />
-          </Div>
+      <Div className="w-full h-full relative flex  items-start justify-start">
+        <Div
+          className={` lg:max-w-[650px] w-full lg:w-[90%]  bg-white  ${type === 'login' ? "" : "hidden"
+            }  h-full  transition duration-300`}
+        >
+          <LoginForm />
         </Div>
+        <Div
+          className={` lg:max-w-[650px] w-full lg:w-[90%] bg-white  ${type === 'signup' ? "" : "hidden"
+            }   h-full transition duration-300`}
+        >
+          <Signup setCheckEmail={setCheckEmail} />
+        </Div>
+
+        <Div
+          className={` p-4 bg-white rounded-xl ${type === 'mailbox' ? "" : "hidden"
+            }  transition duration-300`}
+        >
+          <GotoMailBox checkEmail={checkEmail} />
+        </Div>
+        <Div className="w-full h-full flex-1">
+          <Image src={AccountImage} className="w-full h-full object-cover object-center lg:object-right" alt="Login image" />
+        </Div>
+      </Div>
     </Div>
   );
 };

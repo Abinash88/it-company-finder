@@ -36,7 +36,7 @@ const Signup = ({ setCheckEmail }: { setCheckEmail: React.Dispatch<React.SetStat
     }
   }
   return (
-    <Div className="w-[90%] mx-auto  h-full md:px-10 pt-3 ">
+    <Div className="w-[80%] mx-auto  h-full md:px-10 pt-3 ">
       <form
         action=""
         onSubmit={handleSubmit(dataSubmit)}

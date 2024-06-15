@@ -3,15 +3,17 @@ import Div from '@/lib/Div'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
+import React from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { FaFacebookF, FaGoogle } from 'react-icons/fa'
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
+
 
 const Topheader = ({ title, subtitle, image, className }: { title: string, subtitle: string, image?: string, className?: string }) => {
     return (
         <Div className={cn(`flex flex-col items-start ${className}`)}>
             <Image src={'/black-logo.png'} width={500} height={500} className='w-[100px]' alt='logo' />
-            <h3 className="text-start text-[24px] mb-2 mt-4 font-semibold text-[#252332]">
+            <h3 className="text-start text-[24px] mb-2 mt-4 font-semibold text-[#383648]">
                 {title} 
             </h3>
             <p className=" mb-3 text-[16px] text-blue-900/60">{subtitle}</p>
@@ -96,12 +98,12 @@ export const MoreLogin = () => {
     return (
         <Div className="flex gap-4 justify-center mt-2 mb-2">
             <button type="button" className="flex text-gray-600 hover:bg-background transition-all flex-1 items-center text-[14px] justify-center rounded-md border border-gray-300 py-2 md:py-[10px]  space-x-3">
-                <FaGoogle className="text-lg" />
+                <FcGoogle className="text-lg" />
                 <span> Google</span>
             </button>
 
             <button type="button" className="flex text-gray-600 hover:bg-background transition-all flex-1 items-center text-[14px] justify-center rounded-md border border-gray-300 py-2 md:py-[10px]  space-x-3">
-                <FaFacebookF className="text-lg" />
+                <FaFacebook className="text-lg text-blue-500" />
                 <span> Facebook</span>
             </button>
         </Div>
