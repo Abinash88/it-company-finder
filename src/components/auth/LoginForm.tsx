@@ -16,7 +16,7 @@ import { SCHEMA_VALIDATION } from "@/Backend/Middleware/Validation";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const LoginForm = () => {
+const LoginForm = ({ setCheckEmail }: { setCheckEmail: React.Dispatch<React.SetStateAction<string>> }) => {
   const contextdata = useContext(MyContext);
   const [isPasswordSeen, setIsPasswordSeen] = useState<boolean>(false);
   const { register, handleSubmit, formState: { errors }, watch } = useForm<Omit<SignupDataTypes, 'name'>>({ resolver: zodResolver(SCHEMA_VALIDATION?.login_schema) })
@@ -27,24 +27,34 @@ const LoginForm = () => {
     router.prefetch('/dashboard');
   }, []);
 
+
   const dataSubmit: SubmitHandler<Omit<SignupDataTypes, 'name'>> = async (body) => {
     setLoading(true)
     try {
       const res = await fetchRequest<Omit<SignupDataTypes, 'name'>,
         { success: any, message: string, accessToken: string; refreshToken: string }
-      >({ url: `/api/v1/auth/login`, method: 'POST', body, popup: true });
+      >({ url: `/api/v1/auth/login`, method: 'POST', body, popup: false });
+      if (res?.message === 'Email is not verified!') {
+        toast.warning(res.message);
+        setCheckEmail(body?.email);
+        router.replace('/account?type=mailbox');
+        setLoading(false);
+        return;
+      }
       if (res?.success) {
         setLoading(false);
         toast.success(res.message);
         router.replace('/dashboard')
+        return;
       }
-      console.log(res);
+
       setLoading(false);
     } catch (error) {
       handleError({ error, popup: false });
       setLoading(false);
     }
   }
+
   return (
     <Div className="w-[80%] mx-auto h-full md:px-10 pt-3">
       <form
@@ -52,7 +62,7 @@ const LoginForm = () => {
         onSubmit={handleSubmit(dataSubmit)}
         className="w-full"
       >
-        <Topheader title="Welcome to PersonalManager"  subtitle="Welcome back please login here..." />
+        <Topheader title="Welcome to PersonalManager" subtitle="Welcome back please login here..." />
         <MoreLogin />
         <br />
         <OrComponent />
@@ -66,7 +76,7 @@ const LoginForm = () => {
             }
           </div>
           <Div className="relative flex  items-center  ">
-            <AuthInputBox  className="flex-1"  {...register('password')} name="password" placeholder=" Enter your password" label="Password" type={isPasswordSeen ? 'text' : `password`} />
+            <AuthInputBox className="flex-1"  {...register('password')} name="password" placeholder=" Enter your password" label="Password" type={isPasswordSeen ? 'text' : `password`} />
             <EyeToggle isPasswordSeen={isPasswordSeen} setIsPasswordSeen={setIsPasswordSeen} />
             {
               errors && <FormError error={errors?.password?.message} />

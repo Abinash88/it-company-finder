@@ -3,17 +3,11 @@ import {
   ErrorMessage,
   SuccessMessage,
 } from '@/Backend/Middleware/ErrorHandler'
-import { getSignupSchema } from '@/Backend/Middleware/Validation'
-import {
-  NODEMAILER_EMAIL,
-  NODEMAILER_PASSWORD,
-  WEB_URL,
-} from '@/Backend/config'
-import { signupBodyTypes } from '@/Backend/lib/backendTypes'
-import { CreateToken, transporter } from '@/Backend/lib/utils'
-import { SignupServices } from '@/Backend/services/signup-services'
-import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcrypt'
+
+import { signupBodyTypes } from '@/Backend/lib/backendTypes';
+import {  sendVerifyEmail } from '@/Backend/lib/utils';
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -58,14 +52,7 @@ export const POST = AuthMiddleware(
       },
     })
 
-    const token = CreateToken(getData.id, '5m')
-
-    await transporter.sendMail({
-      from: NODEMAILER_EMAIL,
-      to: userdata?.email,
-      subject: 'Email Verification',
-      text: `Your otp verification code: ${WEB_URL}verify-email?token=${token}`,
-    })
+    await sendVerifyEmail({ email: getData?.email, id: getData?.id })
 
     return SuccessMessage<resType>(
       `User created. Verify Email from you inbox ${userdata?.email}`,

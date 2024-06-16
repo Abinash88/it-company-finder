@@ -33,8 +33,8 @@ export const getSignupSchema = () => {
     password: z
       .string()
       .nonempty({ message: 'Password is required!' })
-      .max(30, { message: 'password must be upto 30 characters' })
-      .min(3, { message: 'password is too short' }),
+      .max(50, { message: 'password must be upto 50 characters' })
+      .min(5, { message: 'password is too short' }),
   })
 }
 
@@ -47,8 +47,8 @@ export const getLoginSchema = () => {
     password: z
       .string()
       .nonempty({ message: 'Password is required!' })
-      .max(15, { message: 'password must be upto 15 characters' })
-      .min(3, { message: 'password is too short' }),
+      .max(50, { message: 'password must be upto 50 characters' })
+      .min(5, { message: 'password is too short' }),
   })
 }
 
@@ -117,12 +117,12 @@ export const Validation = {
 
 export const SCHEMA_VALIDATION = {
   signup_schema: z.object({
-      name: z.string().nonempty({ message: 'Cannot leave the empty field!' }).refine(data => !/[*<>?!#$%^&()|/]/.test(data)),
-      email: z.string().nonempty({ message: 'Cannot leave the empty field!' }).email().refine(data => !/[*<>?!#$%^&()|/]/.test(data)),
+      name: z.string().nonempty({ message: 'Cannot leave the empty field!' }).refine(data => !/[*<>?!$%^&()|/]/.test(data)),
+      email: z.string().nonempty({ message: 'Cannot leave the empty field!' }).email().refine(data => !/[*<>?!$%^&()|/]/.test(data)),
       password: z.string().nonempty({ message: 'Cannot leave the empty field!' }).refine(data => !/[*<>?!$%^&()|/]/.test(data))
   }),
   login_schema: z.object({
-      email: z.string().nonempty({ message: 'Cannot leave the empty field!' }).email().refine(data => !/[*<>?!#$%^&()|/]/.test(data)),
+      email: z.string().nonempty({ message: 'Cannot leave the empty field!' }).email().refine(data => !/[*<>?!$%^&()|/]/.test(data)),
       password: z.string().nonempty({ message: 'Cannot leave the empty field!' }).refine(data => !/[*<>?!$%^&()|/]/.test(data))
   }),
 }

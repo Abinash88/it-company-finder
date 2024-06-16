@@ -14,6 +14,7 @@ export const POST = AuthMiddleware(
     console.log(token)
     if (!token) return ErrorMessage('4 digit Otp is required')
     const verify = verifyToken(token)
+    if (!verify) return ErrorMessage('Wrong authentication token', 401);
     await prisma.user.update({
       where: { id: verify._id },
       data: {

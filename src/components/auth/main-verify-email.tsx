@@ -30,7 +30,6 @@ const MainEmailVerify = () => {
                     },
                     method: 'POST'
                 })
-                console.log(verify);
                 if (verify?.success) {
                     toast.success(verify.message);
                 }

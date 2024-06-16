@@ -43,7 +43,7 @@ const SignUpForm = () => {
           className={` lg:max-w-[650px] w-full lg:w-[90%]  bg-white  ${type === 'login' ? "" : "hidden"
             }  h-full  transition duration-300`}
         >
-          <LoginForm />
+          <LoginForm setCheckEmail={setCheckEmail} />
         </Div>
         <Div
           className={` lg:max-w-[650px] w-full lg:w-[90%] bg-white  ${type === 'signup' ? "" : "hidden"
@@ -53,7 +53,7 @@ const SignUpForm = () => {
         </Div>
 
         <Div
-          className={` p-4 bg-white rounded-xl ${type === 'mailbox' ? "" : "hidden"
+          className={` lg:max-w-[650px] h-full flex items-center  w-full lg:w-[90%] p-4 bg-white rounded-xl ${type === 'mailbox' ? "" : "hidden"
             }  transition duration-300`}
         >
           <GotoMailBox checkEmail={checkEmail} />

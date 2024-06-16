@@ -1,17 +1,23 @@
 import { SidebarData } from "@/Data/StaticData";
 import { SidebarDataTypes } from "@/Data/Types";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Div from "@/lib/Div";
 import { cn } from "@/lib/utils";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Sidebars = () => {
   const location = usePathname();
   const [toggle, setToggle] = useState(false)
+  const router = useRouter();
 
+
+  useEffect(() => {
+    router.prefetch('/account');
+  })
 
   return (
     <Div className={cn(` ${toggle ? 'w-[80px]' : 'w-[250px]'}  transition-all duration-500 h-full relative bg-sidebar`)}>

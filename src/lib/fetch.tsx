@@ -76,7 +76,7 @@ export const fetchRequest = async <T extends FieldValues, O>({
             if (toast && popup) {
                 toast.error(error || data?.message || 'Something went wrong! Please try again later.')
             }
-            return undefined;
+            return data;
         }
 
         return data;

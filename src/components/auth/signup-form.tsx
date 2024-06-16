@@ -26,7 +26,7 @@ const Signup = ({ setCheckEmail }: { setCheckEmail: React.Dispatch<React.SetStat
         setLoading(false);
         toast.success(res.message);
         setCheckEmail(body.email);
-        router.push('/account?type=mailbox');
+        router.replace('/account?type=mailbox');
       }
       setLoading(false);
       console.log(res);

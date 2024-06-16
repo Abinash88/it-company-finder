@@ -6,7 +6,7 @@ import {
 import { signupBodyTypes } from '@/Backend/lib/backendTypes'
 import { accessToken, prisma, refreshToken } from '@/Backend/lib/helper'
 import bcrypt from 'bcrypt'
-import { CookieSetter, CreateToken } from '@/Backend/lib/utils'
+import { CookieSetter, CreateToken, sendVerifyEmail } from '@/Backend/lib/utils'
 import { NextRequest, NextResponse } from 'next/server'
 import { getLoginSchema } from '@/Backend/Middleware/Validation'
 
@@ -28,7 +28,10 @@ export const POST = AuthMiddleware(
     })
 
     if (!data) return ErrorMessage('User not found!', 404)
-    if (!data.isVerified) return ErrorMessage('Email is not verified!', 400)
+    if (data && !data.isVerified) {
+      await sendVerifyEmail({ email: data?.email, id: data?.id })
+      return ErrorMessage('Email is not verified!', 400)
+    }
 
     const compare = await bcrypt.compare(userData?.password, data?.password)
 

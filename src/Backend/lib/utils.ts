@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { accessToken } from './helper'
 import nodemailer from 'nodemailer'
-import { NODEMAILER_EMAIL, NODEMAILER_PASSWORD } from '../config'
+import { NODEMAILER_EMAIL, NODEMAILER_PASSWORD, WEB_URL } from '../config'
 
 type tokentype = { _id: string; iat: number; exp: number }
 
@@ -68,3 +68,19 @@ export const transporter = nodemailer.createTransport({
   },
 })
 
+export const sendVerifyEmail = async ({
+  email,
+  id,
+}: {
+  email: string
+  id: string
+}) => {
+  const token = CreateToken(id, '5m')
+
+  await transporter.sendMail({
+    from: NODEMAILER_EMAIL,
+    to: email,
+    subject: 'Email Verification',
+    text: `Your otp verification code: ${WEB_URL}verify-email?token=${token}`,
+  })
+}
