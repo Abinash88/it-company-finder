@@ -1,9 +1,16 @@
+import { cn } from "@/lib/utils";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
 export default function RootLayout({
   children,
@@ -13,8 +20,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="">
-        <ToastContainer position="top-right" style={{ fontSize: '12px', width: 'auto' }} bodyStyle={{ height: '45px', paddingRight:'20px' }} />
+      <body className={cn(`${poppins.className}`)}>
+        <ToastContainer position="top-right" style={{ fontSize: '12px', width: 'auto' }} bodyStyle={{ height: '45px', paddingRight: '20px' }} />
         {children}
       </body>
     </html>

@@ -1,32 +1,37 @@
-import { FaCog, FaDatabase, FaHome, FaLock, FaRegCopy, FaRegEdit } from "react-icons/fa";
 import { SidebarDataTypes, settingLinksTypes } from "./Types";
 import { StaticNotesDataTypes, TodoDataTypes } from "@/Backend/lib/types";
+import { IoHomeOutline } from "react-icons/io5";
+import { FiLock } from "react-icons/fi";
+import { SlNotebook } from "react-icons/sl";
+import { FaListCheck } from "react-icons/fa6";
+import { BiCog } from "react-icons/bi";
+
 
 
 export const SidebarData: SidebarDataTypes[] = [
   {
     name: "Dashboard",
-    icon: <FaHome className="text-[18px] text-blue-700" />,
+    icon: <IoHomeOutline className="" />,
     link: "/dashboard",
   },
   {
     name: "Password",
-    icon: <FaLock className="text-[18px] text-yellow-800/70" />,
+    icon: <FiLock className="" />,
     link: "/dashboard/password",
   },
   {
     name: "Notes",
-    icon: <FaDatabase className="text-[18px] text-" />,
+    icon: <SlNotebook className="" />,
     link: "/dashboard/notes",
   },
   {
     name: "todo",
-    icon: <FaHome className="text-[18px] text-" />,
+    icon: <FaListCheck className=" text-" />,
     link: "/dashboard/todo",
   },
   {
     name: "Setting",
-    icon: <FaCog className="text-[18px] text-" />,
+    icon: <BiCog className=" text-" />,
     link: "/dashboard/setting",
   },
 ];

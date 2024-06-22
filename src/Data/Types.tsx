@@ -42,6 +42,8 @@ export type contextTypes = {
   loadingUserData: boolean;
   loginLoading: boolean;
   signUpLoading: boolean;
+  toggleSidebar: boolean;
+  setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, createContext, useEffect, useState } from "react";
+import React, { ReactNode, createContext, useState } from "react";
 import Facebook from "@/assests/homeImage/facebook.jpg";
 import Instagram from "@/assests/homeImage/instagram.jpg";
 import Messnager from "@/assests/homeImage/messanger.jpg";
@@ -9,7 +9,6 @@ import Pinterest from "@/assests/homeImage/pintrest.jpg";
 import { MyAppDataTypes, contextTypes } from "@/Data/Types.jsx";
 const MyContext = createContext<contextTypes | undefined>(undefined);
 import { useRouter } from "next/navigation";
-import { fetchRequest } from "@/lib/fetch";
 
 export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
@@ -62,13 +61,15 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [signUpLoading, setSignupLoading] = useState<boolean>(false);
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
-
+  const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
 
   return (
     <MyContext.Provider
       value={{
         SocialData,
         setSocialData,
+        setToggleSidebar,
+        toggleSidebar,
         userData,
         LoginData,
         isSignUp,
