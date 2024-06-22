@@ -9,7 +9,7 @@ const SidebarLink = ({ item }: { item: SidebarDataTypes }) => {
             className={`flex duration-300 transition-all s hover:bg-gray-100 group cursor-pointer w-full items-center`}
         >
             <Link
-                className={cn(` px-6 py-2 w-full h-full flex items-center  space-x-8 font-normal text-sm transition-all duration-500 `)}
+                className={cn(` px-6 py-2 w-full h-full flex items-center  space-x-8 font-normal text-[15px] transition-all duration-500 `)}
                 href={item?.link}
             >
                 <LinkIcon icon={item?.icon} />

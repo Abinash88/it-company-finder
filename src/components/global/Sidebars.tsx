@@ -21,11 +21,12 @@ const Sidebars = () => {
   })
 
   return (
-    <Div className={cn(` overflow-hidden hover:w-[250px] ${toggle?.toggleSidebar ? 'w-[70px]' : 'w-[250px]'}  transition-all duration-500 h-full shadow-xl relative bg-background`)}>
+    <Div className={cn(` overflow-hidden hover:w-[230px] ${toggle?.toggleSidebar ? 'w-[70px]' : 'w-[230px]'} group transition-all duration-300 h-full shadow-xl relative bg-background`)}>
       <Div className="h-full pt-3 ">
         <Div className="flex h-[50px] justify-between items-center ">
-          <Link href={"/dashboard"} className="flex flex-col items-center justify-center  w-[120px]">
-            <Image src={'/white-logo.png'} alt="logo" width={500} height={500} className="size-full object-contain" />
+          <Link href={"/dashboard"} className="flex flex-col items-center mx-auto justify-center ">
+            <Image src={'/dark-logo-icon.png'} alt="logo" width={500} height={500}
+              className={cn(`size-full transition-all duration-300  object-contain ${toggle?.toggleSidebar ? ' w-[60px] group-hover:w-[70px]' : ' w-[70px]'}`)} />
           </Link>
         </Div>
 
