@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import Div from "@/lib/Div";
-import { InputField } from "@/components/UI/UiItems";
+import { InputField } from "@/components/ui/UiItems";
 import PopupMenu from "./SmallComponent/PopupMenu";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { BiDuplicate } from "react-icons/bi";

@@ -1,8 +1,8 @@
 import Div from "@/lib/Div";
 import Image from "next/image";
 import React, { useContext, useEffect } from "react";
-import Button, { LinkBtn } from "../UI/UiItems";
-import Spacing from "../UI/Spacing";
+import Button, { LinkBtn } from "../ui/UiItems";
+import Spacing from "../ui/Spacing";
 import { FaCog, FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import MyContext from "../../context/MyContext";

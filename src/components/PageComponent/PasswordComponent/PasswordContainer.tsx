@@ -8,9 +8,10 @@ import MyContext from "@/context/MyContext";
 import PasswordForm from "./SmallComponent/password-form";
 import { cn } from "@/lib/utils";
 import GlobalTopSearch from "./SmallComponent/GlobalTopSearch";
-import PageTitle from "@/components/UI/page-title";
+import PageTitle from "@/components/ui/page-title";
 import UseHandleSearch from "@/Hooks/use-handle-search";
 import { DragEndEvent } from "@dnd-kit/core";
+import { CustomDrawer } from "@/components/reusables/custom-drawar";
 
 
 const PasswordContainer = () => {
@@ -50,14 +51,14 @@ const PasswordContainer = () => {
       </Div>
       <Div className=" bg-white h-full  rounded-tr-lg">
         <Div className="w-full px-6 py-4">
-          <GlobalTopSearch setText={setText} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
-          <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
+          <GlobalTopSearch setText={setText} Drawer={<CustomDrawer />} />
+          <div className="bg-red-500">
 
-            <Div className="w-full h-full ">
-              <PasswordForm
-                closeModelBox={setIsOpenPopup}
-              />
-            </Div>
+          </div>
+          <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
+            <PasswordForm
+              closeModelBox={setIsOpenPopup}
+            />
           </Div>
         </Div>
         <Div className="w-full px-6">

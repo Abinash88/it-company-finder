@@ -5,7 +5,7 @@ import Topheader, { AuthInputBox, BottomText, EyeToggle, OrComponent, SubmitButt
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignupDataTypes } from "./auth-types";
-import FormError from "../UI/form_error";
+import FormError from "../ui/form_error";
 import { fetchRequest } from "@/lib/fetch";
 import { handleError } from "@/lib/utils";
 import ButtonLoading from "@/Hooks/use-loading";

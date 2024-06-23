@@ -3,7 +3,7 @@
 import { PasswordMoreToolTypes } from "@/Data/Types";
 import React from "react";
 import Div from "@/lib/Div";
-import { InputField } from "@/components/UI/UiItems";
+import { InputField } from "@/components/ui/UiItems";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { BiDuplicate } from "react-icons/bi";
 import { FaRegCopy, FaRegEdit, FaRegStar } from "react-icons/fa";

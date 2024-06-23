@@ -1,5 +1,5 @@
 import { StaticNotesDataTypes } from '@/Backend'/lib/types'
-import RemoveBox from '@/components/UI/remove'
+import RemoveBox from '@/components/ui/remove'
 import Div from '@/lib/Div'
 import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'

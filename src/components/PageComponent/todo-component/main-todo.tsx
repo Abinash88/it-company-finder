@@ -6,10 +6,10 @@ import { cn } from '@/lib/utils';
 
 import dynamic from 'next/dynamic';
 import GlobalTopSearch from '../PasswordComponent/SmallComponent/GlobalTopSearch';
-import PageTitle from '@/components/UI/page-title';
+import PageTitle from '@/components/ui/page-title';
 import { MyAppDataTypes } from '@/Data/Types';
 import { notesData, todoData } from '@/Data/StaticData';
-import { StaticNotesDataTypes, TodoDataTypes } from '@/Backend'/lib/types';
+import { StaticNotesDataTypes, TodoDataTypes } from '@/Backend/lib/types';
 import UseHandleSearch from '@/Hooks/use-handle-search';
 import SingleTodo from './single-todo';
 import TodoForm from './todo-form';
@@ -27,7 +27,7 @@ const MainTodo = () => {
             </Div>
             <Div className="h-[calc(100vh-100px)] bg-background rounded-tr-lg">
                 <Div className="w-full px-6 py-4">
-                    <GlobalTopSearch offCheckList={false} setText={setText} isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
+                    <GlobalTopSearch offCheckList={false} setText={setText} />
                     <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
                         <Div className="w-full h-full ">
                             <TodoForm closeModelBox={setIsOpenPopup} />

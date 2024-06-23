@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import Button from '../UI/UiItems';
+import Button from '../ui/UiItems';
 
 interface FetchWrapperTypes {
     isError: boolean;

@@ -3,7 +3,7 @@
 import { password } from "@/Data/Types";
 import MyContext from "@/context/MyContext";
 import { CheckPasswordCorrect } from "@/components/libary/lib";
-import Button from "@/components/UI/Button";
+import Button from "@/components/ui/Button";
 import { OutClickToggle } from "@/lib/page";
 import React, {
   useContext,

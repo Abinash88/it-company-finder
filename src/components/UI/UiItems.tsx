@@ -35,25 +35,16 @@ const buttonVariants = cva(
 );
 
 export interface buttonTypes extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  btnName: string;
-  icon?: ReactNode;
 };
 
 const Button = React.forwardRef<HTMLButtonElement, buttonTypes>(({
-  btnName,
-  icon,
   variant,
   className,
   size,
   ...rest
 }, ref) => {
   return (
-    <button ref={ref} {...rest} className={cn(buttonVariants({ variant, size, className }))}>
-      <span className="">
-        {btnName}
-      </span>
-      {icon && <span className="">{icon}</span>}
-    </button>
+    <button ref={ref} {...rest} className={cn(buttonVariants({ variant, size, className }))} />
   );
 })
 

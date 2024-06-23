@@ -13,7 +13,7 @@ const SidebarLink = ({ item }: { item: SidebarDataTypes }) => {
                 href={item?.link}
             >
                 <LinkIcon icon={item?.icon} />
-                <span className={cn(`text-gray-500 font-normal `)}>{item?.name}</span>
+                <span className={cn(`text-gray-600 font-normal `)}>{item?.name}</span>
             </Link>
         </li>
     )
@@ -23,7 +23,7 @@ export default SidebarLink
 
 
 export const LinkIcon = ({ icon, className }: { icon: React.ReactNode, className?: string }) => (
-    <span className={cn(` text-gray-600 text-lg duration-300 transition-all ${className}`)}>
+    <span className={cn(` text-gray-700 text-lg duration-300 transition-all ${className}`)}>
         {icon}
     </span>
 )

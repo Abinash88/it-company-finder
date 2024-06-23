@@ -8,17 +8,17 @@ import React, {
   import { AiOutlinePlus } from "react-icons/ai";
   
   import MyContext from "@/context/MyContext";
-  import Button, { LabelContent } from "@/components/UI/UiItems";
-  import PageTitle from "@/components/UI/page-title";
+  import Button, { LabelContent } from "@/components/ui/UiItems";
+  import PageTitle from "@/components/ui/page-title";
   import { SubmitHandler, useForm } from "react-hook-form"
   import { zodResolver } from "@hookform/resolvers/zod"
   import { add_todo_data_types } from "@/Backend/lib/types";
-  import FormError from "@/components/UI/form_error";
+  import FormError from "@/components/ui/form_error";
   import { Validation } from "@/Backend/Middleware/Validation";
   import useFileHandler from "@/Hooks/UseHandleFile";
   import ImageFunction from "@/components/global/image_function";
   import { selectNotePriority } from "@/Data/StaticData";
-  import RemoveBox from "@/components/UI/remove";
+  import RemoveBox from "@/components/ui/remove";
   
   export type popupPassword = {
     closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;

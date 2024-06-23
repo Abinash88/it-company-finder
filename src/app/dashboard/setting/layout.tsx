@@ -1,6 +1,6 @@
 import SettingLinks from "@/components/PageComponent/SettingComponent/SettingLinks";
-import Spacing from "@/components/UI/Spacing";
-import TitleBox from "@/components/UI/page-title";
+import Spacing from "@/components/ui/Spacing";
+import TitleBox from "@/components/ui/page-title";
 import Div from "@/lib/Div";
 import React from "react";
 

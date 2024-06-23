@@ -9,18 +9,18 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 import MyContext from "@/context/MyContext";
 import PinCodeBox from "./PinCodeBox";
-import Button, { InputField, LabelContent } from "@/components/UI/UiItems";
+import Button, { InputField, LabelContent } from "@/components/ui/UiItems";
 import Image from "next/image";
-import PageTitle from "@/components/UI/page-title";
+import PageTitle from "@/components/ui/page-title";
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Add_password_data_types } from "@/Backend/lib/types";
-import FormError from "@/components/UI/form_error";
+import FormError from "@/components/ui/form_error";
 import { Validation } from "@/Backend/Middleware/Validation";
 import useFileHandler from "@/Hooks/UseHandleFile";
 import ImageFunction from "@/components/global/image_function";
 import { selectCatagory } from "@/Data/StaticData";
-import RemoveBox from "@/components/UI/remove";
+import RemoveBox from "@/components/ui/remove";
 
 export type popupPassword = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;

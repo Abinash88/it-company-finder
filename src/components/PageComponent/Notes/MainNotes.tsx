@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 import dynamic from 'next/dynamic';
 import GlobalTopSearch from '../PasswordComponent/SmallComponent/GlobalTopSearch';
-import PageTitle from '@/components/UI/page-title';
+import PageTitle from '@/components/ui/page-title';
 import { MyAppDataTypes } from '@/Data/Types';
 import { notesData } from '@/Data/StaticData';
 import { StaticNotesDataTypes } from '@/Backend'/lib/types';

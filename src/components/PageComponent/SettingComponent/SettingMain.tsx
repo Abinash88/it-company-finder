@@ -1,4 +1,4 @@
-import Spacing from "@/components/UI/Spacing";
+import Spacing from "@/components/ui/Spacing";
 import Div from "@/lib/Div";
 import React from "react";
 
