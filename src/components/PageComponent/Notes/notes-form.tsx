@@ -126,20 +126,15 @@ const NotesForm = (props: popupPassword) => {
           <Div className="h-8"></Div>
           <Div className="flex w-full justify-start gap-4 items-center">
             <Button
-              icon={<AiOutlinePlus className="text-[17px]" />}
               size='md'
               type="submit"
               variant='default'
               className="flex gap-2"
-              btnName="Add Notes"
-            />
-            <Button type="button" variant='destructive' onClick={() => { props.closeModelBox(false) }} size='md' btnName="Cancel" />
-            {/* {showPinCodeBox && (
-              <PinCodeBox
-                showPinCodeBox={showPinCodeBox}
-                setShowPinCodeBox={setShowPinCodeBox}
-              />
-            )} */}
+            >
+              <AiOutlinePlus className="text-[17px]" />
+              <span>Add Notes</span>
+            </Button>
+            <Button type="button" variant='destructive' onClick={() => { props.closeModelBox(false) }} size='md'>Cancel</Button>
           </Div>
         </form>
 

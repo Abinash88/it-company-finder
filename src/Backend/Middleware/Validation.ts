@@ -1,6 +1,4 @@
-import { ValidationChain, body } from 'express-validator'
-import { NextHandler } from 'next-connect'
-import { NextRequest, NextResponse } from 'next/server'
+import {  body } from 'express-validator'
 import { z } from 'zod'
 
 export const signUpValidation = [
@@ -65,54 +63,6 @@ export const getAddPasswordSchema = () => {
     description: z.string({ message: 'description must be string' }).optional(),
   })
 }
-
-export const Validation = {
-  add_password_validatioon: z.object({
-    catagory: z.string().nonempty({ message: 'Chooose One Catagory' }),
-    password_name: z
-      .string()
-      .nonempty({ message: 'Enter a password name' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-    password: z
-      .string()
-      .nonempty({ message: 'Enter Password' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-    url: z
-      .string()
-      .nonempty({ message: 'Enter URL' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-  }),
-  add_task_validation: z.object({
-    task_name: z
-      .string()
-      .nonempty({ message: 'Enter a Task name' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-    description: z
-      .string()
-      .nonempty({ message: 'Enter description' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-    priority: z
-      .string()
-      .nonempty({ message: 'Selected Priority' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-  }),
-  add_notes_validation: z.object({
-    title: z
-      .string()
-      .nonempty({ message: 'Enter note name' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-    description: z
-      .string()
-      .nonempty({ message: 'Enter note description' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-    priority: z
-      .string()
-      .nonempty({ message: 'Select Priority' })
-      .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
-  }),
-}
-
-
 //account or auth validation 
 
 export const SCHEMA_VALIDATION = {

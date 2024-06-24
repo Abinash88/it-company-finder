@@ -1,62 +1,58 @@
 import React, {
-    useContext,
-    useRef,
-    useState,
-  } from "react";
-  import Div from "@/lib/Div";
-  import { FaDownload, FaEye, FaEyeSlash } from "react-icons/fa";
-  import { AiOutlinePlus } from "react-icons/ai";
-  
-  import MyContext from "@/context/MyContext";
-  import Button, { LabelContent } from "@/components/ui/UiItems";
-  import PageTitle from "@/components/ui/page-title";
-  import { SubmitHandler, useForm } from "react-hook-form"
-  import { zodResolver } from "@hookform/resolvers/zod"
-  import { add_todo_data_types } from "@/Backend/lib/types";
-  import FormError from "@/components/ui/form_error";
-  import { Validation } from "@/Backend/Middleware/Validation";
-  import useFileHandler from "@/Hooks/UseHandleFile";
-  import ImageFunction from "@/components/global/image_function";
-  import { selectNotePriority } from "@/Data/StaticData";
-  import RemoveBox from "@/components/ui/remove";
-  
-  export type popupPassword = {
-    closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
-  };
-  
-  const TodoForm = (props: popupPassword) => {
-    const RemovePasswordBox = useRef<HTMLDivElement | null>(null);
-    const MyAppData = useContext(MyContext);
-  
-  
-    const { register, handleSubmit, formState: { errors }, reset } =
-      useForm<add_todo_data_types>({ resolver: zodResolver(Validation?.add_task_validation) });
-    const onSubmitForm: SubmitHandler<add_todo_data_types> = (data) => {
-      console.log(data);
-    }
- 
-  
-    return (
+  useContext,
+  useRef,
+} from "react";
+import Div from "@/lib/Div";
+import { AiOutlinePlus } from "react-icons/ai";
+
+import MyContext from "@/context/MyContext";
+import Button, { LabelContent } from "@/components/ui/UiItems";
+import PageTitle from "@/components/ui/page-title";
+import { SubmitHandler, useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { add_todo_data_types } from "@/Backend/lib/types";
+import FormError from "@/components/ui/form_error";
+import { selectNotePriority } from "@/Data/StaticData";
+import RemoveBox from "@/components/ui/remove";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { AddTaskValidation } from "@/lib/schema/schema.todo";
+
+export type popupPassword = {
+  setIsOpenPopup: React.Dispatch<React.SetStateAction<boolean>>
+};
+
+const TodoForm = ({ setIsOpenPopup }: popupPassword) => {
+  const RemovePasswordBox = useRef<HTMLDivElement | null>(null);
+
+  const form = useForm<add_todo_data_types>({ resolver: zodResolver(AddTaskValidation) });
+  const { register, handleSubmit, formState: { errors }, reset } = form;
+
+  const onSubmitForm: SubmitHandler<add_todo_data_types> = (data) => {
+    console.log(data);
+  }
+
+  return (
+    <div
+      id="PasswordOutBox"
+      className={`relative cursor-normal flex items-end justify-end  w-full h-full`}
+    >
       <div
-        id="PasswordOutBox"
-        className={`relative cursor-normal flex items-end justify-end  w-full h-full`}
+        className=" absolute cursor-normal flex items-center justify-center z-20 w-full h-full transparentBg top-[-12px] left-0"
+      ></div>
+      <div
+        ref={RemovePasswordBox}
+        id="RemovingPasswordBox"
+        className=" z-50 p-4 bg-gray-50 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
       >
-        <div
-          onClick={() => props.closeModelBox(false)}
-          className=" absolute cursor-normal flex items-center justify-center z-20 w-full h-full transparentBg top-[-12px] left-0"
-        ></div>
-        <div
-          ref={RemovePasswordBox}
-          id="RemovingPasswordBox"
-          className=" z-50 p-4 bg-gray-50 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
-        >
+        <Form {...form}>
           <form className="" action="" onSubmit={handleSubmit(onSubmitForm)}>
             <Div className="text-center border-b border-gray-200 mb-3 pb-2 font-normal text-gray-600 text-[20px]">
               <PageTitle className="text-gray-700" title="Add Task" />
             </Div>
-            <RemoveBox remove={() => props.closeModelBox(false)} />
-  
-  
+            <RemoveBox remove={() => { setIsOpenPopup(false) }} />
+
+
             <Div className="flex flex-col md:gap-">
               <Div className="flex gap-4 flex-1">
                 <Div className="flex-1">
@@ -65,13 +61,23 @@ import React, {
                       <Div className="w-full md:w-[130px] flex items-start">
                         <LabelContent className="text-gray-600" htmlFor="taskname" > Task Name</LabelContent>
                       </Div>
-                      <Div className="flex-1 ">
-                        <input
-                          id="taskname"
-                          type="text"
-                          className=" add_password_input"
-                          placeholder="Title"
-                          {...register('task_name')}
+                      <Div className="flex-1">
+                        <FormField
+                          control={form.control}
+                          render={({ field }) => {
+                            <FormItem>
+                              <FormControl>
+                                <Input
+                                  id="taskname"
+                                  type="text"
+                                  name="task_name"
+                                  className=" "
+                                  placeholder="Title"
+                                  {...field}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          }}
                         />
                         {errors && <FormError error={errors?.task_name?.message} />}
                       </Div>
@@ -79,7 +85,7 @@ import React, {
                   </Div>
                 </Div>
               </Div>
-  
+
               <Div className="mt-3 flex flex-col relative gap-[4px] md:gap-1">
                 <Div className="w-full md:w-[130px] flex items-start">
                   <LabelContent className="text-gray-600" htmlFor="Description" >Description</LabelContent>
@@ -93,11 +99,11 @@ import React, {
                     rows={5}
                     cols={6}
                   ></textarea>
-  
+
                   {errors && <FormError error={errors?.description?.message} />}
                 </Div>
               </Div>
-  
+
               <Div className=" flex-1 flex flex-col relative gap-[4px] md:gap-1">
                 <Div className="w-full md:w-[130px] flex items-start">
                   <LabelContent className="text-gray-600" htmlFor="Priority" > Priority</LabelContent>
@@ -114,18 +120,21 @@ import React, {
                 </Div>
               </Div>
             </Div>
-  
+
             <Div className="h-8"></Div>
             <Div className="flex w-full justify-start gap-4 items-center">
               <Button
-                icon={<AiOutlinePlus className="text-[17px]" />}
                 size='md'
                 type="submit"
                 variant='default'
                 className="flex gap-2"
-                btnName="Add Notes"
-              />
-              <Button type="button" variant='destructive' onClick={() => { props.closeModelBox(false) }} size='md' btnName="Cancel" />
+              >
+                <span>Add Notes</span>
+                <AiOutlinePlus className="text-[17px]" />
+              </Button>
+              <Button type="button" variant='destructive' onClick={() => { setIsOpenPopup(false) }} size='md'>
+                Cancel
+              </Button>
               {/* {showPinCodeBox && (
                 <PinCodeBox
                   showPinCodeBox={showPinCodeBox}
@@ -134,12 +143,12 @@ import React, {
               )} */}
             </Div>
           </form>
-  
-        </div>
-  
-      </div >
-    );
-  };
-  
-  export default TodoForm;
-  
+        </Form>
+
+      </div>
+
+    </div >
+  );
+};
+
+export default TodoForm;
