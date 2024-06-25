@@ -70,11 +70,17 @@ export const selectCatagory = [
   { id: 8, catagory: 'Socal Security Number' },
 ];
 
-export const selectNotePriority = [
-  { id: 2, catagory: 'normal' },
-  { id: 1, catagory: 'not important' },
-  { id: 3, catagory: 'important' },
-  { id: 4, catagory: 'very important' },
+export interface SelectNotePriorityTypes {
+  id: number;
+  value: string;
+  label: string;
+}
+
+export const selectNotePriority: SelectNotePriorityTypes[] = [
+  { id: 2, value: 'normal', label: 'Normal' },
+  { id: 1, value: 'not important', label: 'Not Important' },
+  { id: 3, value: 'important', label: 'Important' },
+  { id: 4, value: 'very important', label: 'Very Important' },
 ];
 
 export const notesData: StaticNotesDataTypes[] = [

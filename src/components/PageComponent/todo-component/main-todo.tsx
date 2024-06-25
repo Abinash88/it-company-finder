@@ -29,7 +29,7 @@ const MainTodo = () => {
                     <GlobalTopSearch setIsOpenPopup={setIsOpenPopup} isOpenPopup={isOpenPopup} offCheckList={false} setText={setText} />
                     <Div className={cn(`w-full z-20 h-full transition-all  top-0 `)}>
                         <Div className="w-full h-full ">
-                            <CustomSheet isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
+                            <CustomSheet title='Add Todo List' isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
                                 <TodoForm  setIsOpenPopup={setIsOpenPopup} />
                             </CustomSheet>
                         </Div>

@@ -16,11 +16,9 @@ const AccountBox = ({
   closeAccount: () => void;
   userdata: userData;
 }) => {
-  const accountData = useContext(MyContext);
   const router = useRouter();
 
   const LogOutFunc = () => {
-    accountData?.LogoutFunc();
     router.push("/account")
     closeAccount();
   };
@@ -65,15 +63,16 @@ const AccountBox = ({
             btnName="Setting"
           />
           <Button
-            icon={<FiLogOut />}
             size='sm'
             variant={'ghost'}
-            ButtonClick={() => {
+            onClick={() => {
               LogOutFunc();
             }}
             className="w-full hover:bg-gray-100 pl-3 py-3 justify-start items-center space-x-3"
-            btnName="LogOut"
-          />
+          >
+            <FiLogOut />
+            <span>LogOut</span>
+          </Button>
         </Div>
       </Div>
     </Div>

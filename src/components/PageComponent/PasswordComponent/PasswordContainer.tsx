@@ -12,6 +12,7 @@ import PageTitle from "@/components/ui/page-title";
 import UseHandleSearch from "@/Hooks/use-handle-search";
 import { DragEndEvent } from "@dnd-kit/core";
 import { CustomDrawer } from "@/components/reusables/custom-drawar";
+import CustomSheet from "@/components/reusables/custom-sheet";
 
 
 const PasswordContainer = () => {
@@ -51,16 +52,18 @@ const PasswordContainer = () => {
       </Div>
       <Div className=" bg-white h-full  rounded-tr-lg">
         <Div className="w-full px-6 py-4">
-          <GlobalTopSearch setText={setText} Drawer={<CustomDrawer />} />
-          <div className="bg-red-500">
-
-          </div>
-          <Div className={cn(`w-full fixed z-20 h-full transition-all ${isOpenPopup ? 'right-[0px]' : 'right-[-150%]'} top-0 `)}>
-            <PasswordForm
-              closeModelBox={setIsOpenPopup}
-            />
+          <GlobalTopSearch setIsOpenPopup={setIsOpenPopup} isOpenPopup={isOpenPopup} offCheckList={false} setText={setText} />
+          <Div className={cn(`w-full z-20 h-full transition-all  top-0 `)}>
+            <Div className="w-full h-full ">
+              <CustomSheet title='Add Todo List' isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
+                <PasswordForm
+                  closeModelBox={setIsOpenPopup}
+                />
+              </CustomSheet>
+            </Div>
           </Div>
         </Div>
+        
         <Div className="w-full px-6">
           {searchData?.map((data: MyAppDataTypes) =>
           (

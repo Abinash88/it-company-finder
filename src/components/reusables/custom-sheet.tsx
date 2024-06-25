@@ -5,25 +5,26 @@ import {
     SheetDescription,
     SheetHeader,
     SheetTitle,
-    SheetTrigger,
 } from "@/components/ui/sheet"
 
 
 const CustomSheet = ({
     children,
     isOpenPopup,
-    setIsOpenPopup
+    setIsOpenPopup,
+    title,
 }:
     {
         children: React.ReactNode,
         isOpenPopup: boolean,
         setIsOpenPopup: React.Dispatch<React.SetStateAction<boolean>>
+        title?: string
     }) => {
     return (
         <Sheet open={isOpenPopup} onOpenChange={() => { setIsOpenPopup(!isOpenPopup) }}>
-            <SheetContent className='max'>
+            <SheetContent className='sm:max-w-xl'>
                 <SheetHeader>
-                    <SheetTitle>Are you absolutely sure?</SheetTitle>
+                    <SheetTitle className=' border-b pb-2'>{title}</SheetTitle>
                     <SheetDescription>
                         {children}
                     </SheetDescription>
