@@ -14,9 +14,9 @@ import { add_todo_data_types } from "@/Backend/lib/types";
 import FormError from "@/components/ui/form_error";
 import { selectNotePriority } from "@/Data/StaticData";
 import RemoveBox from "@/components/ui/remove";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { AddTaskValidation } from "@/lib/schema/schema.todo";
+import { AddTaskValidation, TaskValidationTypes } from "@/lib/schema/schema.todo";
 
 export type popupPassword = {
   setIsOpenPopup: React.Dispatch<React.SetStateAction<boolean>>
@@ -25,10 +25,10 @@ export type popupPassword = {
 const TodoForm = ({ setIsOpenPopup }: popupPassword) => {
   const RemovePasswordBox = useRef<HTMLDivElement | null>(null);
 
-  const form = useForm<add_todo_data_types>({ resolver: zodResolver(AddTaskValidation) });
+  const form = useForm<TaskValidationTypes>({ resolver: zodResolver(AddTaskValidation) });
   const { register, handleSubmit, formState: { errors }, reset } = form;
 
-  const onSubmitForm: SubmitHandler<add_todo_data_types> = (data) => {
+  const onSubmitForm: SubmitHandler<TaskValidationTypes> = (data) => {
     console.log(data);
   }
 
@@ -38,12 +38,8 @@ const TodoForm = ({ setIsOpenPopup }: popupPassword) => {
       className={`relative cursor-normal flex items-end justify-end  w-full h-full`}
     >
       <div
-        className=" absolute cursor-normal flex items-center justify-center z-20 w-full h-full transparentBg top-[-12px] left-0"
-      ></div>
-      <div
-        ref={RemovePasswordBox}
         id="RemovingPasswordBox"
-        className=" z-50 p-4 bg-gray-50 absolute bottom-0 rounded-sm w-full md:w-[570px] h-full px-8 mx-auto  "
+        className=" z-50 p-4 bg-gray-50 absolute bottom-0 rounded-sm w-full  h-full px-8 mx-auto  "
       >
         <Form {...form}>
           <form className="" action="" onSubmit={handleSubmit(onSubmitForm)}>
@@ -59,25 +55,25 @@ const TodoForm = ({ setIsOpenPopup }: popupPassword) => {
                   <Div className="flex items-center gap-2 mt-5">
                     <Div className=" flex-1 flex flex-col relative gap-[4px] md:gap-1">
                       <Div className="w-full md:w-[130px] flex items-start">
-                        <LabelContent className="text-gray-600" htmlFor="taskname" > Task Name</LabelContent>
+                        {/* <LabelContent className="text-gray-600" htmlFor="task_name" > </LabelContent> */}
                       </Div>
                       <Div className="flex-1">
                         <FormField
                           control={form.control}
-                          render={({ field }) => {
+                          name="task_name"
+                          render={({ field }) => (
                             <FormItem>
+                              <FormLabel>Task Name</FormLabel>
                               <FormControl>
                                 <Input
-                                  id="taskname"
-                                  type="text"
-                                  name="task_name"
-                                  className=" "
-                                  placeholder="Title"
                                   {...field}
+                                  type="text"
+                                  className=""
+                                  placeholder="Title"
                                 />
                               </FormControl>
                             </FormItem>
-                          }}
+                          )}
                         />
                         {errors && <FormError error={errors?.task_name?.message} />}
                       </Div>

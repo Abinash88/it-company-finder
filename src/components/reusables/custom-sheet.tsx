@@ -21,7 +21,7 @@ const CustomSheet = ({
     }) => {
     return (
         <Sheet open={isOpenPopup} onOpenChange={() => { setIsOpenPopup(!isOpenPopup) }}>
-            <SheetContent>
+            <SheetContent className='max'>
                 <SheetHeader>
                     <SheetTitle>Are you absolutely sure?</SheetTitle>
                     <SheetDescription>

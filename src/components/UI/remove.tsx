@@ -1,4 +1,4 @@
-import Div from '@/lib/Div'
+import Div from '@/lib/Div';
 import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 
