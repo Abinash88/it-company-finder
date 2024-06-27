@@ -179,6 +179,7 @@ const PopUpPassword = (props: popupPassword) => {
                     {...field}
                     name='password'
                     type='password'
+                    label='Password'
                     placeholder='Password'
                   />
                   // <FormItem>
