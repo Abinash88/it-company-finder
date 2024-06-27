@@ -11,7 +11,6 @@ import GlobalTopSearch from "./SmallComponent/GlobalTopSearch";
 import PageTitle from "@/components/ui/page-title";
 import UseHandleSearch from "@/Hooks/use-handle-search";
 import { DragEndEvent } from "@dnd-kit/core";
-import { CustomDrawer } from "@/components/reusables/custom-drawar";
 import CustomSheet from "@/components/reusables/custom-sheet";
 
 
@@ -55,7 +54,7 @@ const PasswordContainer = () => {
           <GlobalTopSearch setIsOpenPopup={setIsOpenPopup} isOpenPopup={isOpenPopup} offCheckList={false} setText={setText} />
           <Div className={cn(`w-full z-20 h-full transition-all  top-0 `)}>
             <Div className="w-full h-full ">
-              <CustomSheet title='Add Todo List' isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
+              <CustomSheet title='Set New Password' isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
                 <PasswordForm
                   closeModelBox={setIsOpenPopup}
                 />
