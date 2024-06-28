@@ -41,7 +41,9 @@ const PasswordContainer = () => {
     }
   };
 
-
+  const resetWhileClose = () => {
+    
+  }
 
 
   return (
@@ -54,8 +56,9 @@ const PasswordContainer = () => {
           <GlobalTopSearch setIsOpenPopup={setIsOpenPopup} isOpenPopup={isOpenPopup} offCheckList={false} setText={setText} />
           <Div className={cn(`w-full z-20 h-full transition-all  top-0 `)}>
             <Div className="w-full h-full ">
-              <CustomSheet title='Set New Password' isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
+              <CustomSheet resetWhileClose={resetWhileClose} title='Set New Password' isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup}>
                 <PasswordForm
+                
                   closeModelBox={setIsOpenPopup}
                 />
               </CustomSheet>

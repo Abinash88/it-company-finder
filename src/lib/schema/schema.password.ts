@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const AddPasswordValidation = z.object({
-  catagory: z.string().nonempty({ message: 'Chooose One Catagory' }),
+  category: z.string().nonempty({ message: 'Choose One Category' }),
   password_name: z
     .string()
     .nonempty({ message: 'Enter a password name' })
@@ -14,6 +14,7 @@ export const AddPasswordValidation = z.object({
     .string()
     .nonempty({ message: 'Enter URL' })
     .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
+  description: z.string().refine((arg) => !/[!@$&<>()]/.test(arg)),
 })
 
 export type PasswordValidationTypes = z.infer<typeof AddPasswordValidation>

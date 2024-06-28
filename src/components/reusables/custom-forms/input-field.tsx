@@ -58,7 +58,7 @@ const InputField = ({
             placeholder={placeholder}
             disabled={disabled}
             rows={5}
-            className={cn(error && 'border border-red-500')}
+            className={cn(error && 'border border-red-500', 'text-xs')}
             {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
         )
@@ -70,6 +70,7 @@ const InputField = ({
               {...rest.register}
               id={rest.register?.name || name}
               name={name}
+              className={cn(error && 'border border-red-500', 'text-xs')}
               {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
             />
           </div>
@@ -82,7 +83,8 @@ const InputField = ({
               id={rest.register?.name || name}
               placeholder={placeholder}
               disabled={disabled}
-              type={ShowPassword ? 'text' : type}
+              className={cn(error && 'border border-red-500', 'text-xs')}
+              type={type === 'password' ? (ShowPassword ? 'text' : type) : type}
               {...rest.register}
               {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
               {...(type === 'number' && {
