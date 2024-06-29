@@ -3,4 +3,13 @@ export const formatNumber = (
   ): false | void => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
   
 
-  export const fileTypes = ['jpg', 'png', 'pdf', 'gif', 'jpeg']
+  export const DefaultFileTypes =[
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+  ];

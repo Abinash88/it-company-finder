@@ -24,6 +24,7 @@ import FormWrapper, {
 } from '@/components/reusables/custom-forms/form-wrapper'
 import { CustomSelect } from '@/components/reusables/custom-select'
 import CustomAlert from '@/components/reusables/alerts/custom-alert'
+import FileDropZone from '@/components/reusables/file-drop-zone'
 
 export type popupPassword = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>
@@ -38,23 +39,18 @@ const PopUpPassword = (props: popupPassword) => {
   const form = useForm<PasswordValidationTypes>({
     resolver: zodResolver(AddPasswordValidation),
     defaultValues: {
-      category: '' || '',
-      description: '' || '',
-      password: '' || '',
-      password_name: '' || '',
-      url: '' || '',
+      category: 'paymentCard' || '',
+      description: 'asdfas' || '',
+      password: 'asdfasd' || '',
+      password_name: 'asdfawe' || '',
+      url: 'asdfager' || '',
+      siteImage: 'blob:http://localhost:3000/bdeaff7a-15b3-4a6c-be0e-ed71719e2e58',
     },
   })
-  const { register, handleSubmit, formState, reset } = form
+  const { handleSubmit, reset, setValue, watch } = form
 
-  const { fileLists, handleFile, blobImage, clearFile, valueData } =
-    useFileHandler()
   const onSubmitForm: SubmitHandler<PasswordValidationTypes> = (data) => {
     console.log(data)
-  }
-  const handleImageClick = () => {
-    if (siteFileInputRef && siteFileInputRef.current)
-      siteFileInputRef?.current?.click()
   }
 
   return (
@@ -84,25 +80,42 @@ const PopUpPassword = (props: popupPassword) => {
                     </FormWrapper>
                   )}
                 />
-                <Div className='flex-1 flex flex-col gap-3'>
+                <Div className='flex gap-2 flex-col'>
+                  <Div className='flex-1 flex flex-col gap-3'>
+                    <FormField
+                      control={form.control}
+                      name='password_name'
+                      render={({ field }) => (
+                        <InputField
+                          {...field}
+                          name=''
+                          placeholder='Password Name'
+                          required
+                          label='Password Name'
+                        />
+                      )}
+                    />
+                  </Div>
                   <FormField
                     control={form.control}
-                    name='password_name'
+                    name='siteImage'
                     render={({ field }) => (
-                      <InputField
-                        {...field}
-                        name=''
-                        placeholder='Password Name'
-                        required
-                        label='Password Name'
-                      />
+                      <FormWrapper>
+                        <FileDropZone
+                          {...field}
+                          files={watch('siteImage') || []}
+                          setFiles={(value) => {
+                            setValue('siteImage', value, { shouldDirty: true })
+                          }}
+                        />
+                      </FormWrapper>
                     )}
                   />
                 </Div>
               </Div>
             </Div>
 
-            <CustomAlert  />
+            <CustomAlert />
 
             <Div className='flex-1'>
               <FormField

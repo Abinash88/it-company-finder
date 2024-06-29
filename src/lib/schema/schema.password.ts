@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { ImageValidator } from './validators'
 
 export const AddPasswordValidation = z.object({
   category: z.string().nonempty({ message: 'Choose One Category' }),
@@ -15,6 +16,7 @@ export const AddPasswordValidation = z.object({
     .nonempty({ message: 'Enter URL' })
     .refine((arg) => !/[!$%^&*()<>]/.test(arg)),
   description: z.string().refine((arg) => !/[!@$&<>()]/.test(arg)),
+  siteImage: ImageValidator(2, true),
 })
 
 export type PasswordValidationTypes = z.infer<typeof AddPasswordValidation>
