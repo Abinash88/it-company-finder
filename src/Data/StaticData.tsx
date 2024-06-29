@@ -59,7 +59,6 @@ export const SettingLinksData: settingLinksTypes[] = [
 
 
 export const selectCategory = [
-  { id: 0, value: 'none', label: 'None' },
   { id: 1, value: 'paymentCard', label: 'PaymentCard' },
   { id: 2, value: 'web account', label: 'Web Account' },
   { id: 3, value: 'file store', label: 'File Store' },

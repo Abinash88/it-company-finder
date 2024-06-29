@@ -6,10 +6,10 @@ export default async function middleware(req: NextRequest) {
   //   return NextResponse.redirect(new URL('/dashboard', req.url))
   // }
   if (!token && req.nextUrl.pathname !== '/account') {
-    return NextResponse.redirect(new URL('/account', req.url))
+    // return NextResponse.redirect(new URL('/account', req.url))
   }
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/account/:path*'],
+  // matcher: ['/dashboard/:path*', '/account/:path*'],
 }

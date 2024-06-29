@@ -9,34 +9,58 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ControllerRenderProps } from 'react-hook-form'
+import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form'
 import { PasswordValidationTypes } from '@/lib/schema/schema.password'
 
-type CustomSelectTypes = {
-  options: { value: string; label: string }[]
-  field: ControllerRenderProps<PasswordValidationTypes>
+type OptionsTypes = { value: string; label: string }
+
+type CustomSelectTypes<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+> = {
+  options: OptionsTypes[]
+  field: ControllerRenderProps<TFieldValues, TName>
   className?: string
+  placeholder?: string
+  defaultValue?: string
 }
 
-export const CustomSelect = ({
+export const CustomSelect = <
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+>({
   options,
   field,
   className,
-}: CustomSelectTypes) => {
-  return (
-    <Select value={field?.value} onValueChange={field.onChange}>
-      <SelectTrigger className='w-[180px]'>
-        <SelectValue placeholder='Select a fruit' />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
+  placeholder,
+  defaultValue,
+}: CustomSelectTypes<TFieldValues, TName>) => {
+  const getContent = () => {
+    if (options.length) {
+      return (
+        <>
           {options?.map((item) => (
-            <SelectItem key={item?.value} value={item?.value}>
+            <SelectItem key={item?.value} className='text-xs' value={item?.value}>
               {item?.value}
             </SelectItem>
           ))}
-        </SelectGroup>
+        </>
+      )
+    }
+    return <p className='text-gray-600 text-sm text-center'>No options</p>
+  }
+
+  return (
+    <Select
+      defaultValue={defaultValue}
+      value={field?.value}
+      onValueChange={field.onChange}
+    >
+      <SelectTrigger className='w-full'>
+        <SelectValue className='text-xs' placeholder={placeholder || 'Select options'} />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>{getContent()} </SelectGroup>
       </SelectContent>
     </Select>
   )

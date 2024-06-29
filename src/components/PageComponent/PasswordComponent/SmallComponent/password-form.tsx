@@ -23,6 +23,7 @@ import FormWrapper, {
   InputFieldWrapper,
 } from '@/components/reusables/custom-forms/form-wrapper'
 import { CustomSelect } from '@/components/reusables/custom-select'
+import CustomAlert from '@/components/reusables/alerts/custom-alert'
 
 export type popupPassword = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>
@@ -37,11 +38,11 @@ const PopUpPassword = (props: popupPassword) => {
   const form = useForm<PasswordValidationTypes>({
     resolver: zodResolver(AddPasswordValidation),
     defaultValues: {
-      category: 'website',
-      description: 'this is description ',
-      password: 'password',
-      password_name: 'password',
-      url: 'http://',
+      category: '' || '',
+      description: '' || '',
+      password: '' || '',
+      password_name: '' || '',
+      url: '' || '',
     },
   })
   const { register, handleSubmit, formState, reset } = form
@@ -76,7 +77,7 @@ const PopUpPassword = (props: popupPassword) => {
                   render={({ field }) => (
                     <FormWrapper label='Password Category' required>
                       <CustomSelect
-                        listData={selectCategory}
+                        options={selectCategory}
                         field={field}
                         className=''
                       />
@@ -100,6 +101,8 @@ const PopUpPassword = (props: popupPassword) => {
                 </Div>
               </Div>
             </Div>
+
+            <CustomAlert  />
 
             <Div className='flex-1'>
               <FormField
