@@ -24,7 +24,6 @@ export const ImageComp = ({
   item: string
   name: string | undefined
 }) => {
-  console.log(item)
   return (
     <Image
       loading='lazy'
@@ -88,8 +87,6 @@ const FileDropZone = ({
     setFile({ file: undefined, preview: '' })
     setFileList([])
   }
-
-  console.log(fileList)
 
   return (
     <div {...getRootProps()}>

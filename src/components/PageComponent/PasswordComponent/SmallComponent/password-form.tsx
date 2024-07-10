@@ -1,50 +1,39 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Div from '@/lib/Div'
-import { FaDownload } from 'react-icons/fa'
 import { AiOutlinePlus } from 'react-icons/ai'
 
-import MyContext from '@/context/MyContext'
 import PinCodeBox from './PinCodeBox'
-import Button from '@/components/ui/UiItems'
-import Image from 'next/image'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ImageFunction from '@/components/global/image_function'
 import { selectCategory } from '@/Data/StaticData'
 import {
   AddPasswordValidation,
   PasswordValidationTypes,
 } from '@/lib/schema/schema.password'
-import useFileHandler from '@/Hooks/UseHandleFile'
 import { Form, FormField } from '@/components/ui/form'
 import InputField from '@/components/reusables/custom-forms/input-field'
-import { ComboboxDemo } from '@/components/reusables/combo-list-box'
-import FormWrapper, {
-  InputFieldWrapper,
-} from '@/components/reusables/custom-forms/form-wrapper'
-import { CustomSelect } from '@/components/reusables/custom-select'
+import FormWrapper from '@/components/reusables/custom-forms/form-wrapper'
 import CustomAlert from '@/components/reusables/alerts/custom-alert'
 import FileDropZone from '@/components/reusables/file-drop-zone'
+import { CustomReactSelect } from '@/components/reusables/custom-select'
+import { Button } from '@/components/ui/button'
 
 export type popupPassword = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const PopUpPassword = (props: popupPassword) => {
-  const RemovePasswordBox = useRef<HTMLDivElement | null>(null)
-  const MyAppData = useContext(MyContext)
-  const siteFileInputRef = useRef<HTMLInputElement | null>(null)
-
   const [showPinCodeBox, setShowPinCodeBox] = useState<boolean>(false)
   const form = useForm<PasswordValidationTypes>({
     resolver: zodResolver(AddPasswordValidation),
     defaultValues: {
-      category: 'paymentCard' || '',
-      description: 'asdfas' || '',
-      password: 'asdfasd' || '',
-      password_name: 'asdfawe' || '',
-      url: 'asdfager' || '',
-      siteImage: 'blob:http://localhost:3000/bdeaff7a-15b3-4a6c-be0e-ed71719e2e58',
+      category: 'paymentCard',
+      description: 'asdfas',
+      password: 'asdfasd',
+      password_name: 'asdfawe',
+      url: 'asdfager',
+      siteImage:
+        'blob:http://localhost:3000/bdeaff7a-15b3-4a6c-be0e-ed71719e2e58',
     },
   })
   const { handleSubmit, reset, setValue, watch } = form
@@ -72,9 +61,9 @@ const PopUpPassword = (props: popupPassword) => {
                   name='category'
                   render={({ field }) => (
                     <FormWrapper label='Password Category' required>
-                      <CustomSelect
+                      <CustomReactSelect
                         options={selectCategory}
-                        field={field}
+                        {...field}
                         className=''
                       />
                     </FormWrapper>

@@ -10,7 +10,7 @@ export const ImageValidator = (
     let isValidFileTypes = false
     let isValidFileLimit = false
     if (typeof file === 'string') {
-      return true
+      return false
     }
     if (!required && (file.length || 0) === 0) {
       return true
