@@ -1,23 +1,114 @@
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import Button from '@/components/ui/UiItems'
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { Table } from '@/components/ui/table'
+import { IbtnVariant } from '@/interface-types/interface'
+import { cn } from '@/lib/utils'
 import { flexRender } from '@tanstack/react-table'
+import { ChevronDownIcon, Download, PlusIcon, SearchIcon } from 'lucide-react'
 import React, { useState } from 'react'
 
-interface TableControllerProps {
-  table: any
-  colums: any
+type TOptions = {
+  id: string
+  label: string
+}
+interface Props {
+  table: unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columns: any[]
+  searchKey?: {
+    key: string
+    label: string
+  }
+  empty?: {
+    title: string
+    subtitle?: string
+    btnAction?: () => void
+    btnLabel?: string
+    btnVariant?: IbtnVariant
+    icon?: string
+  }
+  customEmptyLayout?: React.ReactNode
+  floatingBar?: React.ReactNode | null
+  onRowClick?: (id: string) => void
+  showPagination?: boolean
+  filters?: {
+    [key: string]:
+      | {
+          label?: string
+          linked?: string
+          options: TOptions[]
+          multiSelect?: boolean
+        }
+      | boolean
+  }
+  addButton?: {
+    label?: string
+    variant?: IbtnVariant
+    className?: string
+    handleClick?: () => void
+    icon?: string
+  }
+  extraButtons?: React.ReactNode
+  hideFilterRow?: boolean
+  hideFilterTabs?: boolean
+  hasWritePermission?: boolean
+  hasExport?: boolean
+  hasSearch?: boolean
+  id?: string
 }
 
-const TableController = ({ table, colums }: TableControllerProps) => {
-  const [searchTerm, setSearchTerm] = useState( || '')
+const TableController = ({
+  table,
+  data,
+  columns,
+  searchKey,
+  empty,
+  customEmptyLayout,
+  id,
+  filters = {
+    'Filter 1': {
+      options: [
+        {
+          id: '1',
+          label: 'Item 1',
+        },
+        {
+          id: '2',
+          label: 'Item 2',
+        },
+      ],
+    },
+    'Filter 2': {
+      options: [
+        {
+          id: '1',
+          label: 'Item 1',
+        },
+        {
+          id: '2',
+          label: 'Item 2',
+        },
+      ],
+    },
+  },
+  addButton,
+  extraButtons,
+  hasExport = true,
+  hideFilterRow = false,
+  hideFilterTabs = false,
+  onRowClick,
+  showPagination = true,
+  hasWritePermission,
+}: Props) => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [saveModal, setSaveModal] = useState(false)
   return (
     <>
       <div className='w-full'>
@@ -42,14 +133,14 @@ const TableController = ({ table, colums }: TableControllerProps) => {
                     'flex justify-between items-center align-center',
                     addButton?.className
                   )}
-                  onClick={addButton.handleClick}
+                  onClick={addButton?.handleClick}
                 >
-                  {addButton.icon ? (
-                    <Icons name={addButton.icon} size={18} color='#fff' />
+                  {addButton?.icon ? (
+                    <PlusIcon size={18} color='#fff' />
                   ) : (
                     <PlusIcon size={18} strokeWidth={1.8} className='mx-1' />
                   )}
-                  <p className={`${addButton.icon && 'px-2'}`}>
+                  <p className={`${addButton?.icon && 'px-2'}`}>
                     {addButton?.label}
                   </p>
                 </Button>
@@ -74,7 +165,7 @@ const TableController = ({ table, colums }: TableControllerProps) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align='end'>
                   {table
-                    .getAllColumns()
+                    ?.getAllColumns()
                     .filter(
                       (column) =>
                         column.getCanHide() &&

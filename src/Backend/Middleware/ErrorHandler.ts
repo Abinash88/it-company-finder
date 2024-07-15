@@ -35,7 +35,7 @@ export const initValidation = (
   return async (req: NextRequest, res: NextResponse) => {
     if (["POST", "PUT", "PATCH"].includes(req.method)) {
       try {
-        for (let validation of validations) {
+        for (const validation of validations) {
           await validation.run(req);
         }
         const errors = validationResult(req);

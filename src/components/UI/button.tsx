@@ -41,6 +41,8 @@ export interface ButtonProps
   asChild?: boolean
   loading?: boolean
   message?: string
+  icon?: React.ReactNode
+  iconClass?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -51,6 +53,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loading,
       message,
       children,
+      icon,
+      iconClass,
       size,
       asChild = false,
       ...props
@@ -71,7 +75,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {message && <span>{message}</span>}
           </span>
         ) : (
-          children
+          <div className='w-full'>
+            {icon ? (
+              <div className={cn(`w-full flex items-center gap-3`, iconClass)}>
+                <span className=''>{icon}</span>
+                <span>{children}</span>
+              </div>
+            ) : (
+              children
+            )}
+          </div>
         )}
       </Comp>
     )

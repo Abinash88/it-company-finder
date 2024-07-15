@@ -1,5 +1,5 @@
-import { StaticImageData } from "next/image";
-import { ReactElement } from "react";
+import { StaticImageData } from 'next/image';
+import { ReactElement } from 'react';
 
 export type SidebarDataTypes = {
   name: string;
@@ -17,9 +17,9 @@ export type MyAppDataTypes = {
   id: string;
   name: string;
   link: string;
-  image: StaticImageData | null;
+  image: StaticImageData | null | string;
   password: string;
-  catagory: string;
+  category: string;
 };
 
 export type settingLinksTypes = {
@@ -27,25 +27,28 @@ export type settingLinksTypes = {
   link: string;
 };
 
-export type userData = {
+export type userResultTypes = {
   success: boolean;
   message: string;
-  data: { name: string; email: string; id: string };
+  data: DataTypes;
+};
+
+export type DataTypes = {
+  id: string;
+  createdAt: string;
+  email: string;
+  name: string;
 };
 
 export type contextTypes = {
   SocialData: MyAppDataTypes[];
   setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
-  userData: any;
-  isSignUp: boolean;
-  LoginData: userData | undefined;
-  loadingUserData: boolean;
-  loginLoading: boolean;
-  signUpLoading: boolean;
+  userData: userResultTypes;
   toggleSidebar: boolean;
+  isLoading: boolean;
+  error: Error | null;
   setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
 
 export interface PasswordMoreToolTypes {
   name: string;

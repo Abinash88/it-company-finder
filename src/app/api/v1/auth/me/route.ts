@@ -1,32 +1,36 @@
-import { AuthMiddleware, ErrorMessage, SuccessMessage } from "@/Backend/Middleware/ErrorHandler";
-import { prisma } from "@/Backend/lib/helper";
-import { verifyToken } from "@/Backend/lib/utils";
-import { cookies } from "next/headers"
+import {
+  AuthMiddleware,
+  ErrorMessage,
+  SuccessMessage,
+} from '@/Backend/Middleware/ErrorHandler';
+import { prisma } from '@/Backend/lib/helper';
+import { verifyToken } from '@/Backend/lib/utils';
+import { cookies } from 'next/headers';
 
-export const GET = AuthMiddleware(
-    async (req: Request, res: Response) => {
-      if (req.method !== "GET") return ErrorMessage("GET method only supported.");
-      const getToken = cookies().get('accessToken')?.value;
-      const Token: string | undefined = getToken;
-      if (!Token) return ErrorMessage("token not Found!", 401);
-      const GetId = verifyToken(Token);
-  
-      if (!GetId) return ErrorMessage( "Invalid  Token!", 401);
-  
-      const user = await prisma.user.findUnique({
-        where: {
-          id: GetId._id,
-        },
-        select: {
-          email: true,
-          id: true,
-          name: true,
-          password: false,
-          createdAt: true,
-          updatedAt: true,
-        },
-      });
-  
-      SuccessMessage("User created successfully!", 201, user);
-    }
-  );
+export const GET = AuthMiddleware(async (req: Request) => {
+  if (req.method !== 'GET') return ErrorMessage('GET method only supported.');
+  // const cookie = req.headers.get('cookie');
+  // const token = cookie?.split('=');
+  console.log(req.headers.get('Authorization'));
+  const getToken = cookies().get('accessToken')?.value;
+  const Token: string | undefined = getToken;
+  if (!Token) return ErrorMessage('token not Found!', 401);
+  const GetId = verifyToken(Token);
+  if (!GetId) return ErrorMessage('Invalid  Token!', 401);
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: GetId._id,
+    },
+    select: {
+      email: true,
+      id: true,
+      name: true,
+      password: false,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return SuccessMessage('User get successfully!', 200, user);
+});
