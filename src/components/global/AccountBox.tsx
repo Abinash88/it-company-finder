@@ -12,17 +12,14 @@ import { useTheme } from '../reusables/theme-provider';
 import { Moon, Sun } from 'lucide-react';
 
 const AccountBox = ({
-  closeAccount,
   userdata,
 }: {
-  closeAccount: () => void;
   userdata: userResultTypes | undefined;
 }) => {
   const router = useRouter();
 
   const LogOutFunc = () => {
     router.push('/account');
-    closeAccount();
   };
   const { theme, setTheme } = useTheme();
 
@@ -52,7 +49,6 @@ const AccountBox = ({
           <Link href='/account'>
             <Button
               asChild
-              onClick={closeAccount}
               variant={'ghost'}
               icon={<FaUser size={17} className='text-foreground' />}
               className='w-full '
@@ -64,7 +60,6 @@ const AccountBox = ({
           <Link href='/account'>
             <Button
               asChild
-              onClick={closeAccount}
               variant={'ghost'}
               icon={<FaCog size={17} className='text-foreground' />}
               className='w-full '

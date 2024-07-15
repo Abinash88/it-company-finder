@@ -43,7 +43,7 @@ export type DataTypes = {
 export type contextTypes = {
   SocialData: MyAppDataTypes[];
   setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
-  userData: userResultTypes;
+  userData: userResultTypes | undefined;
   toggleSidebar: boolean;
   isLoading: boolean;
   error: Error | null;

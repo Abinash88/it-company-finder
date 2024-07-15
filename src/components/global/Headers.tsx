@@ -1,12 +1,6 @@
 import Div from '@/lib/Div';
 import Image from 'next/image';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import AccountBox from './AccountBox';
 import MyContext from '../../context/MyContext';
@@ -17,15 +11,10 @@ import { Input } from '../ui/input';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
 const Headers = () => {
-  const [openAccountBox, setOpenAccountBox] = useState<boolean>(false);
-  const removeBox = useRef<HTMLDivElement>(null);
   const accountData = useContext(MyContext);
   const router = useRouter();
   const search = useRef<HTMLInputElement | null>(null);
@@ -33,20 +22,11 @@ const Headers = () => {
   useEffect(() => {
     router.prefetch('/account');
   }, []);
-
-  useEffect(() => {
-    if (accountData && !accountData?.userData.success) {
-      router.push('/account');
-    }
-  }, [accountData, router]);
-
-  const openAccount = () => {
-    setOpenAccountBox(!openAccountBox);
-  };
-
-  const closeAccount = () => {
-    setOpenAccountBox(false);
-  };
+  // useEffect(() => {
+  //   if (accountData && !accountData?.userData?.success) {
+  //     router.push('/account');
+  //   }
+  // }, [accountData]);
 
   const handleCtrlShiftSKey = useCallback((e: KeyboardEvent) => {
     if (e.ctrlKey && e.shiftKey && e.key === 'S') {
@@ -64,13 +44,6 @@ const Headers = () => {
 
   return (
     <>
-      <div
-        onClick={closeAccount}
-        ref={removeBox}
-        className={`${
-          !openAccountBox && 'hidden'
-        } absolute w-full h-screen z-10 left-0 top-0`}
-      ></div>
       <Div className='w-full py-1 border-b bg-background shadow-xl z-10 relative'>
         <Div className='w-full h-full px-6 flex justify-between items-center'>
           <Div className='w-[60%]'>
@@ -107,10 +80,7 @@ const Headers = () => {
                   </Div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <AccountBox
-                    userdata={accountData?.userData}
-                    closeAccount={closeAccount}
-                  />
+                  <AccountBox userdata={accountData?.userData} />
                 </DropdownMenuContent>
               </DropdownMenu>
             </Div>

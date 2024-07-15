@@ -6,7 +6,11 @@ import Instagram from '@/assests/homeImage/instagram.jpg';
 import Messnager from '@/assests/homeImage/messanger.jpg';
 import Reddit from '@/assests/homeImage/reddit.jpg';
 import Pinterest from '@/assests/homeImage/pintrest.jpg';
-import { MyAppDataTypes, contextTypes } from '@/Data/Types.jsx';
+import {
+  MyAppDataTypes,
+  contextTypes,
+  userResultTypes,
+} from '@/Data/Types.jsx';
 const MyContext = createContext<contextTypes | undefined>(undefined);
 import useStorage from '@/Hooks/useStorage';
 import { useQuery } from '@tanstack/react-query';
@@ -66,13 +70,12 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   } = useQuery({
     queryKey: ['userData'],
     queryFn: () =>
-      fetchRequest({
+      fetchRequest<object, userResultTypes>({
         url: '/api/v1/auth/me',
         headers: { Authorization: `Bearer ${storage?.get('accessToken')}` },
         popup: false,
       }),
   });
-  console.log(userData);
   return (
     <MyContext.Provider
       value={{
