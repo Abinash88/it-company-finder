@@ -67,7 +67,6 @@ const getCookie = <T,>(key: string): T | null => {
   const cookie = document.cookie
     .split(';')
     .find((cookie) => cookie.includes(key));
-  console.log(document.cookie);
   if (cookie) {
     try {
       return JSON.parse(cookie.split('=')[1] || '');
