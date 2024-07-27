@@ -9,6 +9,8 @@ export const cn = (...classes: ClassValue[]) => {
 }
 
 
+// export const PATH
+
 
 export const handleError = ({ error, popup = true }: { error: any, popup?: boolean }) => {
     const err = error as Error;

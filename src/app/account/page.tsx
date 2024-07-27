@@ -1,10 +1,10 @@
-import SignUpForm from "@/components/auth/main-account";
-import Div from "@/lib/Div";
-import React from "react";
+import SignUpForm from '@/front-end-components/auth/main-account';
+import Div from '@/lib/Div';
+import React from 'react';
 
 const index = () => {
   return (
-    <Div className="w-full h-full ">
+    <Div className='w-full h-full '>
       <SignUpForm />
     </Div>
   );

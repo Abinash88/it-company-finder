@@ -1,12 +1,12 @@
-import SettingMain from '@/components/PageComponent/SettingComponent/SettingMain'
-import React from 'react'
+import SettingMain from '@/front-end-components/PageComponent/SettingComponent/SettingMain';
+import React from 'react';
 
 const page = () => {
   return (
     <div className=' h-full flex-1 '>
-        <SettingMain />
+      <SettingMain />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

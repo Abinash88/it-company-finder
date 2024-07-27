@@ -1,17 +1,17 @@
 import {
   AuthMiddleware,
   ErrorMessage,
-} from '@/Backend/Middleware/ErrorHandler';
-import { signupBodyTypes } from '@/Backend/lib/backendTypes';
-import { accessToken, prisma, refreshToken } from '@/Backend/lib/helper';
+} from '@/backend/Middleware/ErrorHandler';
+import { signupBodyTypes } from '@/backend/lib/backendTypes';
+import { accessToken, prisma, refreshToken } from '@/backend/lib/helper';
 import bcrypt from 'bcrypt';
 import {
   CookieSetter,
   CreateToken,
   sendVerifyEmail,
-} from '@/Backend/lib/utils';
+} from '@/backend/lib/utils';
 import { NextRequest, NextResponse } from 'next/server';
-import { getLoginSchema } from '@/Backend/Middleware/Validation';
+import { getLoginSchema } from '@/backend/Middleware/Validation';
 
 // Login auth controller
 export const POST = AuthMiddleware(

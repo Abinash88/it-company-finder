@@ -2,19 +2,19 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/Backend/Middleware/ErrorHandler";
-import { prisma } from "@/Backend/lib/helper";
-import { getCookies, verifyToken } from "@/Backend/lib/utils";
-import { NextRequest } from "next/server";
+} from '@/backend/Middleware/ErrorHandler';
+import { prisma } from '@/backend/lib/helper';
+import { getCookies, verifyToken } from '@/backend/lib/utils';
+import { NextRequest } from 'next/server';
 
 export const POST = AuthMiddleware(async (req: NextRequest) => {
-  if (req.method !== "POST")
-    return ErrorMessage("POST method only supported!", 500);
+  if (req.method !== 'POST')
+    return ErrorMessage('POST method only supported!', 500);
   const path = req.nextUrl.pathname;
-  const passwordId = path.split("/api/v1/password/delete_password/").pop();
+  const passwordId = path.split('/api/v1/password/delete_password/').pop();
   const token = getCookies(req);
 
-  if (!token) return ErrorMessage("Token not found!", 403);
+  if (!token) return ErrorMessage('Token not found!', 403);
 
   const { _id: userId } = verifyToken(token);
 
@@ -27,7 +27,7 @@ export const POST = AuthMiddleware(async (req: NextRequest) => {
     },
   });
 
-  if (!findPassword) return ErrorMessage("Password do not exist", 404);
+  if (!findPassword) return ErrorMessage('Password do not exist', 404);
 
   const findPasswordName = await prisma.addPassword.delete({
     where: {
@@ -38,5 +38,5 @@ export const POST = AuthMiddleware(async (req: NextRequest) => {
     },
   });
 
-  return SuccessMessage("Password deleted successfully", 200, findPasswordName);
+  return SuccessMessage('Password deleted successfully', 200, findPasswordName);
 });

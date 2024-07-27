@@ -1,5 +1,6 @@
 import { fetchRequest } from "../fetch"
-import { HanleError, PATH } from "../utils"
+import { HanleError,  } from "../utils"
+import { PATH } from "./routes-path";
 
 export const GET_REQUEST = {
     get_user: async () => {

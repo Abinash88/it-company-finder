@@ -34,7 +34,6 @@ export const fetchRequest = async <T extends FieldValues, O>({
   const isServer = typeof window !== 'undefined';
   const toast = isServer && (await import('react-toastify')).toast;
   const isFormData = body instanceof FormData;
-
   try {
     const res = await fetch(url, {
       method: method || 'GET',
@@ -55,7 +54,6 @@ export const fetchRequest = async <T extends FieldValues, O>({
     });
 
     if (res.status === 401) {
-        
       throw new Error('Unauthorized');
     }
 

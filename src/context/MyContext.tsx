@@ -15,6 +15,7 @@ const MyContext = createContext<contextTypes | undefined>(undefined);
 import useStorage from '@/Hooks/useStorage';
 import { useQuery } from '@tanstack/react-query';
 import { fetchRequest } from '@/lib/fetch';
+import { PATH } from '@/lib/api-services/routes-path';
 
 export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
@@ -71,7 +72,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     queryKey: ['userData'],
     queryFn: () =>
       fetchRequest<object, userResultTypes>({
-        url: '/api/v1/auth/me',
+        url: PATH.GET_USER,
         headers: { Authorization: `Bearer ${storage?.get('accessToken')}` },
         popup: false,
       }),

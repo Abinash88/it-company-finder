@@ -1,23 +1,23 @@
-import nodemailer from "nodemailer";
-import { PrismaClient } from "@prisma/client";
-import { generateVerificationCode } from "./utils";
-import { ErrorMessage, SuccessMessage } from "../Middleware/ErrorHandler";
-import { NextRequest, NextResponse } from "next/server";
-import multer from "multer";
+import nodemailer from 'nodemailer';
+import { PrismaClient } from '@prisma/client';
+import { generateVerificationCode } from './utils';
+import { ErrorMessage, SuccessMessage } from '../Middleware/ErrorHandler';
+import { NextRequest, NextResponse } from 'next/server';
+import multer from 'multer';
 
 const prisma = new PrismaClient();
 
 export { prisma };
 
-export const accessToken = "accessToken";
-export const refreshToken = "refreshToken";
+export const accessToken = 'accessToken';
+export const refreshToken = 'refreshToken';
 
 //VERIFICATION CODE EMAIL SENDER LOGIC START HERE
-let verificationCode: string = "";
+let verificationCode: string = '';
 
 export const sendEmailOfPincode = (email: string) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: 'smtp.gmail.com',
     auth: {
       user: process.env.MAILING_EMAIL,
       pass: process.env.APP_PASSWORD,
@@ -27,22 +27,22 @@ export const sendEmailOfPincode = (email: string) => {
   verificationCode = generateVerificationCode();
 
   const mailOptions = {
-    from: "subediabinas@gmail.com",
+    from: 'subediabinas@gmail.com',
     to: email,
-    subject: "hello world",
+    subject: 'hello world',
     text: `Your password reset code is ${verificationCode}`,
   };
 
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log(err);
-      return ErrorMessage("Error sending mail!", 400);
+      return ErrorMessage('Error sending mail!', 400);
     }
     SuccessMessage(`Verificaton code is sent to your email: ${email}.`, 200);
   });
 
   setTimeout(() => {
-    verificationCode = "";
+    verificationCode = '';
   }, 60000);
 };
 //VERIFICATION CODE EMAIL SENDER LOGIC END HERE
@@ -51,12 +51,12 @@ export const sendEmailOfPincode = (email: string) => {
 export const VerifyPincode = (code: string) => {
   if (verificationCode) {
     if (code === verificationCode) {
-      return "SUCCESS";
+      return 'SUCCESS';
     } else {
-      return "FAILED";
+      return 'FAILED';
     }
   } else {
-    return "EXPIRE";
+    return 'EXPIRE';
   }
 };
 //VERIFICATION CODE VERIFY HERE
@@ -79,7 +79,7 @@ export const HandleMulterMiddleware = (
   upload: any
 ) => {
   return new Promise((resolve, reject) => {
-    upload(req, res, (result: any) => {
+    upload(req, res, (result: unknown) => {
       if (result instanceof Error) return reject(result.message);
       console.log(result);
       return resolve(result);

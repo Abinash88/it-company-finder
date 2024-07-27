@@ -2,8 +2,8 @@ import {
   ContextRunner,
   ValidationChain,
   validationResult,
-} from "express-validator";
-import { NextRequest, NextResponse } from "next/server";
+} from 'express-validator';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const ErrorMessage = (message: string, statusCode: number = 500) => {
   return NextResponse.json({ success: false, message }, { status: statusCode });
@@ -33,7 +33,7 @@ export const initValidation = (
   handler: (req: NextRequest, res: NextResponse<unknown>) => Promise<any>
 ) => {
   return async (req: NextRequest, res: NextResponse) => {
-    if (["POST", "PUT", "PATCH"].includes(req.method)) {
+    if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
       try {
         for (const validation of validations) {
           await validation.run(req);
@@ -49,7 +49,7 @@ export const initValidation = (
       } catch (err) {
         const error = err as Error;
         //eslint-disable-next-line
-        console.log(error.message || "Error occured while validating");
+        console.log(error.message || 'Error occured while validating');
       }
     }
     return await handler(req, res);

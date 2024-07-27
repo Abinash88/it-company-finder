@@ -2,93 +2,79 @@ import {
   AuthMiddleware,
   ErrorMessage,
   SuccessMessage,
-} from "@/Backend/Middleware/ErrorHandler";
-import { getAddPasswordSchema } from "@/Backend/Middleware/Validation";
-import { upload } from "@/Backend/Middleware/multer";
-import {
-  GetFormData,
-  HandleMulterMiddleware,
-  accessToken,
-  prisma,
-} from "@/Backend/lib/helper";
-import { AddPasswordDataTypes } from "@/Backend/lib/types";
-import { getCookies, verifyToken } from "@/Backend/lib/utils";
-import { PageConfig } from "next";
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-import fs from 'fs'
+} from '@/backend/Middleware/ErrorHandler';
+import { getCookies, verifyToken } from '@/backend/lib/utils';
+import { NextRequest } from 'next/server';
+import fs from 'fs';
+import { promisify } from 'util';
+import { pipeline } from 'stream';
+const pump = promisify(pipeline);
+import { prisma } from '@/backend/lib/helper';
+import { PageConfig } from 'next';
 
 type PasswordData = {
-  catagory:string,
-  name:string,
-  password:string,
-  url:string,
-  notes:string,
-  image:string,
-  description:string,
-}
+  category: string;
+  name: string;
+  password: string;
+  url: string;
+  notes: string;
+  image: string;
+  description: string;
+};
 
-// const multerMiddleware = upload.single("image");
+const filePath = '/uploads';
 
-export const POST = AuthMiddleware(
-  async (req: NextRequest, res: NextResponse) => {
-    if (req.method !== "POST")
-      return ErrorMessage("POST method only supported!", 400);
-    const form_data = await req.formData();
-    const formdata = Object.fromEntries(form_data);
-    console.log(formdata);
-    const password_data = formdata as PasswordData;
-    // const image = form_data.get('image');
-    // if(!image) return;
-    // const byteimage = fs.readFileSync(image);
-    // const buffer = Buffer.from(byteimage);
-    // console.log(buffer);
-    // const data = GetFormData<AddPasswordDataTypes>(form_data, PasswordData);
-    // const data = JSON.parse(formdata);
-    // console.log(formdata);
-    // await HandleMulterMiddleware(req, res, multerMiddleware);
-    // const validationResult = await getAddPasswordSchema().safeParseAsync(data);
-    // if (!validationResult.success)
-    //   return ErrorMessage(
-    //     JSON.parse(validationResult.error.message)?.[0].message
-    //   );
-    // const token = getCookies(req);
-    // if (!token) return ErrorMessage("token not Found!", 403);
-    // console.log(data);
-    // const { _id: user } = verifyToken(token);
-    // //CHECK THE USER AND ADD THE PASSWORD
-    // const doesPasswordsAdded = await prisma.addPassword.findFirst({
-    //   where: {
-    //     User: {
-    //       id: user,
-    //     },
-    //   },
-    // });
+export const POST = AuthMiddleware(async (req: NextRequest) => {
+  if (req.method !== 'POST')
+    return ErrorMessage('POST method only supported!', 400);
+  const form_data = await req.formData();
+  const formdata = Object.fromEntries(form_data);
+  const password_data = formdata as PasswordData;
+  const imageFile = form_data.get('image') as unknown as File;
 
-    // console.log(doesPasswordsAdded);
-
-    // const addpassword = await prisma.addPassword.create({
-    //   data: {
-    //     password: data.password,
-    //     catagory: data.catagory,
-    //     description: data.description,
-    //     image: "",
-    //     name: data.name,
-    //     url: data.url,
-    //     notes: data.note,
-    //     userId: user,
-    //   },
-    // });
-    return SuccessMessage(
-      "Password is created successfully.",
-      201
-      // addpassword
-    );
+  // const validationResult =
+  //   await getAddPasswordSchema().safeParseAsync(password_data);
+  // if (!validationResult.success)
+  //   return ErrorMessage(
+  //     JSON.parse(validationResult.error.message)?.[0].message
+  //   );
+  if (!fs.existsSync(filePath)) {
+    fs.mkdirSync(filePath);
   }
-);
+  const createFilePath = `${filePath}/${Date.now() + imageFile.name}`;
+  const paths = `http://localhost:3000/${createFilePath}`;
+  await pump(imageFile?.stream(), fs.createWriteStream(createFilePath));
+  const token = getCookies(req);
+  if (!token) return ErrorMessage('token not Found!', 403);
+  const { _id: user } = verifyToken(token);
+  //CHECK THE USER AND ADD THE PASSWORD
+  const doesPasswordsAdded = await prisma.addPassword.findMany({
+    where: {
+      User: {
+        id: user,
+      },
+    },
+  });
 
-// export const config: PageConfig = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
+  console.log(doesPasswordsAdded);
+
+  const addpassword = await prisma.addPassword.create({
+    data: {
+      password: password_data.password,
+      catagory: password_data.category,
+      description: password_data.description,
+      image: paths,
+      name: password_data.name,
+      url: password_data.url,
+      notes: password_data.notes,
+      userId: user,
+    },
+  });
+  return SuccessMessage('Password is created successfully.', 201, addpassword);
+});
+
+export const config: PageConfig = {
+  api: {
+    bodyParser: false,
+  },
+};
