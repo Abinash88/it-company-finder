@@ -16,7 +16,6 @@ export const GET = AuthMiddleware(async (req: Request) => {
   const getToken = token! || userToken!;
   //CHECK THE USER AND ADD THE PASSWORD
   const user = verifyToken(getToken);
-  console.log(user , 'user');
   if (user instanceof Error) return ErrorMessage('Invalid Token', 401);
 
   const data = await prisma.addPassword.findMany({
