@@ -31,7 +31,6 @@ const Headers = () => {
   const handleCtrlShiftSKey = useCallback((e: KeyboardEvent) => {
     if (e.ctrlKey && e.shiftKey && e.key === 'S') {
       e.preventDefault();
-      console.log('ani');
       search?.current?.focus();
     }
   }, []);

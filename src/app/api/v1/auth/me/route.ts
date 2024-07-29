@@ -9,14 +9,12 @@ import { cookies } from 'next/headers';
 
 export const GET = AuthMiddleware(async (req: Request) => {
   if (req.method !== 'GET') return ErrorMessage('GET method only supported.');
-  // const cookie = req.headers.get('cookie');
-  // const token = cookie?.split('=');
-  console.log(req.headers.get('Authorization'));
   const getToken = cookies().get('accessToken')?.value;
   const Token: string | undefined = getToken;
   if (!Token) return ErrorMessage('token not Found!', 401);
   const GetId = verifyToken(Token);
-  if (!GetId) return ErrorMessage('Invalid  Token!', 401);
+  console.log(GetId, 'getid');
+  if (!GetId) return ErrorMessage('Invalid  Tokens!', 401);
 
   const user = await prisma.user.findUnique({
     where: {

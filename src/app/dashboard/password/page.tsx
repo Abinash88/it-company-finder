@@ -2,6 +2,7 @@ import PasswordContainer from '@/front-end-components/PageComponent/PasswordComp
 import { PATH } from '@/lib/api-services/routes-path';
 import { ACCESS_TOKEN } from '@/lib/constants';
 import { fetchRequest } from '@/lib/fetch';
+import { headerServices } from '@/lib/helper';
 import { cookies } from 'next/headers';
 import React from 'react';
 
@@ -10,13 +11,15 @@ const page = async () => {
 
   const fetchPassword = await fetchRequest({
     url: PATH.GET_PASSWORD,
-    headers: { Authorization: `Bearer ${token}` },
+    headers: headerServices(token),
+    method: 'GET',
   });
-  console.log(fetchPassword, token);
+
+  console.log(fetchPassword, 'get password');
 
   return (
-    <div className='w-full h-full '>
-      <PasswordContainer />
+    <div className='w-full h-full'>
+      <PasswordContainer token={token} />
     </div>
   );
 };

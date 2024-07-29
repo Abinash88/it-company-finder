@@ -12,12 +12,17 @@ import {
   userResultTypes,
 } from '@/Data/Types.jsx';
 const MyContext = createContext<contextTypes | undefined>(undefined);
-import useStorage from '@/Hooks/useStorage';
 import { useQuery } from '@tanstack/react-query';
 import { fetchRequest } from '@/lib/fetch';
 import { PATH } from '@/lib/api-services/routes-path';
 
-export const MyContextProvider = ({ children }: { children: ReactNode }) => {
+export const MyContextProvider = ({
+  children,
+  token,
+}: {
+  children: ReactNode;
+  token: string | undefined;
+}) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
     {
       id: 'asldewio23409roasidjf',
@@ -63,7 +68,6 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
 
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
 
-  const storage = useStorage('cookie');
   const {
     data: userData,
     isLoading,
@@ -73,7 +77,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     queryFn: () =>
       fetchRequest<object, userResultTypes>({
         url: PATH.GET_USER,
-        headers: { Authorization: `Bearer ${storage?.get('accessToken')}` },
+        headers: { Authorization: `Bearer ${token}` },
         popup: false,
       }),
   });

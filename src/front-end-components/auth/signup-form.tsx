@@ -48,7 +48,6 @@ const Signup = ({
         router.replace('/account?type=mailbox');
       }
       setLoading(false);
-      console.log(res);
     } catch (error) {
       setLoading(false);
       handleError({ error, popup: false });

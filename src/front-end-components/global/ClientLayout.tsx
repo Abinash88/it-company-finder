@@ -6,13 +6,19 @@ import Sidebars from './Sidebars';
 import { usePathname } from 'next/navigation';
 import Headers from './Headers';
 
-const ClientLayout = ({ children }: { children: React.ReactNode }) => {
+const ClientLayout = ({
+  children,
+  token,
+}: {
+  children: React.ReactNode;
+  token: string | undefined;
+}) => {
   const contextData = useContext(MyContext);
 
   const path = usePathname();
   return (
     <div>
-      <MyContextProvider>
+      <MyContextProvider token={token}>
         <div className='mx-auto  overflow-hidden w-full h-screen   flex flex-col'>
           <div className=' w-full h-full flex'>
             <div className={`${path === '/account' ? 'hidden' : ''}   h-full`}>

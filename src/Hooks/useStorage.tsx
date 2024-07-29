@@ -13,7 +13,11 @@ type TOptions<TStorage> = TStorage extends 'cookie'
     }
   : undefined;
 
-export default function useStorage<T>(type: TStorage = 'local') {
+export default function useStorage<T>(type: TStorage = 'local'): {
+  get: (key: string) => void;
+  set: (key: string, value: T, options?: TOptions<typeof type>) => void;
+  remove: (key: string) => void;
+} | null {
   if (typeof window === 'undefined') return null;
   const set = (key: string, value: T, options?: TOptions<typeof type>) => {
     if (type === 'cookie') {

@@ -1,13 +1,12 @@
-import React from "react";
+import React from 'react';
 
 export const OutClickToggle = (
   RemovePasswordBox: React.RefObject<HTMLDivElement>,
   closeModelBox: () => void
 ) => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     const passwordBtn: HTMLElement | null =
-      document.getElementById("setpasswordBtn");
-console.log(RemovePasswordBox?.current)
+      document.getElementById('setpasswordBtn');
     const ClosePasswordBox = (e: MouseEvent) => {
       const passwordBox = RemovePasswordBox?.current;
       const buttonBox = passwordBtn;
@@ -24,7 +23,7 @@ console.log(RemovePasswordBox?.current)
       }
     };
 
-    if (typeof window === "undefined") return;
-    document.addEventListener("click", ClosePasswordBox);
+    if (typeof window === 'undefined') return;
+    document.addEventListener('click', ClosePasswordBox);
   }
 };

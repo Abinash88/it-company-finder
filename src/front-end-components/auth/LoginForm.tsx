@@ -1,8 +1,7 @@
 'use client';
 
 import Div from '@/lib/Div';
-import React, { useContext, useEffect, useState } from 'react';
-import MyContext from '../../context/MyContext';
+import React, { useEffect, useState } from 'react';
 import Topheader, {
   AuthInputBox,
   BottomText,
@@ -27,13 +26,11 @@ const LoginForm = ({
 }: {
   setCheckEmail: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const contextdata = useContext(MyContext);
   const [isPasswordSeen, setIsPasswordSeen] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<Omit<SignupDataTypes, 'name'>>({
     resolver: zodResolver(SCHEMA_VALIDATION?.login_schema),
   });
@@ -63,6 +60,7 @@ const LoginForm = ({
         setCheckEmail(body?.email);
         router.replace('/account?type=mailbox');
         setLoading(false);
+        console.log('response');
         return;
       }
       if (res?.success) {

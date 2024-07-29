@@ -39,7 +39,6 @@ export const initValidation = (
           await validation.run(req);
         }
         const errors = validationResult(req);
-        console.log(errors);
         if (!errors.isEmpty()) {
           return NextResponse.json({
             message: errors.array()?.[0].msg,

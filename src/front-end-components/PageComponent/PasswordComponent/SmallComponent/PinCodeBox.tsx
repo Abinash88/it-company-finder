@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import React, { useEffect, useRef, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 
 export type pincodeBoxTypes = {
   setShowPinCodeBox: React.Dispatch<React.SetStateAction<boolean>>;
@@ -7,7 +7,7 @@ export type pincodeBoxTypes = {
 };
 
 const PinCodeBox = ({ setShowPinCodeBox, showPinCodeBox }: pincodeBoxTypes) => {
-  const [pinCode, setPinCode] = useState(["", "", "", ""]);
+  const [pinCode, setPinCode] = useState(['', '', '', '']);
   const pinInputs: React.MutableRefObject<HTMLInputElement | null>[] = [
     useRef<HTMLInputElement | null>(null),
     useRef<HTMLInputElement | null>(null),
@@ -15,10 +15,9 @@ const PinCodeBox = ({ setShowPinCodeBox, showPinCodeBox }: pincodeBoxTypes) => {
     useRef<HTMLInputElement | null>(null),
   ];
 
-
   useEffect(() => {
     pinInputs[0].current?.focus();
-  }, [showPinCodeBox])
+  }, [showPinCodeBox]);
 
   const GetThePinCode = (value: string, index: number) => {
     if (/^\d*$/.test(value) && value.length <= 1) {
@@ -38,8 +37,7 @@ const PinCodeBox = ({ setShowPinCodeBox, showPinCodeBox }: pincodeBoxTypes) => {
   };
 
   useEffect(() => {
-    if (pinCode.join("").length === 4) {
-      console.log("pin submmited");
+    if (pinCode.join('').length === 4) {
     }
   }, [pinCode]);
 
@@ -52,32 +50,32 @@ const PinCodeBox = ({ setShowPinCodeBox, showPinCodeBox }: pincodeBoxTypes) => {
     >
       <div
         onClick={() => setShowPinCodeBox(!showPinCodeBox)}
-        className="absolute top-2 right-3 transform  text-gray-100  p-2 rounded-full transition duration-300 rotate-[140deg] hover:bg-gray-200"
+        className='absolute top-2 right-3 transform  text-gray-100  p-2 rounded-full transition duration-300 rotate-[140deg] hover:bg-gray-200'
       >
-        <FaPlus className="text-gray-100 hover:text-gray-600 text-[19px]" />
+        <FaPlus className='text-gray-100 hover:text-gray-600 text-[19px]' />
       </div>
-      <div className="w-[80%]  flex flex-col items-center justify-center">
-        <div className="items-center mb-5">
-          <h4 className="text-center font-semibold text-white text-[18px]">
+      <div className='w-[80%]  flex flex-col items-center justify-center'>
+        <div className='items-center mb-5'>
+          <h4 className='text-center font-semibold text-white text-[18px]'>
             Enter the Pin code
           </h4>
-          <h6 className="text-center text-white font-light text-[13px]">
+          <h6 className='text-center text-white font-light text-[13px]'>
             To see the password
           </h6>
         </div>
-        <form action="" className="flex items-center space-x-2">
+        <form action='' className='flex items-center space-x-2'>
           {pinCode?.map((item, index) => {
             return (
-              <div key={index} className="w-[40px] h-[20px]">
+              <div key={index} className='w-[40px] h-[20px]'>
                 <input
                   ref={(input) => (pinInputs[index].current = input)}
-                  type="number"
-                  name="first"
+                  type='number'
+                  name='first'
                   onChange={(e) => {
                     GetThePinCode(e.target.value, index);
                   }}
                   value={item}
-                  className="w-full py-1 pl-3 text-[18px] border-2 outline-none"
+                  className='w-full py-1 pl-3 text-[18px] border-2 outline-none'
                 />
               </div>
             );

@@ -47,16 +47,6 @@ export const POST = AuthMiddleware(async (req: NextRequest) => {
   const token = getCookies(req);
   if (!token) return ErrorMessage('token not Found!', 403);
   const { _id: user } = verifyToken(token);
-  //CHECK THE USER AND ADD THE PASSWORD
-  const doesPasswordsAdded = await prisma.addPassword.findMany({
-    where: {
-      User: {
-        id: user,
-      },
-    },
-  });
-
-  console.log(doesPasswordsAdded);
 
   const addpassword = await prisma.addPassword.create({
     data: {

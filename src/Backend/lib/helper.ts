@@ -81,7 +81,6 @@ export const HandleMulterMiddleware = (
   return new Promise((resolve, reject) => {
     upload(req, res, (result: unknown) => {
       if (result instanceof Error) return reject(result.message);
-      console.log(result);
       return resolve(result);
     });
   });

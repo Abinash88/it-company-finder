@@ -30,9 +30,7 @@ const NotesForm = (props: popupPassword) => {
   });
   const { fileLists, handleFile, blobImage, clearFile, valueData } =
     useFileHandler();
-  const onSubmitForm: SubmitHandler<add_notes_data_types> = (data) => {
-    console.log(data);
-  };
+  const onSubmitForm: SubmitHandler<add_notes_data_types> = (data) => {};
   const handleImageClick = () => {
     if (siteFileInputRef && siteFileInputRef.current)
       siteFileInputRef?.current?.click();

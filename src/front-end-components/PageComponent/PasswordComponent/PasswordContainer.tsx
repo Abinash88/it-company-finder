@@ -13,6 +13,9 @@ import CustomSheet from '@/front-end-components/reusables/custom-sheet';
 import CustomTable from '@/front-end-components/reusables/table/custom-table';
 import PasswordColumns from './SmallComponent/password-columns';
 import { PlusIcon } from 'lucide-react';
+import { fetchRequest } from '@/lib/fetch';
+import { PATH, PATH_WITHOUT_PREFIX } from '@/lib/api-services/routes-path';
+import { headerServices } from '@/lib/helper';
 
 const PasswordData: MyAppDataTypes[] = [
   {
@@ -25,7 +28,7 @@ const PasswordData: MyAppDataTypes[] = [
   },
 ];
 
-const PasswordContainer = () => {
+const PasswordContainer = ({ token }: { token: string | undefined }) => {
   const MyAppData = useContext(MyContext);
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [text, setText] = useState('');
