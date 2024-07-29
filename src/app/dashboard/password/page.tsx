@@ -1,3 +1,7 @@
+import {
+  ResponseGetPasswordTypes,
+  ResponseMessageDataTypes,
+} from '@/Data/interfaces/password.interface';
 import PasswordContainer from '@/front-end-components/PageComponent/PasswordComponent/PasswordContainer';
 import { PATH } from '@/lib/api-services/routes-path';
 import { ACCESS_TOKEN } from '@/lib/constants';
@@ -9,7 +13,10 @@ import React from 'react';
 const page = async () => {
   const token = cookies().get(ACCESS_TOKEN)?.value;
 
-  const fetchPassword = await fetchRequest({
+  const fetchPassword = await fetchRequest<
+    {},
+    ResponseMessageDataTypes<ResponseGetPasswordTypes[]>
+  >({
     url: PATH.GET_PASSWORD,
     headers: headerServices(token),
     method: 'GET',
@@ -19,7 +26,7 @@ const page = async () => {
 
   return (
     <div className='w-full h-full'>
-      <PasswordContainer token={token} />
+      <PasswordContainer data={fetchPassword?.data} token={token} />
     </div>
   );
 };

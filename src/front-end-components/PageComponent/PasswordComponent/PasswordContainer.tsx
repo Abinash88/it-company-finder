@@ -16,6 +16,7 @@ import { PlusIcon } from 'lucide-react';
 import { fetchRequest } from '@/lib/fetch';
 import { PATH, PATH_WITHOUT_PREFIX } from '@/lib/api-services/routes-path';
 import { headerServices } from '@/lib/helper';
+import { ResponseGetPasswordTypes } from '@/Data/interfaces/password.interface';
 
 const PasswordData: MyAppDataTypes[] = [
   {
@@ -28,7 +29,13 @@ const PasswordData: MyAppDataTypes[] = [
   },
 ];
 
-const PasswordContainer = ({ token }: { token: string | undefined }) => {
+const PasswordContainer = ({
+  token,
+  data,
+}: {
+  token: string | undefined;
+  data: ResponseGetPasswordTypes[] | undefined;
+}) => {
   const MyAppData = useContext(MyContext);
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [text, setText] = useState('');
