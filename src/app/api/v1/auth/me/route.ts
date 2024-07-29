@@ -14,7 +14,7 @@ export const GET = AuthMiddleware(async (req: Request) => {
   if (!Token) return ErrorMessage('token not Found!', 401);
   const GetId = verifyToken(Token);
   console.log(GetId, 'getid');
-  if (!GetId) return ErrorMessage('Invalid  Tokens!', 401);
+  if (GetId instanceof Error) return ErrorMessage('Invalid  Tokens!', 401);
 
   const user = await prisma.user.findUnique({
     where: {
