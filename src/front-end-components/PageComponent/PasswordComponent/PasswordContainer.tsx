@@ -16,7 +16,12 @@ import { PlusIcon } from 'lucide-react';
 import { fetchRequest } from '@/lib/fetch';
 import { PATH, PATH_WITHOUT_PREFIX } from '@/lib/api-services/routes-path';
 import { headerServices } from '@/lib/helper';
-import { ResponseGetPasswordTypes } from '@/Data/interfaces/password.interface';
+import {
+  ResponseGetPasswordTypes,
+  ResponseMessageDataTypes,
+} from '@/Data/interfaces/password.interface';
+import FetchWrapper from '@/front-end-components/reusables/fetch-wrapper';
+import { useQuery } from '@tanstack/react-query';
 
 const PasswordData: MyAppDataTypes[] = [
   {
@@ -34,7 +39,7 @@ const PasswordContainer = ({
   data,
 }: {
   token: string | undefined;
-  data: ResponseGetPasswordTypes[] | undefined;
+  data: ResponseMessageDataTypes<ResponseGetPasswordTypes[]> | undefined;
 }) => {
   const MyAppData = useContext(MyContext);
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
@@ -50,21 +55,37 @@ const PasswordContainer = ({
     setSearchData(searched);
   }, [searched]);
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+  const { data: password, ...rest } = useQuery({
+    queryKey: ['userData'],
+    queryFn: () =>
+      fetchRequest<
+        object,
+        ResponseMessageDataTypes<ResponseGetPasswordTypes[]>
+      >({
+        url: PATH.GET_PASSWORD,
+        headers: headerServices(token),
+        popup: false,
+      }),
+    initialData: data,
+  });
 
-    if (active.id !== over?.id) {
-      const oldIndex = searched.findIndex((item) => item.id === active.id);
-      const newIndex = searched.findIndex((item) => item.id === over?.id);
+  console.log(data);
 
-      setSearchData((items) => {
-        const updatedItems = [...items];
-        const [movedItem] = updatedItems.splice(oldIndex, 1);
-        updatedItems.splice(newIndex, 0, movedItem);
-        return updatedItems;
-      });
-    }
-  };
+  // const handleDragEnd = (event: DragEndEvent) => {
+  //   const { active, over } = event;
+
+  //   if (active.id !== over?.id) {
+  //     const oldIndex = searched.findIndex((item) => item.id === active.id);
+  //     const newIndex = searched.findIndex((item) => item.id === over?.id);
+
+  //     setSearchData((items) => {
+  //       const updatedItems = [...items];
+  //       const [movedItem] = updatedItems.splice(oldIndex, 1);
+  //       updatedItems.splice(newIndex, 0, movedItem);
+  //       return updatedItems;
+  //     });
+  //   }
+  // };
 
   const resetWhileClose = () => {};
 
@@ -90,18 +111,20 @@ const PasswordContainer = ({
         </Div>
 
         <Div className='w-full px-6'>
-          <CustomTable
-            columns={PasswordColumns}
-            addButton={{
-              label: 'Add password',
-              icon: <PlusIcon size={18} color='#fff' />,
-              handleClick: () => {
-                setIsOpenPopup(!isOpenPopup);
-              },
-              variant: 'default',
-            }}
-            data={PasswordData}
-          />
+          <FetchWrapper {...rest}>
+            <CustomTable
+              columns={PasswordColumns}
+              addButton={{
+                label: 'Add password',
+                icon: <PlusIcon size={18} color='#fff' />,
+                handleClick: () => {
+                  setIsOpenPopup(!isOpenPopup);
+                },
+                variant: 'default',
+              }}
+              data={password}
+            />
+          </FetchWrapper>
         </Div>
       </Div>
     </Div>

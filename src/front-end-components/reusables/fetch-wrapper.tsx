@@ -9,6 +9,7 @@ interface FetchWrapperTypes {
   errorComponent?: React.ReactNode;
   isShow?: boolean;
   children: React.ReactNode;
+  refetch: () => void;
 }
 
 const FetchWrapper = ({
@@ -16,7 +17,7 @@ const FetchWrapper = ({
   isLoading,
   loadingComponent,
   errorComponent,
-  isShow = false,
+  refetch,
   children,
 }: FetchWrapperTypes) => {
   if (isLoading)
@@ -27,7 +28,11 @@ const FetchWrapper = ({
         <div className='w-full h-full flex items-center justify-center'>
           <div className='text-center'>
             <p> Something went wrong{'... '}</p>
-            <Button variant={'link'} className='text-gray-500 font-normal'>
+            <Button
+              onClick={refetch}
+              variant={'link'}
+              className='text-gray-500 font-normal'
+            >
               Retry
             </Button>
           </div>

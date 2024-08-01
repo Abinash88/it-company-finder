@@ -14,7 +14,7 @@ const page = async () => {
   const token = cookies().get(ACCESS_TOKEN)?.value;
 
   const fetchPassword = await fetchRequest<
-    {},
+    object,
     ResponseMessageDataTypes<ResponseGetPasswordTypes[]>
   >({
     url: PATH.GET_PASSWORD,
@@ -26,7 +26,7 @@ const page = async () => {
 
   return (
     <div className='w-full h-full'>
-      <PasswordContainer data={fetchPassword?.data} token={token} />
+      <PasswordContainer data={fetchPassword} token={token} />
     </div>
   );
 };

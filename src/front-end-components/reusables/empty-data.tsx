@@ -1,19 +1,19 @@
-import DocsEmpty from '@/assests/empty.jpg'
-import { Button } from '../ui/button'
-import { PlusIcon } from 'lucide-react'
-import React from 'react'
-import Image from 'next/image'
-import { IbtnVariant } from '@/interface-types/interface'
+import DocsEmpty from '@/assests/empty.jpg';
+import { Button } from '../ui/button';
+import { PlusIcon } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
+import { IbtnVariant } from '@/interface-types/interface';
 
 type EmptyDataProps = {
-  title?: string
-  subtitle?: string
-  btnAction?: () => void
-  btnLabel?: string
-  btnVariant?: IbtnVariant
-  icon?: string
-  hideButton?: boolean
-}
+  title?: string;
+  subtitle?: string;
+  btnAction?: () => void;
+  btnLabel?: string;
+  btnVariant?: IbtnVariant;
+  icon?: string;
+  hideButton?: boolean;
+};
 
 const EmptyData: React.FC<EmptyDataProps> = ({
   title,
@@ -26,13 +26,17 @@ const EmptyData: React.FC<EmptyDataProps> = ({
 }) => {
   const handleBtn = (): void => {
     if (btnAction) {
-      btnAction()
+      btnAction();
     }
-  }
+  };
 
   return (
     <div className='flex flex-col place-items-center md:my-12 lg:my-32 gap-4'>
-      <Image src={DocsEmpty} className='max-h-32 mx-auto' alt='empty ui' />
+      <Image
+        src={DocsEmpty}
+        className='h-[25rem] object-contain mx-auto'
+        alt='empty ui'
+      />
       <h2 className='text-2xl font-medium '>{title}</h2>
       <p className='text-lg'>{subtitle}</p>
       {btnAction && !hideButton && (
@@ -48,7 +52,7 @@ const EmptyData: React.FC<EmptyDataProps> = ({
         </Button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default EmptyData
+export default EmptyData;
