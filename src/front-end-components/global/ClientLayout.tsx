@@ -28,9 +28,6 @@ const ClientLayout = ({
               {path === '/account' ? null : <Headers />}
               <div className=' overflow-y-auto h-[calc(100vh-50px)] flex flex-1'>
                 <div className='w-full'>{children}</div>
-                {/* <div className="w-[50px] bg-white px-1 ">
-                                        nav
-                                    </div> */}
               </div>
             </div>
           </div>

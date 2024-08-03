@@ -1,10 +1,7 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 
 const ClientProvider = ({ children }: { children: ReactNode }) => {
+  return <div>{children}</div>;
+};
 
-    return (
-            <div>{children}</div>
-    )
-}
-
-export default ClientProvider
+export default ClientProvider;

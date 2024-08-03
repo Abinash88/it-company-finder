@@ -1,11 +1,12 @@
 import { ResponseGetPasswordTypes } from '@/Data/interfaces/password.interface';
-import { Checkbox } from '@radix-ui/react-checkbox';
+import { Checkbox } from '@/front-end-components/ui/checkbox';
 import { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
 
 const PasswordColumns: ColumnDef<ResponseGetPasswordTypes>[] = [
   {
     id: 'select',
+    size: 50,
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -29,6 +30,7 @@ const PasswordColumns: ColumnDef<ResponseGetPasswordTypes>[] = [
   },
   {
     accessorKey: 'SN',
+    size: 50,
     header: 'SN',
     cell: ({ row }) => <div className='capitalize'>{row.index + 1}</div>,
   },
@@ -41,45 +43,37 @@ const PasswordColumns: ColumnDef<ResponseGetPasswordTypes>[] = [
   },
   {
     accessorKey: 'category',
-    header: () => <div className='text-right'>CATEGORY</div>,
+    header: () => <div className=''>CATEGORY</div>,
     cell: ({ row }) => {
-      return (
-        <div className='text-right font-medium'>{row.original.createdAt}</div>
-      );
+      return <div className=' '>{row.original.catagory}</div>;
     },
   },
   {
     accessorKey: 'password',
-    header: () => <div className='text-right'>PASSWORD</div>,
+    header: () => <div className=''>PASSWORD</div>,
     cell: ({ row }) => {
-      return (
-        <div className='text-right font-medium'>{row.original.password}</div>
-      );
+      return <div className=' '>{row.original.password}</div>;
     },
   },
   {
     accessorKey: 'notes',
-    header: () => <div className='text-right'>NOTES</div>,
+    header: () => <div className=''>NOTES</div>,
     cell: ({ row }) => {
-      return <div className='text-right font-medium'>{row.original.notes}</div>;
+      return <div className=' '>{row.original.notes}</div>;
     },
   },
   {
     accessorKey: 'description',
-    header: () => <div className='text-right'>DESCRIPTION</div>,
+    header: () => <div className=''>DESCRIPTION</div>,
     cell: ({ row }) => {
-      return (
-        <div className='text-right font-medium'>{row.original.description}</div>
-      );
+      return <div className=' '>{row.original.description}</div>;
     },
   },
   {
     accessorKey: 'url',
-    header: () => <div className='text-right'>URL</div>,
+    header: () => <div className=''>URL</div>,
     cell: ({ row }) => {
-      return (
-        <div className='text-right font-medium'>{row.original.url}</div>
-      );
+      return <div className=' '>{row.original.url}</div>;
     },
   },
 ];

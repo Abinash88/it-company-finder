@@ -22,8 +22,6 @@ const page = async () => {
     method: 'GET',
   });
 
-  console.log(fetchPassword, 'get password');
-
   return (
     <div className='w-full h-full'>
       <PasswordContainer data={fetchPassword} token={token} />

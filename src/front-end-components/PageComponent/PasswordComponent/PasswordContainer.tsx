@@ -8,13 +8,12 @@ import PasswordForm from './SmallComponent/password-form';
 import { cn } from '@/lib/utils';
 import PageTitle from '@/front-end-components/ui/page-title';
 import UseHandleSearch from '@/Hooks/use-handle-search';
-import { DragEndEvent } from '@dnd-kit/core';
 import CustomSheet from '@/front-end-components/reusables/custom-sheet';
 import CustomTable from '@/front-end-components/reusables/table/custom-table';
 import PasswordColumns from './SmallComponent/password-columns';
 import { PlusIcon } from 'lucide-react';
 import { fetchRequest } from '@/lib/fetch';
-import { PATH, PATH_WITHOUT_PREFIX } from '@/lib/api-services/routes-path';
+import { PATH } from '@/lib/api-services/routes-path';
 import { headerServices } from '@/lib/helper';
 import {
   ResponseGetPasswordTypes,
@@ -22,17 +21,7 @@ import {
 } from '@/Data/interfaces/password.interface';
 import FetchWrapper from '@/front-end-components/reusables/fetch-wrapper';
 import { useQuery } from '@tanstack/react-query';
-
-const PasswordData: MyAppDataTypes[] = [
-  {
-    id: '1',
-    name: 'abinash subedi',
-    link: 'https://github.com/',
-    image: '',
-    category: 'website',
-    password: 'password123',
-  },
-];
+import { PopupContext } from '@/context/popup-form-context';
 
 const PasswordContainer = ({
   token,
@@ -69,24 +58,6 @@ const PasswordContainer = ({
     initialData: data,
   });
 
-  console.log(data);
-
-  // const handleDragEnd = (event: DragEndEvent) => {
-  //   const { active, over } = event;
-
-  //   if (active.id !== over?.id) {
-  //     const oldIndex = searched.findIndex((item) => item.id === active.id);
-  //     const newIndex = searched.findIndex((item) => item.id === over?.id);
-
-  //     setSearchData((items) => {
-  //       const updatedItems = [...items];
-  //       const [movedItem] = updatedItems.splice(oldIndex, 1);
-  //       updatedItems.splice(newIndex, 0, movedItem);
-  //       return updatedItems;
-  //     });
-  //   }
-  // };
-
   const resetWhileClose = () => {};
 
   return (
@@ -104,7 +75,7 @@ const PasswordContainer = ({
                 isOpenPopup={isOpenPopup}
                 setIsOpenPopup={setIsOpenPopup}
               >
-                <PasswordForm closeModelBox={setIsOpenPopup} />
+                <PasswordForm />
               </CustomSheet>
             </Div>
           </Div>
@@ -118,11 +89,12 @@ const PasswordContainer = ({
                 label: 'Add password',
                 icon: <PlusIcon size={18} color='#fff' />,
                 handleClick: () => {
-                  setIsOpenPopup(!isOpenPopup);
+                  // setIsOpenPopup(!isOpenPopup);
+                  PopupContext()
                 },
                 variant: 'default',
               }}
-              data={password}
+              data={password?.data || []}
             />
           </FetchWrapper>
         </Div>

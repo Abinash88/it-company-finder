@@ -1,8 +1,11 @@
 'use client';
 
+import PopupFormContext from '@/context/popup-form-context';
 import useStorage from '@/Hooks/useStorage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import MAINMODAL from '../model-sheet';
+import { MODAL_DATA } from '../model-sheet/modal-data';
 
 type Themes = 'system' | 'dark' | 'light';
 
@@ -30,7 +33,7 @@ const ThemeProvider = ({
 }: ContextProps) => {
   const storage = useStorage();
   const [theme, setTheme] = useState<Themes>(
-    () => storage?.get<Themes>(storageKey) || defaultTheme
+    () => storage?.get(storageKey) || defaultTheme
   );
 
   useEffect(() => {
@@ -57,7 +60,10 @@ const ThemeProvider = ({
 
   return (
     <ThemeProviderContext.Provider value={value}>
-      <QueryClientProvider client={query}>{children}</QueryClientProvider>
+      <PopupFormContext>
+        <QueryClientProvider client={query}>{children}</QueryClientProvider>
+        <MAINMODAL MODAL_DATA={MODAL_DATA} />
+      </PopupFormContext>
     </ThemeProviderContext.Provider>
   );
 };

@@ -18,11 +18,11 @@ import FileDropZone from '@/front-end-components/reusables/file-drop-zone';
 import { CustomReactSelect } from '@/front-end-components/reusables/custom-select';
 import { Button } from '@/front-end-components/ui/button';
 
-export type popupPassword = {
+export type popupPasswordTypes = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PopUpPassword = (props: popupPassword) => {
+const PopUpPassword = () => {
   const [showPinCodeBox, setShowPinCodeBox] = useState<boolean>(false);
   const form = useForm<PasswordValidationTypes>({
     resolver: zodResolver(AddPasswordValidation),
@@ -167,13 +167,7 @@ const PopUpPassword = (props: popupPassword) => {
             >
               <span>Add Password</span>
             </Button>
-            <Button
-              type='button'
-              variant='destructive'
-              onClick={() => {
-                props.closeModelBox(false);
-              }}
-            >
+            <Button type='button' variant='destructive' onClick={() => {}}>
               Cancel
             </Button>
             <Button
