@@ -39,8 +39,8 @@ export const POST = AuthMiddleware(
     const compare = await bcrypt.compare(userData?.password, data?.password);
 
     if (!compare) return ErrorMessage('Password incorrect!', 401);
-    const access_token = CreateToken(data?.id, '40m');
-    const refresh_token = CreateToken(data?.id, '60m');
+    const access_token = CreateToken(data?.id, '1h');
+    const refresh_token = CreateToken(data?.id, '1h');
     CookieSetter(res, access_token, true, accessToken);
     CookieSetter(res, refresh_token, true, refreshToken);
     return NextResponse.json({

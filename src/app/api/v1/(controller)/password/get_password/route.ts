@@ -24,6 +24,5 @@ export const GET = AuthMiddleware(async (req: Request) => {
       },
     },
   });
-  console.log(data);
   return SuccessMessage('Password fetched successfully.', 200, data);
 });

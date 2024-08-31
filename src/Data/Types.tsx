@@ -55,3 +55,8 @@ export interface PasswordMoreToolTypes {
   icon: ReactElement;
   clickFunc: () => void;
 }
+
+export enum ModalTypes {
+  MODAL = 'MODAL',
+  SHEET = 'SHEET',
+}

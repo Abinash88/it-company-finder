@@ -1,34 +1,76 @@
 import { ModalDataTypes } from '@/front-end-components/model-sheet/modal-data';
-import { ChildrenProps } from '@/lib/globa';
+import { ChildrenProps } from '@/lib/global';
+import { SheetDirection } from '@/types/extended';
 import React, { createContext, useContext, useState } from 'react';
 
-interface FormProps {
+export type FormProps = {
   id?: string | number;
-  data: unknown;
-  type: ModalDataTypes;
-}
+  data?: object;
+  key: ModalDataTypes;
+  type: 'MODAL' | 'SHEET';
+  isOpen?: boolean;
+  isDirty?: boolean;
+  side?: SheetDirection;
+};
 
 interface FormContextTypes {
-  open: () => void;
-  close: () => void;
-  toggleModal: boolean;
-  setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setFormData: React.Dispatch<React.SetStateAction<FormProps | null>>;
-  formData: FormProps | null;
+  open: (props: FormProps) => void;
+  close: (props: ModalDataTypes) => void;
+  setFormData: React.Dispatch<React.SetStateAction<FormProps[]>>;
+  formData: FormProps[];
+  handleDirty: (dirty: boolean, key: string) => void;
 }
 
 const FormContext = createContext<FormContextTypes | null>(null);
 
 const PopupFormContext = ({ children }: ChildrenProps) => {
-  const [toggleModal, setToggleModal] = useState(false);
-  const [formData, setFormData] = useState<FormProps | null>(null);
+  const [formData, setFormData] = useState<FormProps[]>([]);
 
-  const open = () => {
-    setToggleModal(true);
+  const open = (props: FormProps) => {
+    setFormData((prev) => {
+      const updateData = [...prev].filter((item) => item?.isOpen);
+      return [
+        ...updateData,
+        {
+          type: props?.type,
+          data: props?.data,
+          isDirty: props?.isDirty,
+          id: props?.id,
+          isOpen: true,
+          side: props?.side,
+          key: props?.key,
+        },
+      ];
+    });
+  };
+  console.log(formData)
+  const close = (key: ModalDataTypes) => {
+    setFormData((prev) => {
+      let data = [...prev];
+      data = data?.map((item) => {
+        if (key === item?.key) {
+          return {
+            ...item,
+            isOpen: false,
+          };
+        }
+        return item;
+      });
+      return data;
+    });
   };
 
-  const close = () => {
-    setToggleModal(false);
+  const handleDirty = (dirty: boolean, key: string) => {
+    setFormData((prev) => {
+      let data = [...prev];
+      data = data?.map((item) => {
+        if (item?.key === key) {
+          return { ...item, isDirty: dirty };
+        }
+        return item;
+      });
+      return data;
+    });
   };
 
   return (
@@ -36,10 +78,9 @@ const PopupFormContext = ({ children }: ChildrenProps) => {
       value={{
         open,
         close,
-        toggleModal,
-        setToggleModal,
         setFormData,
         formData,
+        handleDirty,
       }}
     >
       {children}

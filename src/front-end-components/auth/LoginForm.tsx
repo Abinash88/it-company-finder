@@ -60,7 +60,6 @@ const LoginForm = ({
         setCheckEmail(body?.email);
         router.replace('/account?type=mailbox');
         setLoading(false);
-        console.log('response');
         return;
       }
       if (res?.success) {

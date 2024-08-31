@@ -5,31 +5,36 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '../ui/dialog';
+import { cn } from '@/lib/utils';
 
 interface ModalDialogTypes {
   children: React.ReactNode;
-  toggleModal: boolean;
+  toggleModal?: boolean;
+  title?: string;
+  description?: string;
+  className?: string;
+  close: () => void;
 }
 
-const ModalDialog = ({ children, toggleModal }: ModalDialogTypes) => {
+const ModalDialog = ({
+  children,
+  toggleModal,
+  description,
+  title,
+  close,
+  className,
+}: ModalDialogTypes) => {
   return (
-    <div className=''>
-      <Dialog open={toggleModal}>
-        <DialogTrigger>Open</DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-          {children}
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog open={toggleModal} onOpenChange={close}>
+      <DialogContent className={cn('h-[90vh] overflow-y-auto', className)}>
+        <DialogHeader>
+          <DialogTitle>{title && title}</DialogTitle>
+          <DialogDescription>{description && description}</DialogDescription>
+        </DialogHeader>
+        {children}
+      </DialogContent>
+    </Dialog>
   );
 };
 

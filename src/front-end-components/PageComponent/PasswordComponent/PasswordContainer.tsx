@@ -22,6 +22,7 @@ import {
 import FetchWrapper from '@/front-end-components/reusables/fetch-wrapper';
 import { useQuery } from '@tanstack/react-query';
 import { PopupContext } from '@/context/popup-form-context';
+import { POPUP_TYPE } from '@/lib/constants';
 
 const PasswordContainer = ({
   token,
@@ -60,6 +61,8 @@ const PasswordContainer = ({
 
   const resetWhileClose = () => {};
 
+  const { open } = PopupContext();
+
   return (
     <Div className='w-full h-full'>
       <Div className='w-[90%] mx-auto px-6 py-2 flex items-center justify-center my-6 '>
@@ -90,7 +93,12 @@ const PasswordContainer = ({
                 icon: <PlusIcon size={18} color='#fff' />,
                 handleClick: () => {
                   // setIsOpenPopup(!isOpenPopup);
-                  PopupContext()
+                  // PopupContext();
+                  open({
+                    type: POPUP_TYPE.SHEET,
+                    key: 'ADD_PASSWORD_FORM',
+                    side: 'right',
+                  });
                 },
                 variant: 'default',
               }}
