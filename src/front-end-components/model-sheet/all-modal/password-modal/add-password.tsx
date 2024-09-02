@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Div from '@/lib/Div';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-import PinCodeBox from './PinCodeBox';
+import PinCodeBox from '../../../PageComponent/PasswordComponent/SmallComponent/PinCodeBox';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { selectCategory } from '@/Data/StaticData';
@@ -22,18 +22,17 @@ export type popupPasswordTypes = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PopUpPassword = () => {
+const AddPassword = () => {
   const [showPinCodeBox, setShowPinCodeBox] = useState<boolean>(false);
   const form = useForm<PasswordValidationTypes>({
     resolver: zodResolver(AddPasswordValidation),
     defaultValues: {
-      category: 'paymentCard',
-      description: 'asdfas',
-      password: 'asdfasd',
-      password_name: 'asdfawe',
-      url: 'asdfager',
-      siteImage:
-        'blob:http://localhost:3000/bdeaff7a-15b3-4a6c-be0e-ed71719e2e58',
+      category: '',
+      description: '',
+      password: '',
+      password_name: '',
+      url: '',
+      siteImage: '',
     },
   });
   const { handleSubmit, reset, setValue, watch } = form;
@@ -45,7 +44,7 @@ const PopUpPassword = () => {
   return (
     <div
       id='PasswordOutBox'
-      className={`z-50 relative cursor-normal flex  items-end justify-end  w-full h-full`}
+      className={`z-50 relative cursor-normal flex py-5 items-end justify-end  w-full h-full`}
     >
       <Form {...form}>
         <form
@@ -192,4 +191,4 @@ const PopUpPassword = () => {
   );
 };
 
-export default PopUpPassword;
+export default AddPassword;

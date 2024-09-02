@@ -1,16 +1,13 @@
 'use client';
 
 import { MyAppDataTypes } from '@/Data/Types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Div from '@/lib/Div';
 import MyContext from '@/context/MyContext';
-import PasswordForm from './SmallComponent/password-form';
-import { cn } from '@/lib/utils';
 import PageTitle from '@/front-end-components/ui/page-title';
 import UseHandleSearch from '@/Hooks/use-handle-search';
-import CustomSheet from '@/front-end-components/reusables/custom-sheet';
 import CustomTable from '@/front-end-components/reusables/table/custom-table';
-import PasswordColumns from './SmallComponent/password-columns';
+import PasswordColumns from '../../../app/dashboard/password/columns';
 import { PlusIcon } from 'lucide-react';
 import { fetchRequest } from '@/lib/fetch';
 import { PATH } from '@/lib/api-services/routes-path';
@@ -32,21 +29,15 @@ const PasswordContainer = ({
   data: ResponseMessageDataTypes<ResponseGetPasswordTypes[]> | undefined;
 }) => {
   const MyAppData = useContext(MyContext);
-  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [text, setText] = useState('');
   const { searched } = UseHandleSearch<MyAppDataTypes>({
     searchText: text,
     data: MyAppData?.SocialData || [],
     searchItem: 'name',
   });
-  const [searchData, setSearchData] = useState<MyAppDataTypes[]>([]);
-
-  useEffect(() => {
-    setSearchData(searched);
-  }, [searched]);
 
   const { data: password, ...rest } = useQuery({
-    queryKey: ['userData'],
+    queryKey: ['passwords'],
     queryFn: () =>
       fetchRequest<
         object,
@@ -55,11 +46,10 @@ const PasswordContainer = ({
         url: PATH.GET_PASSWORD,
         headers: headerServices(token),
         popup: false,
+        method: 'GET',
       }),
     initialData: data,
   });
-
-  const resetWhileClose = () => {};
 
   const { open } = PopupContext();
 
@@ -69,21 +59,6 @@ const PasswordContainer = ({
         <PageTitle title='Password' />
       </Div>
       <Div className=' bg-background h-full  rounded-tr-lg'>
-        <Div className='w-full px-6 py-4'>
-          <Div className={cn(`w-full z-20 h-full transition-all  top-0 `)}>
-            <Div className='w-full h-full '>
-              <CustomSheet
-                resetWhileClose={resetWhileClose}
-                title='Set New Password'
-                isOpenPopup={isOpenPopup}
-                setIsOpenPopup={setIsOpenPopup}
-              >
-                <PasswordForm />
-              </CustomSheet>
-            </Div>
-          </Div>
-        </Div>
-
         <Div className='w-full px-6'>
           <FetchWrapper {...rest}>
             <CustomTable
@@ -92,8 +67,6 @@ const PasswordContainer = ({
                 label: 'Add password',
                 icon: <PlusIcon size={18} color='#fff' />,
                 handleClick: () => {
-                  // setIsOpenPopup(!isOpenPopup);
-                  // PopupContext();
                   open({
                     type: POPUP_TYPE.SHEET,
                     key: 'ADD_PASSWORD_FORM',
