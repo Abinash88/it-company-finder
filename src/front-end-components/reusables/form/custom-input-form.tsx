@@ -6,19 +6,11 @@ import {
   Path,
   UseFormReturn,
 } from 'react-hook-form';
-import InputField from '../custom-forms/input-field';
-
-type InputType =
-  | 'text'
-  | 'search'
-  | 'icon_search'
-  | 'number'
-  | 'checkbox'
-  | 'textarea';
+import InputField, { InputTypeTypes } from '../custom-forms/input-field';
 
 interface TFormProps<T extends FieldValues> {
   form: UseFormReturn<T, any, undefined>;
-  type: InputType;
+  type: InputTypeTypes;
   name: Path<T>;
   disabled?: boolean;
   placeholder?: string;
@@ -33,41 +25,31 @@ const CustomInput = <T extends FieldValues>({
   placeholder,
   label,
 }: TFormProps<T>) => {
-  const fieldRenderer = (field: ControllerRenderProps<T, Path<T>>) => {
-    switch (type) {
-      case 'text':
-        return (
-          <InputField
-            {...field}
-            disabled={disabled}
-            name={name}
-            placeholder={placeholder}
-            required
-            label={label}
-          />
-        );
-    }
-  };
-
   return (
     <div>
       <FormField
         control={form.control}
         name={name}
         render={({ field }) => {
-          return <FormItem>{fieldRenderer(field)}</FormItem>;
+          return (
+            <FormItem>
+              <InputField
+                {...field}
+                disabled={disabled}
+                name={name}
+                placeholder={placeholder}
+                required
+                type={type}
+                label={label}
+              />
+            </FormItem>
+          );
         }}
       />
     </div>
   );
 };
 
-//  <FormWrapper label='Password Category' required>
-//     <CustomReactSelect
-//       options={selectCategory}
-//       {...field}
-//       className=''
-//     />
-//   </FormWrapper>
+
 
 export default CustomInput;

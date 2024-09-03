@@ -44,11 +44,11 @@ const AddPassword = () => {
   return (
     <div
       id='PasswordOutBox'
-      className={`z-50 relative cursor-normal flex py-5 items-end justify-end  w-full h-full`}
+      className={`z-50 relative cursor-normal flex py-3 items-end justify-end w-full h-full`}
     >
       <Form {...form}>
         <form
-          className=' z-50 p-4 rounded-sm w-full md:w-full h-full px-8 mx-auto  '
+          className=' z-50 py-4 rounded-sm w-full md:w-full h-full  mx-auto  '
           action=''
           onSubmit={handleSubmit(onSubmitForm)}
         >
@@ -88,7 +88,7 @@ const AddPassword = () => {
                     control={form.control}
                     name='siteImage'
                     render={({ field }) => (
-                      <FormWrapper>
+                      <FormWrapper label='Image' required>
                         <FileDropZone
                           {...field}
                           files={watch('siteImage') || []}

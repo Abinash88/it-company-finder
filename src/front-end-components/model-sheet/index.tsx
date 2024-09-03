@@ -79,7 +79,15 @@ const MAINMODAL = ({ MODAL_DATA }: MainModelTypes) => {
       );
 
     return (
-      <SheetBox close={closeModal} toggleModal={toggle} side={side} key={index}>
+      <SheetBox
+        close={closeModal}
+        title={modalsData?.title}
+        className={modalsData?.className}
+        toggleModal={toggle}
+        description={modalsData?.description}
+        side={side}
+        key={index}
+      >
         {ModelComp && (
           <ModelComp
             open={open}

@@ -46,6 +46,7 @@ type FormWrapperTypes = {
   children: React.ReactNode;
   className?: string;
   required?: boolean;
+  name?: string;
 };
 
 const FormWrapper = ({
@@ -53,15 +54,19 @@ const FormWrapper = ({
   children,
   className,
   required,
+  name,
 }: FormWrapperTypes) => {
   return (
     <>
       <FormItem className={cn(`space-y-2`, className)}>
         {label && (
-          <FormLabel className={cn(`font-normal text-xs gap-[3px] flex `)}>
+          <FormLabel
+            htmlFor={name}
+            className={cn(`font-normal text-sm 3xl:text-base gap-[2px] flex `)}
+          >
             {label}
             {required && (
-              <span className='text-red-500 font-normal text-xs leading-[8px]'>
+              <span className='text-red-600 font-normal text-sm leading-[8px]'>
                 *
               </span>
             )}
