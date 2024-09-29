@@ -85,7 +85,7 @@ export const AuthInputBox = React.forwardRef<HTMLInputElement, AuthInput>(({ cla
             >
                 {label}
             </label>
-            <input ref={ref} id={label} {...props} className={cn(`  px-4 py-2 md:py-[10px] text-[13px] placeholder:text-[13px]
+            <input ref={ref} id={label} {...props} className={cn(`  px-4 py-2 md:py-[10px] text-gray-600 text-[13px] placeholder:text-[13px]
              placeholder:text-gray-500 rounded-md border border-border focus:outline-none ${className}`)} />
         </Div>
     )

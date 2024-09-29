@@ -5,7 +5,7 @@ import React from 'react';
 const page = () => {
   return (
     <div className='w-full  h-[calc(100vh-50px)]'>
-      <FetchWrapper isError={false} isLoading={false}>
+      <FetchWrapper  isError={false} isLoading={false}>
         <MainDashboard />
       </FetchWrapper>
     </div>

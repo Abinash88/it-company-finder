@@ -31,7 +31,7 @@ const SheetBox = ({
   return (
     <Sheet open={toggleModal} onOpenChange={close}>
       <SheetContent side={side} className={cn('h-screen overflow-y-auto ', className)}>
-        {title && <SheetTitle>{title}</SheetTitle>}
+        {title && <SheetTitle className='text-xl font-medium text-dark-300 '>{title}</SheetTitle>}
         {description && <SheetDescription>{description}</SheetDescription>}
         <SheetHeader></SheetHeader>
         {children}

@@ -59,12 +59,14 @@ const ThemeProvider = ({
   const query = new QueryClient();
 
   return (
-    <ThemeProviderContext.Provider value={value}>
-      <PopupFormContext>
-        <QueryClientProvider client={query}>{children}</QueryClientProvider>
-        <MAINMODAL MODAL_DATA={MODAL_DATA} />
-      </PopupFormContext>
-    </ThemeProviderContext.Provider>
+    <QueryClientProvider client={query}>
+      <ThemeProviderContext.Provider value={value}>
+        <PopupFormContext>
+          {children}
+          <MAINMODAL MODAL_DATA={MODAL_DATA} />
+        </PopupFormContext>
+      </ThemeProviderContext.Provider>
+    </QueryClientProvider>
   );
 };
 

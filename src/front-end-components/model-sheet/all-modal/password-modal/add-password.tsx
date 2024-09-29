@@ -17,6 +17,12 @@ import CustomAlert from '@/front-end-components/reusables/alerts/custom-alert';
 import FileDropZone from '@/front-end-components/reusables/file-drop-zone';
 import { CustomReactSelect } from '@/front-end-components/reusables/custom-select';
 import { Button } from '@/front-end-components/ui/button';
+import { ResponseMessageDataTypes } from '@/Data/interfaces/password.interface';
+import { fetchRequest } from '@/lib/fetch';
+import { useMutation } from '@tanstack/react-query';
+import { headerServices } from '@/lib/helper';
+import { PATH } from '@/lib/api-services/routes-path';
+import ReactSelect from '@/front-end-components/reusables/react-select';
 
 export type popupPasswordTypes = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,9 +42,23 @@ const AddPassword = () => {
     },
   });
   const { handleSubmit, reset, setValue, watch } = form;
+  console.log(form.watch());
+  const { mutate } = useMutation({
+    mutationFn: (data: PasswordValidationTypes) =>
+      fetchRequest<PasswordValidationTypes, ResponseMessageDataTypes<object[]>>(
+        {
+          url: PATH.ADD_PASSWORD,
+          headers: headerServices(''),
+          popup: false,
+          method: 'POST',
+          body: data,
+        }
+      ),
+  });
 
   const onSubmitForm: SubmitHandler<PasswordValidationTypes> = (data) => {
     console.log(data);
+    mutate({ ...data });
   };
 
   return (
@@ -60,11 +80,12 @@ const AddPassword = () => {
                   name='category'
                   render={({ field }) => (
                     <FormWrapper label='Password Category' required>
-                      <CustomReactSelect
+                      {/* <CustomReactSelect
                         options={selectCategory}
                         {...field}
                         className=''
-                      />
+                      /> */}
+                      <ReactSelect multiple options={selectCategory} />
                     </FormWrapper>
                   )}
                 />

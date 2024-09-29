@@ -9,7 +9,7 @@ interface FetchWrapperTypes {
   errorComponent?: React.ReactNode;
   isShow?: boolean;
   children: React.ReactNode;
-  refetch: () => void;
+  refetch?: () => void;
 }
 
 const FetchWrapper = ({
@@ -29,7 +29,9 @@ const FetchWrapper = ({
           <div className='text-center'>
             <p> Something went wrong{'... '}</p>
             <Button
-              onClick={refetch}
+              onClick={() => {
+                refetch && refetch();
+              }}
               variant={'link'}
               className='text-gray-500 font-normal'
             >

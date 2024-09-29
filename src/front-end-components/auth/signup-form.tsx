@@ -28,7 +28,6 @@ const Signup = ({
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<SignupDataTypes>({
     resolver: zodResolver(SCHEMA_VALIDATION?.signup_schema),
   });

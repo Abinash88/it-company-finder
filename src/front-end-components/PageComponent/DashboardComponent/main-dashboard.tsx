@@ -4,8 +4,15 @@ import PageTitle from '@/front-end-components/ui/page-title';
 import MyContext from '@/context/MyContext';
 import React, { useContext } from 'react';
 
+interface dataT {
+  name: string;
+  age: number;
+  roll: number;
+}
+
 const MainDashboard = () => {
   const accountData = useContext(MyContext);
+
 
   return (
     <div className='flex h-full w-full flex-col'>

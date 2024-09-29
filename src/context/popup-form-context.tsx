@@ -43,7 +43,7 @@ const PopupFormContext = ({ children }: ChildrenProps) => {
       ];
     });
   };
-  console.log(formData)
+
   const close = (key: ModalDataTypes) => {
     setFormData((prev) => {
       let data = [...prev];
