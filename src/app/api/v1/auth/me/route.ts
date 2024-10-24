@@ -9,9 +9,15 @@ import { cookies } from 'next/headers';
 
 export const GET = AuthMiddleware(async (req: Request) => {
   if (req.method !== 'GET') return ErrorMessage('GET method only supported.');
+
   const getToken = cookies().get('accessToken')?.value;
-  const Token: string | undefined = getToken;
+
+  const getHeaderToken = req.headers.get('authorization')?.split(' ')[1];
+
+  const Token: string | undefined = getToken || getHeaderToken;
+
   if (!Token) return ErrorMessage('token not Found!', 401);
+
   const GetId = verifyToken(Token);
 
   if (GetId instanceof Error) return ErrorMessage('Invalid  Tokens!', 401);

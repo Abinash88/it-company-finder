@@ -1,4 +1,23 @@
-import React, { useState } from 'react';
+'use client';
+
+import { Button } from '@/front-end-components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/front-end-components/ui/dropdown-menu';
+import { Input } from '@/front-end-components/ui/input';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/front-end-components/ui/table';
+import { IbtnVariant } from '@/interface-types/interface';
+import { cn } from '@/lib/utils';
 import {
   ColumnFiltersState,
   flexRender,
@@ -9,26 +28,9 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table';
-import { IbtnVariant } from '@/interface-types/interface';
-import { Input } from '@/front-end-components/ui/input';
 import { ChevronDownIcon, Download, PlusIcon, SearchIcon } from 'lucide-react';
-import { Button } from '@/front-end-components/ui/button';
-import { cn } from '@/lib/utils';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/front-end-components/ui/dropdown-menu';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/front-end-components/ui/table';
-import { useTheme } from '../theme-provider';
+import { useTheme } from 'next-themes';
+import React, { useState } from 'react';
 import EmptyData from '../empty-data';
 
 type TOptions = {
@@ -74,8 +76,6 @@ interface Props {
     icon?: React.ReactElement;
   };
   extraButtons?: React.ReactNode;
-  hideFilterRow?: boolean;
-  hideFilterTabs?: boolean;
   hasWritePermission?: boolean;
   hasExport?: boolean;
   hasSearch?: boolean;
@@ -118,8 +118,6 @@ const CustomTable = ({
   addButton,
   extraButtons,
   hasExport = true,
-  hideFilterRow = false,
-  hideFilterTabs = false,
   onRowClick,
   showPagination = true,
   hasWritePermission,
@@ -134,12 +132,7 @@ const CustomTable = ({
   const [saveModal, setSaveModal] = useState(false);
   const { theme } = useTheme();
 
-  const getContent = ():
-    | string
-    | number
-    | true
-    | Iterable<React.ReactNode>
-    | JSX.Element => {
+  const getContent = () => {
     if (customEmptyLayout) {
       return customEmptyLayout;
     }

@@ -14,7 +14,7 @@ import { Form, FormField } from '@/front-end-components/ui/form';
 import InputField from '@/front-end-components/reusables/custom-forms/input-field';
 import FormWrapper from '@/front-end-components/reusables/custom-forms/form-wrapper';
 import CustomAlert from '@/front-end-components/reusables/alerts/custom-alert';
-import FileDropZone from '@/front-end-components/reusables/file-drop-zone';
+import FileDropZone from '@/front-end-components/reusables/drop-zone-file/file-drop-zone';
 import { CustomReactSelect } from '@/front-end-components/reusables/custom-select';
 import { Button } from '@/front-end-components/ui/button';
 import { ResponseMessageDataTypes } from '@/Data/interfaces/password.interface';
@@ -23,6 +23,7 @@ import { useMutation } from '@tanstack/react-query';
 import { headerServices } from '@/lib/helper';
 import { PATH } from '@/lib/api-services/routes-path';
 import ReactSelect from '@/front-end-components/reusables/react-select';
+import FormInput from '@/front-end-components/ui/input/form-input';
 
 export type popupPasswordTypes = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,7 +43,7 @@ const AddPassword = () => {
     },
   });
   const { handleSubmit, reset, setValue, watch } = form;
-  console.log(form.watch());
+
   const { mutate } = useMutation({
     mutationFn: (data: PasswordValidationTypes) =>
       fetchRequest<PasswordValidationTypes, ResponseMessageDataTypes<object[]>>(
@@ -75,49 +76,39 @@ const AddPassword = () => {
           <Div className='flex flex-col gap-4'>
             <Div className='flex gap-4 flex-1 flex-col'>
               <Div className='flex-1 flex flex-col gap-4'>
-                <FormField
-                  control={form.control}
+                <FormInput
+                  form={form}
                   name='category'
-                  render={({ field }) => (
-                    <FormWrapper label='Password Category' required>
-                      {/* <CustomReactSelect
-                        options={selectCategory}
-                        {...field}
-                        className=''
-                      /> */}
-                      <ReactSelect multiple options={selectCategory} />
-                    </FormWrapper>
+                  label='Password Category'
+                  render={({ ...field }) => (
+                    <ReactSelect {...field} multiple options={selectCategory} />
                   )}
                 />
                 <Div className='flex gap-2 flex-col'>
                   <Div className='flex-1 flex flex-col gap-3'>
-                    <FormField
-                      control={form.control}
+                    <FormInput
+                      form={form}
                       name='password_name'
-                      render={({ field }) => (
-                        <InputField
-                          {...field}
-                          name=''
-                          placeholder='Password Name'
-                          required
-                          label='Password Name'
-                        />
-                      )}
+                      label='Password Name'
+                      input={{
+                        type: 'text',
+                        placeholder: 'Enter password name',
+                      }}
                     />
                   </Div>
-                  <FormField
-                    control={form.control}
+
+                  <FormInput
+                    form={form}
                     name='siteImage'
-                    render={({ field }) => (
-                      <FormWrapper label='Image' required>
-                        <FileDropZone
-                          {...field}
-                          files={watch('siteImage') || []}
-                          setFiles={(value) => {
-                            setValue('siteImage', value, { shouldDirty: true });
-                          }}
-                        />
-                      </FormWrapper>
+                    label='Image'
+                    render={({ ...field }) => (
+                      <FileDropZone
+                        {...field}
+                        files={watch('siteImage') || []}
+                        setFiles={(value) => {
+                          setValue('siteImage', value, { shouldDirty: true });
+                        }}
+                      />
                     )}
                   />
                 </Div>

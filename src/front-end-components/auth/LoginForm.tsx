@@ -1,7 +1,16 @@
 'use client';
 
+import ButtonLoading from '@/Hooks/use-loading';
+import { SCHEMA_VALIDATION } from '@/backend/Middleware/Validation';
 import Div from '@/lib/Div';
+import { fetchRequest } from '@/lib/fetch';
+import { handleError } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import FormError from '../ui/form_error';
 import Topheader, {
   AuthInputBox,
   BottomText,
@@ -10,16 +19,7 @@ import Topheader, {
   OrComponent,
   SubmitButton,
 } from './auth-component';
-import { handleError } from '@/lib/utils';
-import { fetchRequest } from '@/lib/fetch';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { SignupDataTypes } from './auth-types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import FormError from '../ui/form_error';
-import ButtonLoading from '@/Hooks/use-loading';
-import { SCHEMA_VALIDATION } from '@/backend/Middleware/Validation';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
 
 const LoginForm = ({
   setCheckEmail,
@@ -27,13 +27,15 @@ const LoginForm = ({
   setCheckEmail: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [isPasswordSeen, setIsPasswordSeen] = useState<boolean>(false);
+  const form = useForm<Omit<SignupDataTypes, 'name'>>({
+    resolver: zodResolver(SCHEMA_VALIDATION?.login_schema),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Omit<SignupDataTypes, 'name'>>({
-    resolver: zodResolver(SCHEMA_VALIDATION?.login_schema),
-  });
+  } = form;
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -98,7 +100,7 @@ const LoginForm = ({
             />
             {errors && <FormError error={errors?.email?.message} />}
           </div>
-          <Div className='relative flex  items-center  '>
+          <Div className='relative flex  items-center'>
             <AuthInputBox
               className='flex-1'
               {...register('password')}

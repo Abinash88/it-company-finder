@@ -1,19 +1,30 @@
-import * as A from '../ui/avatar'
+import { cn } from '@/lib/utils';
+import * as A from '../ui/avatar';
 
 type TProps = {
-  src?: string
-  name?: string
-  bg?: 'none' | string
-  size?: string
-}
+  src?: string;
+  name?: string;
+  bg?: 'none' | string;
+  size?: string;
+  className?: string;
+  radius?: string;
+};
 
-const Avatar: React.FC<TProps> = ({ bg, name, src, size }) => {
+const Avatar: React.FC<TProps> = ({
+  bg,
+  name,
+  src,
+  size,
+  className,
+  radius,
+}) => {
   return (
     <A.Avatar
       style={{
         width: size || '40px',
         height: size || '40px',
         aspectRatio: '1 / 1',
+        borderRadius: radius,
       }}
     >
       <A.AvatarImage
@@ -30,7 +41,7 @@ const Avatar: React.FC<TProps> = ({ bg, name, src, size }) => {
           height: size || '40px',
         }}
         alt={`${name || 'User'}'s Avatar`}
-        className='object-cover'
+        className={cn(`object-cover rounded-none`, className)}
       />
       <A.AvatarFallback>
         <img
@@ -44,7 +55,7 @@ const Avatar: React.FC<TProps> = ({ bg, name, src, size }) => {
         />
       </A.AvatarFallback>
     </A.Avatar>
-  )
-}
+  );
+};
 
-export default Avatar
+export default Avatar;

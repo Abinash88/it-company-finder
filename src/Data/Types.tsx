@@ -27,10 +27,10 @@ export type settingLinksTypes = {
   link: string;
 };
 
-export type userResultTypes = {
+export type userResultTypes<T = object> = {
   success: boolean;
   message: string;
-  data: DataTypes;
+  data: T;
 };
 
 export type DataTypes = {
@@ -43,7 +43,7 @@ export type DataTypes = {
 export type contextTypes = {
   SocialData: MyAppDataTypes[];
   setSocialData: React.Dispatch<React.SetStateAction<MyAppDataTypes[]>>;
-  userData: userResultTypes | undefined;
+  userData: userResultTypes<DataTypes> | undefined;
   toggleSidebar: boolean;
   isLoading: boolean;
   error: Error | null;

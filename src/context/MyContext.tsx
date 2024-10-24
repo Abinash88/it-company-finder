@@ -10,6 +10,7 @@ import {
   MyAppDataTypes,
   contextTypes,
   userResultTypes,
+  type DataTypes,
 } from '@/Data/Types.jsx';
 const MyContext = createContext<contextTypes | undefined>(undefined);
 import { useQuery } from '@tanstack/react-query';
@@ -19,9 +20,11 @@ import { PATH } from '@/lib/api-services/routes-path';
 export const MyContextProvider = ({
   children,
   token,
+  data,
 }: {
   children: ReactNode;
   token: string | undefined;
+  data: any;
 }) => {
   const [SocialData, setSocialData] = useState<MyAppDataTypes[]>([
     {
@@ -75,11 +78,12 @@ export const MyContextProvider = ({
   } = useQuery({
     queryKey: ['userData'],
     queryFn: () =>
-      fetchRequest<object, userResultTypes>({
+      fetchRequest<object, userResultTypes<DataTypes>>({
         url: PATH.GET_USER,
         headers: { Authorization: `Bearer ${token}` },
         popup: false,
       }),
+    initialData: data,
   });
   return (
     <MyContext.Provider

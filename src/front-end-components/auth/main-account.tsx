@@ -34,10 +34,10 @@ const SignUpForm = () => {
   }, [contextData?.userData, router]);
 
   return (
-    <Div className='flex flex-col  justify-center items-start bg-gray-100 w-full h-screen'>
+    <Div className='flex flex-col  justify-center items-start bg-background w-full h-screen'>
       <Div className='w-full h-full relative flex  items-start justify-start'>
         <Div
-          className={` max-w-[650px] w-full lg:w-[90%]  bg-white  h-full  transition duration-300`}
+          className={` max-w-[650px] w-full lg:w-[90%]  bg-background  h-full  transition duration-300`}
         >
           {type === 'login' ? (
             <LoginForm setCheckEmail={setCheckEmail} />
@@ -47,17 +47,6 @@ const SignUpForm = () => {
             <GotoMailBox checkEmail={checkEmail} />
           )}
         </Div>
-        {/* <Div
-          className={` lg:max-w-[650px] w-full lg:w-[90%] bg-white  ${
-            type === 'signup' ? '' : 'hidden'
-          }   h-full transition duration-300`}
-        ></Div>
-
-        <Div
-          className={` lg:max-w-[650px] h-full flex items-center  w-full lg:w-[90%] p-4 bg-white rounded-xl ${
-            type === 'mailbox' ? '' : 'hidden'
-          }  transition duration-300`}
-        ></Div> */}
         <Div className=' h-full flex-1'>
           <Image
             src={AccountImage}

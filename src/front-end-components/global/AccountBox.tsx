@@ -2,14 +2,13 @@ import Div from '@/lib/Div';
 import Image from 'next/image';
 import React from 'react';
 import Spacing from '../ui/Spacing';
-import { FaCog, FaUser } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { userResultTypes } from '@/Data/Types';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import { useTheme } from '../reusables/theme-provider';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Settings, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const AccountBox = ({
   userdata,
@@ -50,18 +49,7 @@ const AccountBox = ({
             <Button
               asChild
               variant={'ghost'}
-              icon={<FaUser size={17} className='text-foreground' />}
-              className='w-full '
-              iconClass=' justify-start'
-            >
-              Account
-            </Button>
-          </Link>
-          <Link href='/account'>
-            <Button
-              asChild
-              variant={'ghost'}
-              icon={<FaCog size={17} className='text-foreground' />}
+              icon={<Settings size={17} className='text-foreground' />}
               className='w-full '
               iconClass=' justify-start'
             >

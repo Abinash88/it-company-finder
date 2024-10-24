@@ -1,10 +1,10 @@
+import ThemeProviderComp from '@/front-end-components/reusables/theme-provider';
 import { cn } from '@/lib/utils';
-import './globals.css';
 import { Poppins } from 'next/font/google';
+import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ThemeProvider from '@/front-end-components/reusables/theme-provider';
-import React from 'react';
+import './globals.css';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -21,14 +21,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={cn(`${poppins.className}`)}>
-        <ThemeProvider defaultTheme='system' storageKey='next-ui-theme'>
-          <ToastContainer
-            position='top-right'
-            style={{ fontSize: '12px', width: 'auto' }}
-            bodyStyle={{ height: '45px', paddingRight: '20px' }}
-          />
-          {children}
-        </ThemeProvider>
+        <ToastContainer
+          position='top-right'
+          style={{ fontSize: '12px', width: 'auto' }}
+          bodyStyle={{ height: '45px', paddingRight: '20px' }}
+        />
+        <ThemeProviderComp>{children}</ThemeProviderComp>
       </body>
     </html>
   );

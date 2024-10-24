@@ -54,14 +54,14 @@ export const SettingLinksData: settingLinksTypes[] = [
 ];
 
 export const selectCategory = [
-  { id: 1, value: 'paymentCard', label: 'PaymentCard' },
-  { id: 2, value: 'web account', label: 'Web Account' },
-  { id: 3, value: 'file store', label: 'File Store' },
-  { id: 4, value: 'secure note', label: 'Secure Note' },
-  { id: 5, value: 'unix', label: 'Unix' },
-  { id: 6, value: 'windows', label: 'Windows' },
-  { id: 7, value: 'bank account', label: 'Bank Account' },
-  { id: 8, value: 'social security Number', label: 'Social Security Number' },
+  { value: 'paymentCard', label: 'PaymentCard' },
+  { value: 'web account', label: 'Web Account' },
+  { value: 'file store', label: 'File Store' },
+  { value: 'secure note', label: 'Secure Note' },
+  { value: 'unix', label: 'Unix' },
+  { value: 'windows', label: 'Windows' },
+  { value: 'bank account', label: 'Bank Account' },
+  { value: 'social security Number', label: 'Social Security Number' },
 ];
 
 export interface SelectNotePriorityTypes {

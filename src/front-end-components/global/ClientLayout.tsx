@@ -1,24 +1,24 @@
 'use client';
 
-import React, { useContext } from 'react';
-import MyContext, { MyContextProvider } from '../../context/MyContext';
-import Sidebars from './Sidebars';
 import { usePathname } from 'next/navigation';
+import React from 'react';
+import { MyContextProvider } from '../../context/MyContext';
 import Headers from './Headers';
+import Sidebars from './Sidebars';
 
 const ClientLayout = ({
   children,
   token,
+  data,
 }: {
   children: React.ReactNode;
   token: string | undefined;
+  data: any;
 }) => {
-  const contextData = useContext(MyContext);
-
   const path = usePathname();
   return (
     <div>
-      <MyContextProvider token={token}>
+      <MyContextProvider data={data} token={token}>
         <div className='mx-auto  overflow-hidden w-full h-screen   flex flex-col'>
           <div className=' w-full h-full flex'>
             <div className={`${path === '/account' ? 'hidden' : ''}   h-full`}>

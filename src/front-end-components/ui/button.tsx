@@ -78,8 +78,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <div className='w-full'>
             {icon ? (
               <div className={cn(`w-full flex items-center gap-3`, iconClass)}>
-                <span>{children}</span>
                 <span className=''>{icon}</span>
+                <span>{children}</span>
               </div>
             ) : (
               children

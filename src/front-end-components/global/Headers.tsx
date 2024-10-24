@@ -78,7 +78,7 @@ const Headers = () => {
                     ></Image>
                   </Div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent side='top' align='end' >
                   <AccountBox userdata={accountData?.userData} />
                 </DropdownMenuContent>
               </DropdownMenu>
