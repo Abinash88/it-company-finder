@@ -23,3 +23,8 @@ export const headerServices = (
   }
   return undefined;
 };
+
+export const handleChangeToMB = (bytes: number) => {
+  const result = bytes / (1024 * 1024);
+  return Math.round(result * 100) / 100;
+};

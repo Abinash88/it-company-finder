@@ -1,13 +1,13 @@
-import { Textarea } from '@/front-end-components/ui/textarea';
-import React, { useState } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
-import FormWrapper from './form-wrapper';
 import { Input } from '@/front-end-components/ui/input';
+import { Textarea } from '@/front-end-components/ui/textarea';
+import Div from '@/lib/Div';
+import { formatNumber } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { SearchIcon } from 'lucide-react';
-import { formatNumber } from '@/lib/helper';
-import Div from '@/lib/Div';
+import React, { useState } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
+import FormWrapper from './form-wrapper';
 
 export type InputTypeTypes =
   | 'text'
@@ -62,8 +62,7 @@ const InputField = ({
             rows={5}
             className={cn(
               error && 'border border-red-500',
-              'text-sm 3xl:text-base',
-              'placeholder:text-gray-400'
+              'text-xs  3xl:text-sm'
             )}
             {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
@@ -78,8 +77,7 @@ const InputField = ({
               name={name}
               className={cn(
                 error && 'border border-red-500',
-                'text-sm 3xl:text-base',
-                'placeholder:text-gray-400'
+                'text-xs  3xl:text-sm'
               )}
               {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
             />
@@ -95,8 +93,7 @@ const InputField = ({
               disabled={disabled}
               className={cn(
                 error && 'border border-red-500',
-                'text-sm 3xl:text-base',
-                'placeholder:text-gray-400'
+                'text-xs 3xl:text-sm'
               )}
               type={type === 'password' ? (ShowPassword ? 'text' : type) : type}
               {...rest.register}
@@ -126,7 +123,12 @@ const InputField = ({
   };
 
   return (
-    <FormWrapper required={required} name={name} label={label} className={className}>
+    <FormWrapper
+      required={required}
+      name={name}
+      label={label}
+      className={className}
+    >
       {inputFormType()}
     </FormWrapper>
   );

@@ -13,7 +13,7 @@ const layout = async ({ children }: { children: ReactNode }) => {
     headers: { Authorization: `Bearer ${token}` },
     popup: true,
   });
-  console.log(data);
+
   return (
     <div>
       <ClientLayout data={data} token={token}>

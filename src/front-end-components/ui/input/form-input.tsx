@@ -7,7 +7,13 @@ import type {
   UseFormReturn,
   UseFormStateReturn,
 } from 'react-hook-form';
-import { FormControl, FormField, FormItem, FormLabel } from '../form';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../form';
 import { Input, type InputProps } from '../input';
 
 interface FormInputProps<T extends FieldValues> {
@@ -19,7 +25,10 @@ interface FormInputProps<T extends FieldValues> {
     formState: UseFormStateReturn<T>
   ) => React.ReactNode;
   name: Path<T>;
-  input?: InputProps;
+  input?: Omit<InputProps, keyof ControllerRenderProps<FieldValues, string>> & {
+    disabled?: boolean;
+  };
+  required?: boolean;
 }
 
 const FormInput = <T extends FieldValues>({
@@ -28,6 +37,7 @@ const FormInput = <T extends FieldValues>({
   name,
   render,
   input,
+  required,
 }: FormInputProps<T>) => {
   return (
     <FormField
@@ -35,7 +45,10 @@ const FormInput = <T extends FieldValues>({
       name={name}
       render={({ field, fieldState, formState }) => (
         <FormItem className=''>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel className='flex gap-1 3xl:text-sm text-xs font-medium items-center'>
+            {label}
+            {required && <span className='text-red-600 '>*</span>}
+          </FormLabel>
           <FormControl>
             {render ? (
               render(field, fieldState, formState)
@@ -43,6 +56,7 @@ const FormInput = <T extends FieldValues>({
               <Input {...field} {...input} />
             )}
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />

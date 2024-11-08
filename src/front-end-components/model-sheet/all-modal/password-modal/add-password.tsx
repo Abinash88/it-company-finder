@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
 import Div from '@/lib/Div';
+import React, { useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-import PinCodeBox from '../../../PageComponent/PasswordComponent/SmallComponent/PinCodeBox';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { ResponseMessageDataTypes } from '@/Data/interfaces/password.interface';
 import { selectCategory } from '@/Data/StaticData';
+import CustomAlert from '@/front-end-components/reusables/alerts/custom-alert';
+import InputField from '@/front-end-components/reusables/custom-forms/input-field';
+import FileDropZone from '@/front-end-components/reusables/drop-zone-file/file-drop-zone';
+import ReactSelect from '@/front-end-components/reusables/react-select';
+import { Button } from '@/front-end-components/ui/button';
+import { Form, FormField } from '@/front-end-components/ui/form';
+import FormInput from '@/front-end-components/ui/input/form-input';
+import { PATH } from '@/lib/api-services/routes-path';
+import { fetchRequest } from '@/lib/fetch';
+import { headerServices } from '@/lib/helper';
 import {
   AddPasswordValidation,
   PasswordValidationTypes,
 } from '@/lib/schema/schema.password';
-import { Form, FormField } from '@/front-end-components/ui/form';
-import InputField from '@/front-end-components/reusables/custom-forms/input-field';
-import FormWrapper from '@/front-end-components/reusables/custom-forms/form-wrapper';
-import CustomAlert from '@/front-end-components/reusables/alerts/custom-alert';
-import FileDropZone from '@/front-end-components/reusables/drop-zone-file/file-drop-zone';
-import { CustomReactSelect } from '@/front-end-components/reusables/custom-select';
-import { Button } from '@/front-end-components/ui/button';
-import { ResponseMessageDataTypes } from '@/Data/interfaces/password.interface';
-import { fetchRequest } from '@/lib/fetch';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { headerServices } from '@/lib/helper';
-import { PATH } from '@/lib/api-services/routes-path';
-import ReactSelect from '@/front-end-components/reusables/react-select';
-import FormInput from '@/front-end-components/ui/input/form-input';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import PinCodeBox from '../../../PageComponent/PasswordComponent/SmallComponent/PinCodeBox';
+import { parseToFormData } from '@/lib/utils';
 
 export type popupPasswordTypes = {
   closeModelBox: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,7 +44,7 @@ const AddPassword = () => {
   const { handleSubmit, reset, setValue, watch } = form;
 
   const { mutate } = useMutation({
-    mutationFn: (data: PasswordValidationTypes) =>
+    mutationFn: (data: FormData) =>
       fetchRequest<PasswordValidationTypes, ResponseMessageDataTypes<object[]>>(
         {
           url: PATH.ADD_PASSWORD,
@@ -58,18 +57,19 @@ const AddPassword = () => {
   });
 
   const onSubmitForm: SubmitHandler<PasswordValidationTypes> = (data) => {
-    console.log(data);
-    mutate({ ...data });
+    mutate({ ...parseToFormData(data) });
   };
+
+  console.log(form.watch());
 
   return (
     <div
       id='PasswordOutBox'
-      className={`z-50 relative cursor-normal flex py-3 items-end justify-end w-full h-full`}
+      className={`z-50 relative cursor-normal flex mt-2 items-end justify-end w-full`}
     >
       <Form {...form}>
         <form
-          className=' z-50 py-4 rounded-sm w-full md:w-full h-full  mx-auto  '
+          className=' z-50 py-4 rounded-sm w-full md:w-full h-full  mx-auto'
           action=''
           onSubmit={handleSubmit(onSubmitForm)}
         >
@@ -80,8 +80,8 @@ const AddPassword = () => {
                   form={form}
                   name='category'
                   label='Password Category'
-                  render={({ ...field }) => (
-                    <ReactSelect {...field} multiple options={selectCategory} />
+                  render={({ ref: _ref, ...field }) => (
+                    <ReactSelect {...field} options={selectCategory} />
                   )}
                 />
                 <Div className='flex gap-2 flex-col'>
@@ -90,6 +90,7 @@ const AddPassword = () => {
                       form={form}
                       name='password_name'
                       label='Password Name'
+                      required
                       input={{
                         type: 'text',
                         placeholder: 'Enter password name',
@@ -104,8 +105,8 @@ const AddPassword = () => {
                     render={({ ...field }) => (
                       <FileDropZone
                         {...field}
-                        files={watch('siteImage') || []}
-                        setFiles={(value) => {
+                        value={watch('siteImage') || []}
+                        onValueChange={(value) => {
                           setValue('siteImage', value, { shouldDirty: true });
                         }}
                       />
@@ -135,19 +136,15 @@ const AddPassword = () => {
             </Div>
 
             <Div className=' flex-1'>
-              <FormField
-                control={form.control}
+              <FormInput
+                form={form}
                 name='url'
-                render={({ field }) => (
-                  <InputField
-                    {...field}
-                    name='url'
-                    label='Url'
-                    type='text'
-                    required
-                    placeholder='Site Url'
-                  />
-                )}
+                label='Site Url'
+                required
+                input={{
+                  type: 'text',
+                  placeholder: 'Enter Site url',
+                }}
               />
             </Div>
 

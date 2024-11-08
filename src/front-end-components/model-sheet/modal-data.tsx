@@ -8,7 +8,7 @@ export const MODAL_DATA: { [key in ModalDataTypes]: _TModal } = {
     component: AddPassword,
     title: 'Add Password',
     description: '',
-    className: 'max-w-xl',
+    className: 'max-w-md',
     variant: 'form',
   },
   UPDATE_PASSWORD_FORM: {

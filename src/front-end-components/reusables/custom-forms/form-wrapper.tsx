@@ -4,7 +4,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/front-end-components/ui/form';
-import { Label } from '@/front-end-components/ui/label';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
@@ -62,7 +61,7 @@ const FormWrapper = ({
         {label && (
           <FormLabel
             htmlFor={name}
-            className={cn(`font-normal text-sm 3xl:text-base gap-[2px] flex `)}
+            className={cn(`font-medium text-xs 3xl:text-sm gap-[2px] flex `)}
           >
             {label}
             {required && (

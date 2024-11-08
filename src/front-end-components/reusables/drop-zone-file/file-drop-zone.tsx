@@ -1,13 +1,14 @@
 import { CloudUpload, X } from 'lucide-react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Dropzone, {
   type DropzoneProps,
   type DropzoneRef,
   type FileRejection,
 } from 'react-dropzone';
-import Avatar from '../avatars';
 import { toast } from 'react-toastify';
+import Avatar from '../avatars';
+import { handleChangeToMB } from '@/lib/helper';
 
 type ServerFiles = {
   id: string;
@@ -17,19 +18,16 @@ type ServerFiles = {
 };
 
 type FileDropZoneTypes = {
-  name?: string;
-  setFiles: (file: File[]) => void;
+  onValueChange: React.Dispatch<React.SetStateAction<(File | ServerFiles)[]>>;
+  // (file: (File | ServerFiles)[]) => void;
   fileTypes?: string[];
   multiple?: boolean;
   disabled?: boolean;
-  isFile?: boolean;
-  files?: File[] | string;
+  value?: (File | ServerFiles)[];
   accept?: DropzoneProps['accept'];
   maxSize?: DropzoneProps['maxSize'];
   maxFiles?: DropzoneProps['maxFiles'];
 };
-
-type FileListTypes = { file: File | undefined; preview: string };
 
 export const ImageComp = ({
   item,
@@ -50,28 +48,26 @@ export const ImageComp = ({
   );
 };
 
-const isFileWithPreview = (file: File): file is File & { preview: string } => {
+const isFileWithPreview = (
+  file: File | ServerFiles
+): file is File & { preview: string } => {
   if (file instanceof File) {
     return 'preview' in file && typeof file.preview === 'string';
-  }
-  return false;
+  } else return false;
 };
 
 const FileDropZone = React.forwardRef<DropzoneRef, FileDropZoneTypes>(
   (props, ref) => {
     const {
-      name,
-      setFiles,
-      files,
-      fileTypes,
+      onValueChange,
+      value,
       multiple = false,
       disabled = false,
-      isFile = false,
       maxSize = 1024 * 1023 * 2,
       maxFiles = 1,
       accept,
     } = props;
-    const [fileList, setFileList] = useState<File[]>([]);
+    // const [fileList, setFileList] = useState<(File | ServerFiles)[]>([]);
 
     const onDropFile = (
       acceptedFile: File[],
@@ -82,7 +78,7 @@ const FileDropZone = React.forwardRef<DropzoneRef, FileDropZoneTypes>(
         return;
       }
 
-      if ((fileList?.length ?? 0) + acceptedFile.length > maxFiles) {
+      if ((value?.length ?? 0) + acceptedFile.length > maxFiles) {
         toast.error(`Cannot upload more than ${maxFiles} files`);
         return;
       }
@@ -97,8 +93,8 @@ const FileDropZone = React.forwardRef<DropzoneRef, FileDropZoneTypes>(
         return file;
       });
 
-      const arrayFile = fileList ? [...fileList, ...acceptFile] : acceptFile;
-      setFileList(arrayFile);
+      const arrayFile = value ? [...value, ...acceptFile] : acceptFile;
+      onValueChange(arrayFile);
 
       if (rejectedFile.length > 0) {
         rejectedFile.forEach((reject) => {
@@ -110,16 +106,12 @@ const FileDropZone = React.forwardRef<DropzoneRef, FileDropZoneTypes>(
       }
     };
 
-    useEffect(() => {
-      setFiles(fileList);
-    }, [fileList]);
-
-    const removeImage = (file: File) => {
-      setFileList((prev) => {
-        return [...prev].filter(
-          (item) => JSON.stringify(item) !== JSON.stringify(file)
-        );
-      });
+    const removeImage = (index: number) => {
+      if (!value) return;
+      const images = [...value];
+      images.splice(index, 1);
+      console.log(images, index);
+      onValueChange(images || []);
     };
 
     return (
@@ -128,6 +120,7 @@ const FileDropZone = React.forwardRef<DropzoneRef, FileDropZoneTypes>(
           maxFiles={maxFiles}
           multiple={(maxFiles && maxFiles > 1) || multiple}
           ref={ref}
+          disabled={disabled}
           accept={accept}
           onDrop={onDropFile}
           maxSize={maxSize}
@@ -159,11 +152,11 @@ const FileDropZone = React.forwardRef<DropzoneRef, FileDropZoneTypes>(
           }}
         </Dropzone>
         <div className='flex flex-col gap-3 '>
-          {fileList?.map((file) => (
+          {value?.map((file, index) => (
             <DisplayImage
               src={file}
               alt=''
-              handleRemove={removeImage}
+              handleRemove={() => removeImage(index)}
               className=''
             />
           ))}
@@ -181,27 +174,34 @@ export const DisplayImage = ({
   className,
   handleRemove,
 }: {
-  src: File;
+  src: File | ServerFiles;
   alt?: string;
   className?: string;
   handleRemove?: (file: File) => void;
 }) => {
   return (
-    isFileWithPreview(src) && (
-      <div className='flex items-center gap-4 border rounded-md w-full justify-between'>
-        <Avatar
-          className={className}
-          radius='5px'
-          size='50px'
-          src={src.preview}
-        />
-        <X
-          onClick={() => {
-            if (handleRemove) handleRemove(src);
-          }}
-          className='w-5 h-5 text-dark-300 mr-4 cursor-pointer'
-        />
-      </div>
-    )
+    <>
+      {isFileWithPreview(src) && (
+        <div className='flex items-center gap-4 border rounded-md w-full justify-between'>
+          <div className='flex items-center gap-3'>
+            <Avatar
+              className={className}
+              radius='5px'
+              size='50px'
+              src={src.preview}
+            />
+            <span className='3xl:text-sm text-xs'>
+              {handleChangeToMB(src.size)} Mb
+            </span>
+          </div>
+          <X
+            onClick={() => {
+              if (handleRemove) handleRemove(src);
+            }}
+            className='w-5 h-5 text-dark-300 mr-4 cursor-pointer'
+          />
+        </div>
+      )}
+    </>
   );
 };
